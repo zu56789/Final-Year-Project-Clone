@@ -3,6 +3,7 @@ package main;
 
 import java.awt.*;
 import javax.swing.JFrame;
+import gui.Board;
 
 public class Driver {
 
@@ -20,6 +21,7 @@ public class Driver {
     frame.add(board);
     
     frame.setVisible(true);
+    
 
   }
 
