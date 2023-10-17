@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.*;
 import pieces.Knight;
+import pieces.Pawn;
 import pieces.Piece;
 import java.awt.*;
 import java.util.ArrayList;
@@ -23,8 +24,33 @@ public class Board extends JPanel {
   
   
   public void drawPieces() {
-    pieceList.add(new Knight(this,2,0,true));
-    pieceList.add(new Knight(this,2,7,false));
+    pieceList.add(new Knight(this,1,0,true));
+    pieceList.add(new Knight(this,6,0,true));
+    
+    pieceList.add(new Knight(this,1,7,false));
+    pieceList.add(new Knight(this,6,7,false));
+    
+    pieceList.add(new Pawn(this,0,1,true));
+    pieceList.add(new Pawn(this,1,1,true));
+    pieceList.add(new Pawn(this,2,1,true));
+    pieceList.add(new Pawn(this,3,1,true));
+    pieceList.add(new Pawn(this,4,1,true));
+    pieceList.add(new Pawn(this,5,1,true));
+    pieceList.add(new Pawn(this,6,1,true));
+    pieceList.add(new Pawn(this,7,1,true));
+    
+    
+    
+    pieceList.add(new Pawn(this,0,6,false));
+    pieceList.add(new Pawn(this,1,6,false));
+    pieceList.add(new Pawn(this,2,6,false));
+    pieceList.add(new Pawn(this,3,6,false));
+    pieceList.add(new Pawn(this,4,6,false));
+    pieceList.add(new Pawn(this,5,6,false));
+    pieceList.add(new Pawn(this,6,6,false));
+    pieceList.add(new Pawn(this,7,6,false));
+    
+    
   }
   
   
@@ -32,7 +58,7 @@ public class Board extends JPanel {
     
     for (int r = 0; r< rows; r++) {
       for (int c = 0; c< columns; c++) {
-        g.setColor((c+r) %2 == 0 ? new Color(95,0,196) : Color.black);
+        g.setColor((c+r) %2 == 0 ? new Color(111,135,210) : new Color(160,178,250));
         g.fillRect(c*tileSize, r*tileSize, tileSize, tileSize);
       }
     }
