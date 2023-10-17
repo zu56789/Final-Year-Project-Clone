@@ -63,6 +63,9 @@ public class Board extends JPanel {
     
     pieceList.add(new Queen(this,3,7,false));
     
+    pieceList.add(new King(this,4,0,true));
+    pieceList.add(new King(this,4,7,false));
+    
   }
   
   
