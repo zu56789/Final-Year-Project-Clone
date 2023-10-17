@@ -53,6 +53,11 @@ public class Board extends JPanel {
     pieceList.add(new Rook(this,7,7,false));
     pieceList.add(new Rook(this,0,7,false));
     
+    pieceList.add(new Bishop(this,2,0,true));
+    pieceList.add(new Bishop(this,5,0,true));
+    
+    pieceList.add(new Bishop(this,2,7,false));
+    pieceList.add(new Bishop(this,5,7,false));
     
   }
   
