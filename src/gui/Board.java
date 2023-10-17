@@ -59,6 +59,10 @@ public class Board extends JPanel {
     pieceList.add(new Bishop(this,2,7,false));
     pieceList.add(new Bishop(this,5,7,false));
     
+    pieceList.add(new Queen(this,3,0,true));
+    
+    pieceList.add(new Queen(this,3,7,false));
+    
   }
   
   
