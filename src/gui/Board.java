@@ -1,9 +1,7 @@
 package gui;
 
 import javax.swing.*;
-import pieces.Knight;
-import pieces.Pawn;
-import pieces.Piece;
+import pieces.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -39,8 +37,6 @@ public class Board extends JPanel {
     pieceList.add(new Pawn(this,6,1,true));
     pieceList.add(new Pawn(this,7,1,true));
     
-    
-    
     pieceList.add(new Pawn(this,0,6,false));
     pieceList.add(new Pawn(this,1,6,false));
     pieceList.add(new Pawn(this,2,6,false));
@@ -49,6 +45,13 @@ public class Board extends JPanel {
     pieceList.add(new Pawn(this,5,6,false));
     pieceList.add(new Pawn(this,6,6,false));
     pieceList.add(new Pawn(this,7,6,false));
+    
+    
+    pieceList.add(new Rook(this,0,0,true));
+    pieceList.add(new Rook(this,7,0,true));
+    
+    pieceList.add(new Rook(this,7,7,false));
+    pieceList.add(new Rook(this,0,7,false));
     
     
   }
