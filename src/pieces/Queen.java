@@ -5,10 +5,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import gui.Board;
 
-public class Knight extends Piece{
+public class Queen extends Piece{
 
-  public Knight(Board board, int column, int row, boolean isBlack) {
+  public Queen(Board board, int column, int row, boolean isBlack) {
     super(board);
+    
     this.column = column;
     this.row = row;
     
@@ -17,17 +18,19 @@ public class Knight extends Piece{
     this.xPoint = column * board.tileSize;
     this.yPoint = row * board.tileSize;
     
-    this.name = "Knight";
+    this.name = "Queen";
     
     this.pic = getPic();
     
     
+    
   }
+  
   
   public Image getPic() {
     if (isBlack) {
       try {
-        return ImageIO.read(Knight.class.getResource("/resources/blackKnight.png"));
+        return ImageIO.read(Queen.class.getResource("/resources/blackQueen.png"));
       } catch (IOException e) {
         e.printStackTrace();
         return null;
@@ -35,7 +38,7 @@ public class Knight extends Piece{
     }
     else {
       try {
-        return ImageIO.read(Knight.class.getResource("/resources/whiteKnight.png"));
+        return ImageIO.read(Queen.class.getResource("/resources/whiteQueen.png"));
       } catch (IOException e) {
         e.printStackTrace();
         return null;
