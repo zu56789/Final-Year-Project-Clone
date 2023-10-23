@@ -15,9 +15,30 @@ public class Board extends JPanel {
   
   ArrayList<Piece> pieceList = new ArrayList<>();
   
+  Piece selectedPiece;
+  
+  UserInput input = new UserInput(this);
+  
   public Board() {
     this.setPreferredSize(new Dimension(columns * tileSize, rows * tileSize));
+    
+    this.addMouseListener(input);
+    this.addMouseMotionListener(input);
+    
     drawPieces();
+  }
+  
+  
+  public Piece getPiece(int column, int row) {
+    
+    for (Piece piece: pieceList) {
+      if (piece.row == row && piece.column == column) {
+        return piece;
+      }
+    }
+    
+    return null;
+    
   }
   
   
