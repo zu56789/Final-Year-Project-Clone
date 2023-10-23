@@ -1,15 +1,37 @@
 package test;
 
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
 import gui.Board;
+import pieces.Piece;
 import player.BlackPlayer;
 
 public class TestPlayers {
+  
+  private BlackPlayer blackPlayer;
+  private Board board = new Board();
 
-  @Test
+  @Before
   public void setup() {
-    BlackPlayer blackPlayer = new BlackPlayer(new Board(), "black"); // test a black player can be created
+    blackPlayer = new BlackPlayer(board, "black"); // test a black player can be created
+  }
+  
+  @Test
+  public void testPiecesMatch() {
+    
+    String pieces1 = "";
+    String pieces2 = "";
+    
+    for (Piece piece: blackPlayer.getPieces()) {
+      pieces1 += piece.name;
+    }
+    
+    for (Piece piece: new BlackPlayer(new Board(),"black").getPieces()) {
+      pieces2 += piece.name;
+    }
+    
+    assertEquals(pieces1, pieces2); // test initial pieces of two black players match
   }
 
 }
