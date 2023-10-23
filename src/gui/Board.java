@@ -41,6 +41,31 @@ public class Board extends JPanel {
     
   }
   
+  public ArrayList<Piece> getBlackPieces() {
+    
+    ArrayList<Piece> blackPieces = new ArrayList<>();
+    for (Piece piece: pieceList) {
+      if (piece.isBlack) {
+        blackPieces.add(piece);
+      }
+    }
+    return blackPieces;
+  }
+  
+  
+public ArrayList<Piece> getWhitePieces() {
+    
+    ArrayList<Piece> whitePieces = new ArrayList<>();
+    for (Piece piece: pieceList) {
+      if (!piece.isBlack) {
+        whitePieces.add(piece);
+      }
+    }
+    return whitePieces;
+  }
+  
+  
+  
   
   public void drawPieces() {
     pieceList.add(new Knight(this,1,0,true));

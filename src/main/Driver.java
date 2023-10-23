@@ -18,10 +18,10 @@ public class Driver {
     
     
     Board board = new Board();
+    
     frame.add(board);
     
     frame.setVisible(true);
-    
 
   }
 
