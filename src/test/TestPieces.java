@@ -46,9 +46,20 @@ public class TestPieces {
     assertEquals(bishop.name, (new Bishop(new Board(), 1, 0, true)).name); // test if bishops are created properly.
   }
   
+  @Test
+  public void testSameTeam() {
+    Bishop bishop = new Bishop(new Board(), 1, 0, true);
+    Queen queen = new Queen(new Board(), 1, 0, true);
+    assertEquals(bishop.isBlack, queen.isBlack); // tests if pieces of the same team show as being on the same team.
+    
+  }
   
-  
-  
+  @Test
+  public void testSprites() {
+    King king = new King(new Board(), 1, 0, true);
+    King king2 = new King(new Board(), 1, 0, false);
+    assertNotEquals(king.getPic(), king2.getPic()); // tests identical pieces of different teams create different sprites.
+  }
   
   
 
