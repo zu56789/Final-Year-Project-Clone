@@ -28,13 +28,11 @@ public class BlackPlayer extends Player{
 
   @Override
   public int getNumPieces() {
-    // TODO Auto-generated method stub
-    return 0;
+    return getPieces().size();
   }
 
   @Override
   public String getName() {
-    // TODO Auto-generated method stub
     return this.name;
   }
 
