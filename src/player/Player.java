@@ -9,7 +9,7 @@ public abstract class Player {
   protected final Board board;
   protected ArrayList<Piece> pieces;
   protected int numCaptured;
-  protected String colour;
+  protected String name;
   
   public Player(Board board) {
     this.board = board;
@@ -20,6 +20,6 @@ public abstract class Player {
   public abstract ArrayList<Piece> getPieces();
   public abstract int getNumCaptured();
   public abstract int getNumPieces();
-  public abstract String getColour();
+  public abstract String getName();
 
 }

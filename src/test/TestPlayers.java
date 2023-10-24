@@ -33,5 +33,10 @@ public class TestPlayers {
     
     assertEquals(pieces1, pieces2); // test initial pieces of two black players match
   }
+  
+  @Test
+  public void testName() {
+    assertEquals(blackPlayer.getName(), new BlackPlayer(new Board(),"black").getName());
+  }
 
 }

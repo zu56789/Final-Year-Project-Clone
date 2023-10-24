@@ -6,10 +6,10 @@ import pieces.Piece;
 
 public class BlackPlayer extends Player{
 
-  public BlackPlayer(Board board, String colour) {
+  public BlackPlayer(Board board, String name) {
     super(board);
     
-    this.colour = colour;
+    this.name = name;
   }
 
   @Override
@@ -34,9 +34,9 @@ public class BlackPlayer extends Player{
   }
 
   @Override
-  public String getColour() {
+  public String getName() {
     // TODO Auto-generated method stub
-    return null;
+    return this.name;
   }
 
 }
