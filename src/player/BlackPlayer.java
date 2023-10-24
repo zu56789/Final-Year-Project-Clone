@@ -23,8 +23,7 @@ public class BlackPlayer extends Player{
 
   @Override
   public int getNumCaptured() {
-    // TODO Auto-generated method stub
-    return 0;
+    return this.numCaptured;
   }
 
   @Override

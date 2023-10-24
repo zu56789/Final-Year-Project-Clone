@@ -38,5 +38,11 @@ public class TestPlayers {
   public void testName() {
     assertEquals(blackPlayer.getName(), new BlackPlayer(new Board(),"black").getName());
   }
+  
+  @Test
+  public void testNumCaptured() {
+    assertEquals(blackPlayer.getNumCaptured(), 0); // initial number of captures should be zero
+  }
+  
 
 }
