@@ -1,2 +1,3 @@
 17/10/23: Finished adding pieces for both teams.
 26/10/23: Stopped coding because I realised my planned class design has too many dependencies and is not done well. I have now thought of a new class design plan which I am going to implement.
+26/10/23: Finished refactoring old code so it follows new class design plan.
