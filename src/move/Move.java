@@ -11,6 +11,10 @@ public class Move {
     this.y2 = y2;
   }
   
+  public int getx1() {
+    return this.x1;
+  }
+  
   
   
 }
