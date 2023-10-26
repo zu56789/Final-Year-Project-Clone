@@ -5,14 +5,17 @@ import org.junit.Before;
 import org.junit.Test;
 import pieces.Piece;
 import player.BlackPlayer;
+import player.WhitePlayer;
 
 public class TestPlayers {
   
   private BlackPlayer blackPlayer;
+  private WhitePlayer whitePlayer;
   
   @Before
   public void setup() {
     blackPlayer = new BlackPlayer("black");
+    whitePlayer = new WhitePlayer("white");
   }
   
   @Test
@@ -51,6 +54,11 @@ public class TestPlayers {
   public void testSetNumCaptured() {
     blackPlayer.setNumCaptured(4);
     assertEquals(blackPlayer.getNumCaptured(),4); // test a change of numCaptured
+  }
+  
+  @Test
+  public void testDifferentColours() {
+    assertNotEquals(whitePlayer.getName(), blackPlayer.getName()); // test if black and white players show as different
   }
   
 
