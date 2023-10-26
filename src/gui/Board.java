@@ -7,19 +7,23 @@ import java.util.ArrayList;
 
 public class Board extends JPanel {
   
+  private final int rows;
+  private final int columns;
+  private final int tileSize = 65;
   
-  int rows = 8;
-  int columns = 8;
+  private ArrayList<Piece> pieceList = new ArrayList<>();
   
-  public int tileSize = 65;
+  private Piece selectedPiece;
   
-  ArrayList<Piece> pieceList = new ArrayList<>();
-  
-  Piece selectedPiece;
-  
-  UserInput input = new UserInput(this);
+  private UserInput input;
   
   public Board() {
+    
+    this.rows = 8;
+    this.columns = 8;
+    
+    this.input = new UserInput(this);
+    
     this.setPreferredSize(new Dimension(columns * tileSize, rows * tileSize));
     
     this.addMouseListener(input);
@@ -32,7 +36,7 @@ public class Board extends JPanel {
   public Piece getPiece(int column, int row) {
     
     for (Piece piece: pieceList) {
-      if (piece.row == row && piece.column == column) {
+      if (piece.getRow() == row && piece.getColumn() == column) {
         return piece;
       }
     }
@@ -45,7 +49,7 @@ public class Board extends JPanel {
     
     ArrayList<Piece> blackPieces = new ArrayList<>();
     for (Piece piece: pieceList) {
-      if (piece.isBlack) {
+      if (piece.isBlack()) {
         blackPieces.add(piece);
       }
     }
@@ -53,11 +57,11 @@ public class Board extends JPanel {
   }
   
   
-public ArrayList<Piece> getWhitePieces() {
+  public ArrayList<Piece> getWhitePieces() {
     
     ArrayList<Piece> whitePieces = new ArrayList<>();
     for (Piece piece: pieceList) {
-      if (!piece.isBlack) {
+      if (!piece.isBlack()) {
         whitePieces.add(piece);
       }
     }
@@ -68,6 +72,8 @@ public ArrayList<Piece> getWhitePieces() {
   
   
   public void drawPieces() {
+    
+    /*
     pieceList.add(new Knight(this,1,0,true));
     pieceList.add(new Knight(this,6,0,true));
     
@@ -110,7 +116,8 @@ public ArrayList<Piece> getWhitePieces() {
     pieceList.add(new Queen(this,3,7,false));
     
     pieceList.add(new King(this,4,0,true));
-    pieceList.add(new King(this,4,7,false));
+    pieceList.add(new King(this,4,7,false)); 
+    */
     
   }
   
@@ -120,13 +127,29 @@ public ArrayList<Piece> getWhitePieces() {
     for (int r = 0; r< rows; r++) {
       for (int c = 0; c< columns; c++) {
         g.setColor((c+r) %2 == 0 ? new Color(111,135,210) : new Color(160,178,250));
-        g.fillRect(c*tileSize, r*tileSize, tileSize, tileSize);
+        g.fillRect(c*this.getTileSize(), r*this.getTileSize(), this.getTileSize(), this.getTileSize());
       }
     }
     
     for (Piece piece : pieceList) {
-      piece.paint(g);
+      g.drawImage(piece.getPic(),piece.getColumn()* this.getTileSize(), piece.getRow()* this.getTileSize(), null);
     }
   }
+  
+  public int getTileSize() {
+    return this.tileSize;
+  }
+  
+  public Piece getSelectedPiece() {
+    return this.selectedPiece;
+  }
+  
+  
+  public void setSelectedPiece(Piece selectedPiece) {
+    this.selectedPiece = selectedPiece;
+  }
+  
+  
+  
 
 }
