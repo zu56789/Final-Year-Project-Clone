@@ -3,64 +3,60 @@ package test;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import pieces.*;
-import gui.Board;
-
-
 
 public class TestPieces {
 
   
   @Test
   public void testPawn() {
-    Pawn pawn = new Pawn(new Board(), 1, 0, true);
-    assertEquals(pawn.name, (new Pawn(new Board(), 2,0, true)).name); // test if pawns are created properly.
-  }
-  
-  @Test
-  public void testRook() {
-    Rook rook = new Rook(new Board(), 1, 0, true);
-    assertEquals(rook.name, (new Rook(new Board(), 2,0, true)).name); // test if rooks are created properly.
-  }
-  
-  @Test
-  public void testKnight() {
-    Knight knight = new Knight(new Board(), 1, 0, true);
-    assertEquals(knight.name, (new Knight(new Board(), 1,0, true)).name); // test if knights are created properly.
-  }
-  
-  @Test
-  public void testKing() {
-    King king = new King(new Board(), 1, 0, true);
-    assertEquals(king.name, (new King(new Board(), 1, 0, true)).name); // test if kings are created properly.
-  }
-  
-  @Test
-  public void testQueen() {
-    Queen queen = new Queen(new Board(), 1, 0, true);
-    assertEquals(queen.name, (new Queen(new Board(), 1, 0, true)).name); // test if queens are created properly.
+    Pawn pawn = new Pawn(1, 0, true);
+    assertEquals(pawn.getName(), new Pawn(1,1, true).getName()); // tests if pawns have same name.
   }
   
   @Test
   public void testBishop() {
-    Bishop bishop = new Bishop(new Board(), 1, 0, true);
-    assertEquals(bishop.name, (new Bishop(new Board(), 1, 0, true)).name); // test if bishops are created properly.
+    Bishop bishop = new Bishop(1, 0, true);
+    assertEquals(bishop.getName(), new Bishop(1,1, true).getName()); // tests if bishops have same name.
+  }
+  
+  @Test
+  public void testQueen() {
+    Queen queen = new Queen(1, 0, true);
+    assertEquals(queen.getName(), new Queen(1,1, true).getName()); // tests if queens have same name.
+  }
+  
+  @Test
+  public void testKing() {
+    King king = new King(1, 0, true);
+    assertEquals(king.getName(), new King(1,1, true).getName()); // tests if kings have same name.
+  }
+  
+  @Test
+  public void testRook() {
+    Rook rook = new Rook(1, 0, true);
+    assertEquals(rook.getName(), new Rook(1,1, true).getName()); // tests if rooks have same name.
+  }
+  
+  @Test
+  public void testKnight() {
+    Knight knight = new Knight(1, 0, true);
+    assertEquals(knight.getName(), new Knight(1,1, true).getName()); // tests if knights have same name.
   }
   
   @Test
   public void testSameTeam() {
-    Bishop bishop = new Bishop(new Board(), 1, 0, true);
-    Queen queen = new Queen(new Board(), 1, 0, true);
-    assertEquals(bishop.isBlack, queen.isBlack); // tests if pieces of the same team show as being on the same team.
-    
+    Bishop bishop = new Bishop(1, 0, true);
+    Queen queen = new Queen(1, 0, true);
+    assertEquals(bishop.isBlack(), queen.isBlack()); // tests if pieces of the same team show as being on the same team.
   }
-  
+
   @Test
   public void testSprites() {
-    King king = new King(new Board(), 1, 0, true);
-    King king2 = new King(new Board(), 1, 0, false);
+    King king = new King(1, 0, true);
+    King king2 = new King(1, 0, false);
     assertNotEquals(king.getPic(), king2.getPic()); // tests identical pieces of different teams create different sprites.
   }
-  
-  
 
+  
+  
 }

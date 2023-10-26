@@ -3,29 +3,21 @@ package pieces;
 import java.awt.Image;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import gui.Board;
 
 public class Knight extends Piece{
 
-  public Knight(Board board, int column, int row, boolean isBlack) {
-    super(board);
+  public Knight(int column, int row, boolean isBlack) {
+    
     this.column = column;
     this.row = row;
-    
     this.isBlack = isBlack;
-    
-    this.xPoint = column * board.tileSize;
-    this.yPoint = row * board.tileSize;
-    
     this.name = "Knight";
-    
     this.pic = getPic();
-    
     
   }
   
   public Image getPic() {
-    if (isBlack) {
+    if (isBlack()) {
       try {
         return ImageIO.read(Knight.class.getResource("/resources/blackKnight.png"));
       } catch (IOException e) {
@@ -41,6 +33,26 @@ public class Knight extends Piece{
         return null;
       }
     }
+  }
+
+  @Override
+  public int getColumn() {
+    return this.column;
+  }
+
+  @Override
+  public int getRow() {
+    return this.row;
+  }
+
+  @Override
+  public boolean isBlack() {
+    return this.isBlack;
+  }
+
+  @Override
+  public String getName() {
+    return this.name;
   }
 
 }

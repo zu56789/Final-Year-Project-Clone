@@ -1,26 +1,19 @@
 package pieces;
 
-import java.awt.Graphics;
 import java.awt.Image;
-import gui.Board;
 
-public class Piece {
+public abstract class Piece {
   
-  public String name;
-  public int column, row, xPoint, yPoint;
-  public boolean isBlack;
+  protected String name;
+  protected int column, row;
+  protected boolean isBlack;
   
-  public Image pic;
+  protected Image pic;
   
-  Board board;
-  
-  public Piece(Board board) {
-    this.board = board;
-  }
-  
-  public void paint(Graphics g) {
-    g.drawImage(pic,xPoint,yPoint,null);
-  }
-  
+  public abstract int getColumn();
+  public abstract int getRow();
+  public abstract boolean isBlack();
+  public abstract Image getPic();
+  public abstract String getName();
 
 }
