@@ -20,6 +20,10 @@ public class Move {
     return this.y1;
   }
   
+  public int getx2() {
+    return this.x2;
+  }
+  
   
   
 }
