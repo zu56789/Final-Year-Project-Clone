@@ -18,5 +18,10 @@ public class TestMove {
   public void testGetx1() {
     assertEquals(move.getx1(),0); // test if correct x1 returned
   }
+  
+  @Test
+  public void testGety1() {
+    assertEquals(move.gety1(),0); // test if correct y1 returned
+  }
 
 }
