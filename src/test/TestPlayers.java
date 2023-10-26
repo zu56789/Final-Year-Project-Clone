@@ -47,5 +47,11 @@ public class TestPlayers {
     assertEquals(blackPlayer.getNumPieces(), 16); // initial number of pieces should be sixteen
   }
   
+  @Test
+  public void testSetNumCaptured() {
+    blackPlayer.setNumCaptured(4);
+    assertEquals(blackPlayer.getNumCaptured(),4); // test a change of numCaptured
+  }
+  
 
 }
