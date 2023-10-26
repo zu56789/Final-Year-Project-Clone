@@ -14,6 +14,7 @@ public class Board extends JPanel {
   private ArrayList<Piece> pieceList = new ArrayList<>();
   
   private Piece selectedPiece;
+  private Piece releasedPiece;
   
   private UserInput input;
   
@@ -72,53 +73,6 @@ public class Board extends JPanel {
   
   
   public void drawPieces() {
-    
-    /*
-    pieceList.add(new Knight(this,1,0,true));
-    pieceList.add(new Knight(this,6,0,true));
-    
-    pieceList.add(new Knight(this,1,7,false));
-    pieceList.add(new Knight(this,6,7,false));
-    
-    pieceList.add(new Pawn(this,0,1,true));
-    pieceList.add(new Pawn(this,1,1,true));
-    pieceList.add(new Pawn(this,2,1,true));
-    pieceList.add(new Pawn(this,3,1,true));
-    pieceList.add(new Pawn(this,4,1,true));
-    pieceList.add(new Pawn(this,5,1,true));
-    pieceList.add(new Pawn(this,6,1,true));
-    pieceList.add(new Pawn(this,7,1,true));
-    
-    pieceList.add(new Pawn(this,0,6,false));
-    pieceList.add(new Pawn(this,1,6,false));
-    pieceList.add(new Pawn(this,2,6,false));
-    pieceList.add(new Pawn(this,3,6,false));
-    pieceList.add(new Pawn(this,4,6,false));
-    pieceList.add(new Pawn(this,5,6,false));
-    pieceList.add(new Pawn(this,6,6,false));
-    pieceList.add(new Pawn(this,7,6,false));
-    
-    
-    pieceList.add(new Rook(this,0,0,true));
-    pieceList.add(new Rook(this,7,0,true));
-    
-    pieceList.add(new Rook(this,7,7,false));
-    pieceList.add(new Rook(this,0,7,false));
-    
-    pieceList.add(new Bishop(this,2,0,true));
-    pieceList.add(new Bishop(this,5,0,true));
-    
-    pieceList.add(new Bishop(this,2,7,false));
-    pieceList.add(new Bishop(this,5,7,false));
-    
-    pieceList.add(new Queen(this,3,0,true));
-    
-    pieceList.add(new Queen(this,3,7,false));
-    
-    pieceList.add(new King(this,4,0,true));
-    pieceList.add(new King(this,4,7,false)); 
-    */
-    
   }
   
   
@@ -147,6 +101,14 @@ public class Board extends JPanel {
   
   public void setSelectedPiece(Piece selectedPiece) {
     this.selectedPiece = selectedPiece;
+  }
+  
+  public Piece getReleasedPiece() {
+    return this.releasedPiece;
+  }
+  
+  public void setReleasedPiece(Piece releasedPiece) {
+    this.releasedPiece = releasedPiece;
   }
   
   

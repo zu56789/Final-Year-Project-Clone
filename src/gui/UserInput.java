@@ -14,15 +14,7 @@ public class UserInput extends MouseAdapter{
   public UserInput(Board board) {
     this.board = board;
   }
-
-  @Override
-  public void mouseDragged(MouseEvent e) {
-    // TODO Auto-generated method stub
-    
-  }
-
  
-
   @Override
   public void mousePressed(MouseEvent e) {
     
@@ -33,18 +25,26 @@ public class UserInput extends MouseAdapter{
     
     if (pressedPiece != null) {
       board.setSelectedPiece(pressedPiece);
-      System.out.println(pressedPiece.getName() + " " + pressedPiece.getColumn()
-          + " " + pressedPiece.getRow());
+      /*System.out.println(pressedPiece.getName() + " " + pressedPiece.getColumn()
+          + " " + pressedPiece.getRow()); */
     }
     
-    
-    
+    System.out.println("Pressed at column "+ column + " And Row " + row);
     
   }
 
   @Override
   public void mouseReleased(MouseEvent e) {
-    // TODO Auto-generated method stub
+    
+    int column = e.getX() / board.getTileSize();
+    int row = e.getY() / board.getTileSize();
+    Piece relPiece = board.getPiece(column, row);
+    
+    if(relPiece != null) {
+      board.setReleasedPiece(relPiece);
+    }
+    
+    System.out.println("Released at column " + column + " And Row " + row);
     
   }
 
