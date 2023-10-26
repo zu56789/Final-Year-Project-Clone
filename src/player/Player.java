@@ -1,6 +1,7 @@
 package player;
 
 import java.util.ArrayList;
+import move.Move;
 import pieces.Piece;
 
 public abstract class Player {
@@ -18,7 +19,7 @@ public abstract class Player {
   public abstract int getNumCaptured();
   public abstract int getNumPieces();
   public abstract String getName();
-  public abstract void makeMove(); // Create Move class and implement logic 
+  public abstract Move makeMove(int x1, int y1, int x2, int y2);
   public abstract void setNumCaptured(int numCaptured);
   public abstract void setNumPieces(int numPieces);
   public abstract void setPieces(ArrayList<Piece> pieces);
