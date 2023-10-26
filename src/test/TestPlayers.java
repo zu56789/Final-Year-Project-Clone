@@ -3,18 +3,16 @@ package test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import gui.Board;
 import pieces.Piece;
 import player.BlackPlayer;
 
 public class TestPlayers {
   
   private BlackPlayer blackPlayer;
-  private Board board = new Board();
-
+  
   @Before
   public void setup() {
-    blackPlayer = new BlackPlayer(board, "black"); // test a black player can be created
+    blackPlayer = new BlackPlayer("black");
   }
   
   @Test
@@ -24,11 +22,11 @@ public class TestPlayers {
     String pieces2 = "";
     
     for (Piece piece: blackPlayer.getPieces()) {
-      pieces1 += piece.name;
+      pieces1 += piece.getName();
     }
     
-    for (Piece piece: new BlackPlayer(new Board(),"black").getPieces()) {
-      pieces2 += piece.name;
+    for (Piece piece: new BlackPlayer("black").getPieces()) {
+      pieces2 += piece.getName();
     }
     
     assertEquals(pieces1, pieces2); // test initial pieces of two black players match
@@ -36,7 +34,7 @@ public class TestPlayers {
   
   @Test
   public void testName() {
-    assertEquals(blackPlayer.getName(), new BlackPlayer(new Board(),"black").getName());
+    assertEquals(blackPlayer.getName(), new BlackPlayer("black").getName());
   }
   
   @Test
