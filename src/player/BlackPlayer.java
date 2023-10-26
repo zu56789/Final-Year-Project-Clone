@@ -1,6 +1,7 @@
 package player;
 
 import java.util.ArrayList;
+import move.Move;
 import pieces.*;
 
 
@@ -34,12 +35,6 @@ public class BlackPlayer extends Player{
   @Override
   public String getName() {
     return this.name;
-  }
-
-  @Override
-  public void makeMove() {
-    // TODO Auto-generated method stub
-    
   }
 
   @Override
@@ -88,6 +83,11 @@ public class BlackPlayer extends Player{
     this.pieces.add(new King(4,0,true));
     
     return this.pieces;
+  }
+
+  @Override
+  public Move makeMove(int x1, int y1, int x2, int y2) {
+    return new Move(x1,y1,x2,y2);
   }
 
 }

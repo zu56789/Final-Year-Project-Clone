@@ -61,5 +61,10 @@ public class TestPlayers {
     assertNotEquals(whitePlayer.getName(), blackPlayer.getName()); // test if black and white players show as different
   }
   
+  @Test
+  public void testMakeMove() {
+    whitePlayer.makeMove(0, 0, 0, 0); // test if move is created successfully
+  }
+  
 
 }
