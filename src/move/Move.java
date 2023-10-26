@@ -24,6 +24,9 @@ public class Move {
     return this.x2;
   }
   
+  public int gety2() {
+    return this.y2;
+  }
   
   
 }
