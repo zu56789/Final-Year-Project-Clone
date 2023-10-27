@@ -30,7 +30,6 @@ public class Board extends JPanel {
     this.addMouseListener(input);
     this.addMouseMotionListener(input);
     
-    drawPieces();
   }
   
   
@@ -72,7 +71,18 @@ public class Board extends JPanel {
   
   
   
-  public void drawPieces() {
+  public void drawPieces(ArrayList<Piece> whitePieces, ArrayList<Piece> blackPieces) {
+    
+    for (Piece piece: whitePieces) {
+      pieceList.add(piece);
+    }
+    
+    for (Piece piece: blackPieces) {
+      pieceList.add(piece);
+    }
+    
+    this.repaint();
+    
   }
   
   

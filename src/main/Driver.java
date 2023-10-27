@@ -3,7 +3,11 @@ package main;
 
 import java.awt.*;
 import javax.swing.JFrame;
+import game.GameThread;
 import gui.Board;
+import player.BlackPlayer;
+import player.Player;
+import player.WhitePlayer;
 
 public class Driver {
 
@@ -22,6 +26,18 @@ public class Driver {
     frame.add(board);
     
     frame.setVisible(true);
+    
+    Player player1 = new WhitePlayer("white");
+    Player player2 = new BlackPlayer("black");
+    
+    GameThread game = new GameThread(player1,player2, board);
+    
+    Thread gameThread = new Thread(game);
+    
+    gameThread.start();
+    
+    
+    
 
   }
 
