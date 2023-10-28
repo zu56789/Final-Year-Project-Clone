@@ -10,7 +10,7 @@ public class TestGameThread {
 
   @Test
   public void test() {
-    GameThread game = new GameThread(new WhitePlayer("white"), new BlackPlayer("black"), new Board());
+    GameThread game = new GameThread(new WhitePlayer("white"), new BlackPlayer("black"));
     Thread gameThread = new Thread(game);
     gameThread.start();
     

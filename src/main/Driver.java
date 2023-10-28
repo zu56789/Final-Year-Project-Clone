@@ -21,20 +21,19 @@ public class Driver {
     frame.setLocationRelativeTo(null);
     
     
-    Board board = new Board();
-    
-    frame.add(board);
-    
-    frame.setVisible(true);
-    
     Player player1 = new WhitePlayer("white");
     Player player2 = new BlackPlayer("black");
     
-    GameThread game = new GameThread(player1,player2, board);
+    GameThread game = new GameThread(player1,player2);
     
     Thread gameThread = new Thread(game);
     
     gameThread.start();
+    
+    
+    frame.add(game.getBoard());
+    
+    frame.setVisible(true);
     
     
     
