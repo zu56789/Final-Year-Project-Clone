@@ -44,7 +44,7 @@ public class UserInput extends MouseAdapter{
   @Override
   public void mouseReleased(MouseEvent e) {
     
-    board.setReleased(true);
+    
     
     int column = e.getX() / board.getTileSize();
     int row = e.getY() / board.getTileSize();
@@ -63,6 +63,8 @@ public class UserInput extends MouseAdapter{
       board.setReleasedY(row);
       
     }
+    
+    board.setReleased(true);
     
     
     /*Piece relPiece = board.getPiece(column, row);
