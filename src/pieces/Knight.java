@@ -55,4 +55,16 @@ public class Knight extends Piece{
     return this.name;
   }
 
+  @Override
+  public void setColumn(int column) {
+    this.column = column;
+    
+  }
+
+  @Override
+  public void setRow(int row) {
+    this.row = row;
+    
+  }
+
 }

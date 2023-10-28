@@ -21,6 +21,10 @@ public class Board extends JPanel {
   private int releasedX;
   private int releasedY;
   
+  private boolean pressed;
+  private boolean released;
+  private boolean releasedEmpty;
+  
   public Board() {
     
     this.rows = 8;
@@ -32,6 +36,8 @@ public class Board extends JPanel {
     
     this.addMouseListener(input);
     this.addMouseMotionListener(input);
+    
+    //this.pressed = false;
     
     
   }
@@ -149,6 +155,30 @@ public class Board extends JPanel {
   
   public void setReleasedY(int y) {
     this.releasedY = y;
+  }
+  
+  public boolean Pressed() {
+    return this.pressed;
+  }
+  
+  public void setPressed(boolean pressed) {
+    this.pressed = pressed;
+  }
+  
+  public boolean releasedEmpty() {
+    return this.releasedEmpty;
+  }
+  
+  public void setReleasedEmpty(boolean empty) {
+    this.releasedEmpty = empty;
+  }
+  
+  public boolean Released() {
+    return this.released;
+  }
+  
+  public void setReleased(boolean released) {
+    this.released = released;
   }
   
 

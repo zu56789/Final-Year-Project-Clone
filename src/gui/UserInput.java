@@ -8,7 +8,7 @@ import pieces.Piece;
 
 public class UserInput extends MouseAdapter{
   
-  private final Board board;
+  private Board board;
   
   
   public UserInput(Board board) {
@@ -18,12 +18,15 @@ public class UserInput extends MouseAdapter{
   @Override
   public void mousePressed(MouseEvent e) {
     
+    
+    
     int column = e.getX() / board.getTileSize();
     int row = e.getY() / board.getTileSize();
     
     if(!board.emptyTile(column, row)) {
       Piece pressedPiece = board.getPiece(column, row);
       board.setSelectedPiece(pressedPiece);
+      board.setPressed(true);
     }
     
     /*Piece pressedPiece = board.getPiece(column, row);
@@ -41,15 +44,20 @@ public class UserInput extends MouseAdapter{
   @Override
   public void mouseReleased(MouseEvent e) {
     
+    board.setReleased(true);
+    
     int column = e.getX() / board.getTileSize();
     int row = e.getY() / board.getTileSize();
     
     
     if(!board.emptyTile(column, row)) {
+      board.setReleasedEmpty(false);
       Piece relPiece = board.getPiece(column, row);
       board.setSelectedPiece(relPiece);
     }
     else {
+      
+      board.setReleasedEmpty(true);
       
       board.setReleasedX(column);
       board.setReleasedY(row);
