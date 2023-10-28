@@ -21,15 +21,20 @@ public class UserInput extends MouseAdapter{
     int column = e.getX() / board.getTileSize();
     int row = e.getY() / board.getTileSize();
     
-    Piece pressedPiece = board.getPiece(column, row);
+    if(!board.emptyTile(column, row)) {
+      Piece pressedPiece = board.getPiece(column, row);
+      board.setSelectedPiece(pressedPiece);
+    }
+    
+    /*Piece pressedPiece = board.getPiece(column, row);
     
     if (pressedPiece != null) {
       board.setSelectedPiece(pressedPiece);
-      /*System.out.println(pressedPiece.getName() + " " + pressedPiece.getColumn()
-          + " " + pressedPiece.getRow()); */
-    }
+      System.out.println(pressedPiece.getName() + " " + pressedPiece.getColumn()
+          + " " + pressedPiece.getRow()); 
+    } */
     
-    System.out.println("Pressed at column "+ column + " And Row " + row);
+    //System.out.println("Pressed at column "+ column + " And Row " + row);
     
   }
 
@@ -38,15 +43,30 @@ public class UserInput extends MouseAdapter{
     
     int column = e.getX() / board.getTileSize();
     int row = e.getY() / board.getTileSize();
-    Piece relPiece = board.getPiece(column, row);
+    
+    
+    if(!board.emptyTile(column, row)) {
+      Piece relPiece = board.getPiece(column, row);
+      board.setSelectedPiece(relPiece);
+    }
+    else {
+      
+      board.setReleasedX(column);
+      board.setReleasedY(row);
+      
+    }
+    
+    
+    /*Piece relPiece = board.getPiece(column, row);
     
     if(relPiece != null) {
       board.setReleasedPiece(relPiece);
     }
     
     System.out.println("Released at column " + column + " And Row " + row);
+    */
     
-  }
+  } 
 
   
 
