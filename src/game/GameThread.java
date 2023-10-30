@@ -23,14 +23,11 @@ public class GameThread implements Runnable{
     this.player2Pieces = this.getPlayer2Pieces();
   }
   
-  
-
   @Override
   public void run() {
     this.board.drawPieces(this.player1Pieces,this.player2Pieces);
     
   }
-  
   
   public Board getBoard() {
     return this.board;
@@ -44,6 +41,4 @@ public class GameThread implements Runnable{
     return this.player2.getPieces();
   }
   
-  
-
 }

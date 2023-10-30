@@ -56,6 +56,20 @@ public class TestPieces {
     King king2 = new King(1, 0, false);
     assertNotEquals(king.getPic(), king2.getPic()); // tests identical pieces of different teams create different sprites.
   }
+  
+  @Test 
+  public void testSetRow() {
+    King king = new King(1,0,true);
+    king.setRow(4);
+    assertEquals(king.getRow(),4); // tests setting row of a piece 
+  }
+  
+  @Test
+  public void testSetColumn() {
+    Bishop bishop = new Bishop(1,0,false);
+    bishop.setColumn(3);
+    assertEquals(bishop.getColumn(), 3); // tests setting column of a piece
+  }
 
   
   
