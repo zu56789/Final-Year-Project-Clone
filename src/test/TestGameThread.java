@@ -65,5 +65,10 @@ public class TestGameThread {
     
   }
   
+  @Test
+  public void testBoards() {
+    assertNotEquals(game.getBoard(), game2.getBoard()); // tests different threads create different boards
+  }
+  
 
 }

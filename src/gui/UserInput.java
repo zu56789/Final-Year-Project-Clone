@@ -41,7 +41,7 @@ public class UserInput extends MouseAdapter{
     if(!board.emptyTile(column, row)) {
       board.setReleasedEmpty(false);
       Piece relPiece = board.getPiece(column, row);
-      board.setSelectedPiece(relPiece);
+      board.setReleasedPiece(relPiece);
     }
     else {
       
@@ -55,7 +55,5 @@ public class UserInput extends MouseAdapter{
     board.setSelectedPiece(null);
     
   } 
-
-  
 
 }
