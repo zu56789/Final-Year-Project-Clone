@@ -4,7 +4,6 @@ package main;
 import java.awt.*;
 import javax.swing.JFrame;
 import game.GameThread;
-import gui.Board;
 import player.BlackPlayer;
 import player.Player;
 import player.WhitePlayer;

@@ -52,7 +52,7 @@ public class UserInput extends MouseAdapter{
     }
     
     board.setPressed(false);
-    board.setSelectedPiece(null);
+    //board.setSelectedPiece(null);
     
   } 
 
