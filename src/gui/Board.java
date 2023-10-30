@@ -9,9 +9,9 @@ public class Board extends JPanel {
   
   private final int rows;
   private final int columns;
-  private final int tileSize = 65;
+  private final int tileSize;
   
-  private ArrayList<Piece> pieceList = new ArrayList<>();
+  private ArrayList<Piece> pieceList;
   
   private Piece selectedPiece;
   private Piece releasedPiece;
@@ -23,12 +23,15 @@ public class Board extends JPanel {
   
   private boolean pressed;
   private boolean released;
-  private boolean releasedEmpty;
   
   public Board() {
     
     this.rows = 8;
     this.columns = 8;
+    
+    this.tileSize = 65;
+    
+    this.pieceList = new ArrayList<>();
     
     this.input = new UserInput(this);
     
@@ -163,14 +166,6 @@ public class Board extends JPanel {
   
   public void setPressed(boolean pressed) {
     this.pressed = pressed;
-  }
-  
-  public boolean releasedEmpty() {
-    return this.releasedEmpty;
-  }
-  
-  public void setReleasedEmpty(boolean empty) {
-    this.releasedEmpty = empty;
   }
   
   public boolean Released() {
