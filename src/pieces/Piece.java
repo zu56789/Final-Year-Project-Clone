@@ -15,5 +15,7 @@ public abstract class Piece {
   public abstract boolean isBlack();
   public abstract Image getPic();
   public abstract String getName();
+  public abstract void setColumn(int column);
+  public abstract void setRow(int row);
 
 }

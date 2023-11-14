@@ -3,13 +3,10 @@ package gui;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import pieces.Piece;
-//import java.awt.event.MouseListener;
-//import java.awt.event.MouseMotionListener;
 
 public class UserInput extends MouseAdapter{
   
-  private final Board board;
-  
+  private Board board;
   
   public UserInput(Board board) {
     this.board = board;
@@ -21,15 +18,16 @@ public class UserInput extends MouseAdapter{
     int column = e.getX() / board.getTileSize();
     int row = e.getY() / board.getTileSize();
     
-    Piece pressedPiece = board.getPiece(column, row);
-    
-    if (pressedPiece != null) {
+    if(!board.emptyTile(column, row)) {
+      board.setReleased(false);
+      board.setReleasedPiece(null);
+      board.setReleasedX(10);
+      board.setReleasedY(10);
+      board.setPressed(true);
+      Piece pressedPiece = board.getPiece(column, row);
       board.setSelectedPiece(pressedPiece);
-      /*System.out.println(pressedPiece.getName() + " " + pressedPiece.getColumn()
-          + " " + pressedPiece.getRow()); */
+      
     }
-    
-    System.out.println("Pressed at column "+ column + " And Row " + row);
     
   }
 
@@ -38,16 +36,24 @@ public class UserInput extends MouseAdapter{
     
     int column = e.getX() / board.getTileSize();
     int row = e.getY() / board.getTileSize();
-    Piece relPiece = board.getPiece(column, row);
     
-    if(relPiece != null) {
+    board.setReleased(true);
+    
+    
+    if(!board.emptyTile(column, row)) {
+      Piece relPiece = board.getPiece(column, row);
       board.setReleasedPiece(relPiece);
     }
+    else {
+      
+      board.setReleasedX(column);
+      board.setReleasedY(row);
+      
+    }
     
-    System.out.println("Released at column " + column + " And Row " + row);
+    board.setPressed(false);
+    //board.setSelectedPiece(null);
     
-  }
-
-  
+  } 
 
 }

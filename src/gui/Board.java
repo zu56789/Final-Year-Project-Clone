@@ -9,19 +9,29 @@ public class Board extends JPanel {
   
   private final int rows;
   private final int columns;
-  private final int tileSize = 65;
+  private final int tileSize;
   
-  private ArrayList<Piece> pieceList = new ArrayList<>();
+  private ArrayList<Piece> pieceList;
   
   private Piece selectedPiece;
   private Piece releasedPiece;
   
   private UserInput input;
   
+  private int releasedX;
+  private int releasedY;
+  
+  private boolean pressed;
+  private boolean released;
+  
   public Board() {
     
     this.rows = 8;
     this.columns = 8;
+    
+    this.tileSize = 65;
+    
+    this.pieceList = new ArrayList<>();
     
     this.input = new UserInput(this);
     
@@ -30,7 +40,9 @@ public class Board extends JPanel {
     this.addMouseListener(input);
     this.addMouseMotionListener(input);
     
-    drawPieces();
+    //this.pressed = false;
+    
+    
   }
   
   
@@ -72,7 +84,18 @@ public class Board extends JPanel {
   
   
   
-  public void drawPieces() {
+  public void drawPieces(ArrayList<Piece> whitePieces, ArrayList<Piece> blackPieces) {
+    
+    for (Piece piece: whitePieces) {
+      pieceList.add(piece);
+    }
+    
+    for (Piece piece: blackPieces) {
+      pieceList.add(piece);
+    }
+    
+    this.repaint();
+    
   }
   
   
@@ -111,7 +134,47 @@ public class Board extends JPanel {
     this.releasedPiece = releasedPiece;
   }
   
+  public boolean emptyTile(int column, int row) {
+    Piece piece = this.getPiece(column, row);
+    if (piece == null) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
   
+  public int getReleasedX() {
+    return this.releasedX;
+  }
+  
+  public int getReleasedY() {
+    return this.releasedY;
+  }
+  
+  public void setReleasedX(int x) {
+    this.releasedX = x;
+  }
+  
+  public void setReleasedY(int y) {
+    this.releasedY = y;
+  }
+  
+  public boolean Pressed() {
+    return this.pressed;
+  }
+  
+  public void setPressed(boolean pressed) {
+    this.pressed = pressed;
+  }
+  
+  public boolean Released() {
+    return this.released;
+  }
+  
+  public void setReleased(boolean released) {
+    this.released = released;
+  }
   
 
 }

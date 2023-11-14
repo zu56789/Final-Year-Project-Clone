@@ -3,7 +3,10 @@ package main;
 
 import java.awt.*;
 import javax.swing.JFrame;
-import gui.Board;
+import game.GameThread;
+import player.BlackPlayer;
+import player.Player;
+import player.WhitePlayer;
 
 public class Driver {
 
@@ -17,11 +20,22 @@ public class Driver {
     frame.setLocationRelativeTo(null);
     
     
-    Board board = new Board();
+    Player player1 = new WhitePlayer("white");
+    Player player2 = new BlackPlayer("black");
     
-    frame.add(board);
+    GameThread game = new GameThread(player1,player2);
+    
+    Thread gameThread = new Thread(game);
+    
+    gameThread.start();
+    
+    
+    frame.add(game.getBoard());
     
     frame.setVisible(true);
+    
+    
+    
 
   }
 
