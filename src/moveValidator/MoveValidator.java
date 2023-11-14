@@ -17,13 +17,44 @@ public class MoveValidator {
   
   public synchronized boolean validMove(Move move, Board board, boolean whiteMove) {
     
-    if (move.getx1() >= 8 || move.getx2() >=8 || move.gety1() >= 8 || move.gety2() >=8) {
+    int x1 = move.getx1();
+    int x2 = move.getx2();
+    int y1 = move.gety1();
+    int y2 = move.gety2();
+    
+    if (x1 >= 8 || x2 >=8 || y1 >= 8 || y2 >=8) {
       return false; // x and y values should be from 0 to 7
     }
     
     else {
-      return true;
+      
+      if (whiteMove) {
+        
+        if (board.getPiece(x1, y1).isBlack()) {
+          return false;
+        }
+        
+        else {
+          //
+        }
+      }
+      
+      else {
+        
+        if (!board.getPiece(x1, y1).isBlack()) {
+          return false;
+        }
+        
+        else {
+          //
+        }
+        
+        
+      }
+      
     }
+    
+    return true;
     
   }
   
