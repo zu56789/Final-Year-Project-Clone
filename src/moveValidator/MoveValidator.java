@@ -35,7 +35,7 @@ public class MoveValidator {
         }
         
         else {
-          //
+          return pieceValidator(x1,y1,board);
         }
       }
       
@@ -46,19 +46,43 @@ public class MoveValidator {
         }
         
         else {
-          //
+          return pieceValidator(x1,y1,board);
         }
         
         
       }
       
     }
-    
-    return true;
-    
+
   }
   
-  
+  public boolean pieceValidator(int x, int y, Board board) {
+    
+    String piece = board.getPiece(x,y).getName();
+    
+    switch (piece) {
+      case "Pawn":
+        // run the pawn move checker
+        break;
+      case "Bishop":
+        //run the bishop move checker
+        break;
+      case "King":
+        //run the king move checker
+        break;
+      case "Queen":
+        //run the queen move checker
+        break;
+      case "Rook":
+        //run the rook move checker
+        break;
+      case "Knight":
+        //run the knight move checker
+        break; 
+    }
+    
+    return false;
+  }
   
   
 
