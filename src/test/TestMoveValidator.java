@@ -22,6 +22,7 @@ public class TestMoveValidator {
     board = new Board();
     player1 = new WhitePlayer("player1");
     player2 = new BlackPlayer("player2");
+    board.drawPieces(player1.getPieces(), player2.getPieces());
   }
   
   @Test
@@ -35,7 +36,6 @@ public class TestMoveValidator {
   @Test
   public void testWrongTeam() {
     Move move2 = new Move(0,0,4,4); // black piece
-    board.drawPieces(player1.getPieces(), player2.getPieces());
     assertEquals(moveValidator.validMove(move2, board, true), false);
     // tests that trying to move the other teams piece makes move invalid
     
@@ -44,7 +44,6 @@ public class TestMoveValidator {
   @Test
   public void knightTest() {
     Move move3 = new Move(1,0,2,2);
-    board.drawPieces(player1.getPieces(), player2.getPieces());
     assertEquals(moveValidator.validMove(move3, board, false),true);
     // tests that a knight is able to move in its specified way
   }
@@ -52,9 +51,16 @@ public class TestMoveValidator {
   @Test
   public void pawnTest() {
     Move move4 = new Move(1,6,1,4);
-    board.drawPieces(player1.getPieces(), player2.getPieces());
     assertEquals(moveValidator.validMove(move4, board, true),true);
-    // tests that a pawn can is able to move in its specified way on first turn
+    // tests that a pawn is able to move in its specified way
+  }
+  
+  @Test
+  public void rookTest() {
+    Move move5 = new Move(0,0,0,3);
+    assertEquals(moveValidator.validMove(move5, board, false),true);
+    // tests that a rook is able to move in its speicified way 
+    
   }
   
 
