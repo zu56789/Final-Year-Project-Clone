@@ -68,8 +68,7 @@ public class MoveValidator {
       case "King":
         break;
       case "Queen":
-        //run the queen move checker
-        break;
+        return queenValidator(x1,y1,x2,y2,board,whiteMove);
       case "Rook":
         return rookValidator(x1,y1,x2,y2,board,whiteMove);
       case "Knight":
@@ -144,6 +143,15 @@ public class MoveValidator {
     else {
       return false;
     }
+    
+    // add capture logic
+    // add collision logic
+    
+  }
+  
+  public boolean queenValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
+    
+    return bishopValidator(x1,y1,x2,y2,board,whiteMove) || rookValidator(x1,y1,x2,y2,board,whiteMove);
     
     // add capture logic
     // add collision logic
