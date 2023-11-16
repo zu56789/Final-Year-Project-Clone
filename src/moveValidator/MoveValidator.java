@@ -56,14 +56,13 @@ public class MoveValidator {
 
   }
   
-  public boolean pieceValidator(int x1, int y1, int x2, int y2, Board board, boolean team) {
+  public boolean pieceValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
     String piece = board.getPiece(x1,y1).getName();
     
     switch (piece) {
       case "Pawn":
-        // run the pawn move checker
-        break;
+        return pawnValidator(x1,y1,x2,y2,board,whiteMove);
       case "Bishop":
         //run the bishop move checker
         break;
@@ -76,14 +75,45 @@ public class MoveValidator {
         //run the rook move checker
         break;
       case "Knight":
-        return knightValidator(x1,y1,x2,y2,board,team);
+        return knightValidator(x1,y1,x2,y2,board,whiteMove);
     }
     
     return false;
   }
   
-  public boolean knightValidator(int x1, int y1, int x2, int y2, Board board, boolean team) {
+  public boolean knightValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     return Math.abs(x2-x1) * Math.abs(y2-y1) == 2;
+    // add checking for collisions and captures
+  }
+  
+  public boolean pawnValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
+    
+    if (whiteMove) {
+      if (y1 == 6) {
+        return (y1-y2) <= 2 && (x1 == x2) && (y1-y2!=0);
+        // if first pawn move, can move up to 2 spaces forward
+      }
+      else {
+        return (y1-y2 == 1) && (x1 == x2);
+        // if not first move, can only move 1 space forward
+      }
+    }
+    
+    else {
+      if (y1 == 1) {
+        return (y2-y1 <= 2) && (x1 == x2) && (y1-y2!=0);
+     // if first pawn move, can move up to 2 spaces forward
+      }
+      else {
+        return (y2-y1 == 1) && (x1 == x2);
+     // if not first move, can only move 1 space forward
+      }
+    }
+    
+    // will need to change the way of checking if first move
+    // add capture logic
+    // add collision logic
+ 
   }
   
   
