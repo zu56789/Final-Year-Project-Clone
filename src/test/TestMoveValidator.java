@@ -41,5 +41,13 @@ public class TestMoveValidator {
     
   }
   
+  @Test
+  public void knightTest() {
+    Move move3 = new Move(1,0,2,2);
+    board.drawPieces(player1.getPieces(), player2.getPieces());
+    assertEquals(moveValidator.validMove(move3, board, false),true);
+    // tests that a knight is able to move in its specified way
+  }
+  
 
 }

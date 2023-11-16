@@ -35,7 +35,7 @@ public class MoveValidator {
         }
         
         else {
-          return pieceValidator(x1,y1,board);
+          return pieceValidator(x1,y1,x2,y2,board, whiteMove);
         }
       }
       
@@ -46,7 +46,7 @@ public class MoveValidator {
         }
         
         else {
-          return pieceValidator(x1,y1,board);
+          return pieceValidator(x1,y1,x2,y2,board, whiteMove);
         }
         
         
@@ -56,9 +56,9 @@ public class MoveValidator {
 
   }
   
-  public boolean pieceValidator(int x, int y, Board board) {
+  public boolean pieceValidator(int x1, int y1, int x2, int y2, Board board, boolean team) {
     
-    String piece = board.getPiece(x,y).getName();
+    String piece = board.getPiece(x1,y1).getName();
     
     switch (piece) {
       case "Pawn":
@@ -68,7 +68,6 @@ public class MoveValidator {
         //run the bishop move checker
         break;
       case "King":
-        //run the king move checker
         break;
       case "Queen":
         //run the queen move checker
@@ -77,11 +76,14 @@ public class MoveValidator {
         //run the rook move checker
         break;
       case "Knight":
-        //run the knight move checker
-        break; 
+        return knightValidator(x1,y1,x2,y2,board,team);
     }
     
     return false;
+  }
+  
+  public boolean knightValidator(int x1, int y1, int x2, int y2, Board board, boolean team) {
+    return Math.abs(x2-x1) * Math.abs(y2-y1) == 2;
   }
   
   
