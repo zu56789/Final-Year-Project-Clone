@@ -64,8 +64,7 @@ public class MoveValidator {
       case "Pawn":
         return pawnValidator(x1,y1,x2,y2,board,whiteMove);
       case "Bishop":
-        //run the bishop move checker
-        break;
+        return bishopValidator(x1,y1,x2,y2,board,whiteMove);
       case "King":
         break;
       case "Queen":
@@ -126,6 +125,28 @@ public class MoveValidator {
     else {
       return true;
     }
+    
+    // add capture logic
+    // add collision logic
+    
+  }
+  
+  public boolean bishopValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
+    
+    if (Math.abs(x2-x1) == Math.abs(y2-y1)) {
+      if (x1 == x2 && y1 == y2) {
+        return false;
+      }
+      else {
+        return true;
+      }
+    }
+    else {
+      return false;
+    }
+    
+    // add capture logic
+    // add collision logic
     
   }
   
