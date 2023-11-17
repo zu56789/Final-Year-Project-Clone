@@ -80,13 +80,27 @@ public class MoveValidator {
   }
   
   public boolean knightValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
-    return Math.abs(x2-x1) * Math.abs(y2-y1) == 2;
-    // add checking for collisions and captures
+    
+    if (sameTeam(x1,y1,x2,y2,board)) {
+      return false;
+    }
+    
+    else {
+      
+      return Math.abs(x2-x1) * Math.abs(y2-y1) == 2;
+    }
+    
+    // add checking for captures
   }
   
   public boolean pawnValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
-    if (whiteMove) {
+    
+    if (sameTeam(x1,y1,x2,y2,board) || collision(x1,y1,x2,y2,board)) {
+      return false;
+    }
+    
+    else if (whiteMove) {
       if (y1 == 6) {
         return (y1-y2) <= 2 && (x1 == x2) && (y1-y2!=0);
         // if first pawn move, can move up to 2 spaces forward
@@ -110,15 +124,26 @@ public class MoveValidator {
     
     // will need to change the way of checking if first move
     // add capture logic
-    // add collision logic
  
   }
   
   public boolean rookValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
+    
+    
+    if (sameTeam(x1,y1,x2,y2,board) || collision(x1,y1,x2,y2,board)) {
+      return false;
+    }
+    
+    
 
-    if (x1 == x2 && y1 == y2) {
+    else if (x1 == x2 && y1 == y2) {
       return false;
   }
+    else if (sameTeam(x1,y1,x2,y2,board) || collision(x1,y1,x2,y2,board)) {
+      
+      return false;
+      
+    }
     else if (x1 != x2 && y1 != y2) {
       return false;
     }
@@ -127,13 +152,20 @@ public class MoveValidator {
     }
     
     // add capture logic
-    // add collision logic
     
   }
   
   public boolean bishopValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
-    if (Math.abs(x2-x1) == Math.abs(y2-y1)) {
+    
+    if (sameTeam(x1,y1,x2,y2,board) || collision(x1,y1,x2,y2,board)) {
+      return false;
+    }
+    
+    
+    
+    
+    else if (Math.abs(x2-x1) == Math.abs(y2-y1)) {
       if (x1 == x2 && y1 == y2) {
         return false;
       }
@@ -146,7 +178,6 @@ public class MoveValidator {
     }
     
     // add capture logic
-    // add collision logic
     
   }
   
@@ -161,7 +192,13 @@ public class MoveValidator {
   
   public boolean kingValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
-    if (x1 == x2 && y1 == y2) {
+    if (sameTeam(x1,y1,x2,y2,board) || collision(x1,y1,x2,y2,board)) {
+      return false;
+    }
+    
+    
+    
+    else if (x1 == x2 && y1 == y2) {
       return false;
     }
     
@@ -172,7 +209,6 @@ public class MoveValidator {
     }
     
     // add capture logic
-    // add collision logic
     // add check/checkmate logic to not allow certain moves
   }
   
@@ -187,6 +223,25 @@ public class MoveValidator {
     
     
     
+  }
+  
+  public boolean collision(int x1, int y1, int x2, int y2, Board board) {
+    
+    int dx = Integer.compare(x2, x1);
+    int dy = Integer.compare(y2, y1);
+    
+    int xcurr = x1 + dx;
+    int ycurr = y1+ dy;
+    
+    while(xcurr != x2 || ycurr!= y2) {
+      if (board.getPiece(xcurr, ycurr) != null) {
+        return true;
+      }
+      
+      xcurr += dx;
+      ycurr += dy;
+    }
+    return false;
   }
   
   

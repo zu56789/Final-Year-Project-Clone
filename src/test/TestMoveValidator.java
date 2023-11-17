@@ -1,6 +1,7 @@
 package test;
 
 import static org.junit.Assert.*;
+import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import gui.Board;
@@ -8,6 +9,7 @@ import move.Move;
 import moveValidator.MoveValidator;
 import player.BlackPlayer;
 import player.WhitePlayer;
+import pieces.*;
 
 public class TestMoveValidator {
   
@@ -42,22 +44,23 @@ public class TestMoveValidator {
   }
   
   @Test
-  public void knightTest() {
+  public void testKnight() {
     Move move3 = new Move(1,0,2,2);
     assertEquals(moveValidator.validMove(move3, board, false),true);
     // tests that a knight is able to move in its specified way
   }
   
   @Test
-  public void pawnTest() {
+  public void testPawn() {
     Move move4 = new Move(1,6,1,4);
     assertEquals(moveValidator.validMove(move4, board, true),true);
     // tests that a pawn is able to move in its specified way
   }
   
   @Test
-  public void rookTest() {
-    Move move5 = new Move(0,0,0,3);
+  public void testRook() {
+    Move move5 = new Move(0,0,0,4);
+    
     assertEquals(moveValidator.validMove(move5, board, false),true);
     // tests that a rook is able to move in its speicified way 
     
