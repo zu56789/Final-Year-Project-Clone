@@ -22,6 +22,7 @@ public class MoveValidator {
     int y1 = move.gety1();
     int y2 = move.gety2();
     
+    
     if (x1 >= 8 || x2 >=8 || y1 >= 8 || y2 >=8) {
       return false; // x and y values should be from 0 to 7
     }
@@ -174,6 +175,21 @@ public class MoveValidator {
     // add collision logic
     // add check/checkmate logic to not allow certain moves
   }
+  
+  public boolean sameTeam(int x1, int y1, int x2, int y2, Board board) {
+    
+    if (board.getPiece(x1, y1) != null && board.getPiece(x2,y2) != null) {
+      return board.getPiece(x1, y1).isBlack() == board.getPiece(x2, y2).isBlack();
+    }
+    else {
+      return false;
+    }
+    
+    
+    
+  }
+  
+  
   
   
 
