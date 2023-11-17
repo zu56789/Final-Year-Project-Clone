@@ -66,7 +66,7 @@ public class MoveValidator {
       case "Bishop":
         return bishopValidator(x1,y1,x2,y2,board,whiteMove);
       case "King":
-        break;
+        return kingValidator(x1,y1,x2,y2,board,whiteMove);
       case "Queen":
         return queenValidator(x1,y1,x2,y2,board,whiteMove);
       case "Rook":
@@ -156,6 +156,23 @@ public class MoveValidator {
     // add capture logic
     // add collision logic
     
+  }
+  
+  public boolean kingValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
+    
+    if (x1 == x2 && y1 == y2) {
+      return false;
+    }
+    
+    else {
+      
+      return Math.abs((x2-x1) * (y2-y1)) == 1 || Math.abs(x2-x1) + Math.abs(y2-y1) == 1;
+      
+    }
+    
+    // add capture logic
+    // add collision logic
+    // add check/checkmate logic to not allow certain moves
   }
   
   

@@ -77,5 +77,12 @@ public class TestMoveValidator {
     // tests that a queen is able to move in its speicified way 
   }
   
+  @Test
+  public void testKing() {
+    Move move8 = new Move(4,7,3,6);
+    assertEquals(moveValidator.validMove(move8, board, true),true);
+    // tests that a queen is able to move in its speicified way 
+  }
+  
 
 }
