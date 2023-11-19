@@ -2,3 +2,5 @@
 26/10/23: Stopped coding because I realised my planned class design has too many dependencies and is not done well. I have now thought of a new class design plan which I am going to implement.
 26/10/23: Finished refactoring old code so it follows new class design plan.
 14/11/23: Players can move in a turn based way. Need to start work on MoveValidator before refactoring gameThread.
+17/11/23: Added all basic movement logic to move validator class. In doing so, I noticed that the work I did on 14/11/23 may not have been the most relevant at the time because a lot of it will be replaced.
+19/11/23: Added collision detetction for each move.
