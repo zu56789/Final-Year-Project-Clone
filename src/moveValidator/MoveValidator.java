@@ -27,6 +27,10 @@ public class MoveValidator {
       return false; // x and y values should be from 0 to 7
     }
     
+    else if (board.getPiece(x1, y1) == null) {
+      return false;
+    }
+    
     else {
       
       if (whiteMove) {
@@ -139,11 +143,7 @@ public class MoveValidator {
     else if (x1 == x2 && y1 == y2) {
       return false;
   }
-    else if (sameTeam(x1,y1,x2,y2,board) || collision(x1,y1,x2,y2,board)) {
-      
-      return false;
-      
-    }
+    
     else if (x1 != x2 && y1 != y2) {
       return false;
     }
@@ -185,8 +185,6 @@ public class MoveValidator {
     
     return bishopValidator(x1,y1,x2,y2,board,whiteMove) || rookValidator(x1,y1,x2,y2,board,whiteMove);
     
-    // add capture logic
-    // add collision logic
     
   }
   
