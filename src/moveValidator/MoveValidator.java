@@ -243,6 +243,16 @@ public class MoveValidator {
   }
   
   
+  public boolean capture(int x1, int y1, int x2, int y2, Board board) {
+    
+    if (board.getPiece(x1, y1) != null && board.getPiece(x2,y2) != null) {
+      return board.getPiece(x1, y1).isBlack() != board.getPiece(x2, y2).isBlack();
+    }
+    else {
+      return false;
+    }
+  }
+  
   
   
 
