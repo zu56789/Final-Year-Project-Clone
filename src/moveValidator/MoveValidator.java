@@ -100,8 +100,16 @@ public class MoveValidator {
   public boolean pawnValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
     
-    if (sameTeam(x1,y1,x2,y2,board) || collision(x1,y1,x2,y2,board) || otherTeam(x1,y1,x2,y2,board)) {
+    if (sameTeam(x1,y1,x2,y2,board) || collision(x1,y1,x2,y2,board)) {
       return false;
+    }
+    
+    else if (otherTeam(x1,y1,x2,y2,board) && x1 == x2) {
+      return false;
+    }
+    
+    else if (otherTeam(x1,y1,x2,y2,board) && x1 != x2 && y1 != y2) {
+      return pawnCapture(x1,y1,x2,y2,whiteMove);
     }
     
     else if (whiteMove) {
@@ -126,7 +134,6 @@ public class MoveValidator {
       }
     }
     
-    // add capture logic
     // add promotion logic
  
   }
@@ -151,7 +158,6 @@ public class MoveValidator {
       return true;
     }
     
-    // add capture logic
     
   }
   
@@ -177,7 +183,6 @@ public class MoveValidator {
       return false;
     }
     
-    // add capture logic
     
   }
   
@@ -206,7 +211,6 @@ public class MoveValidator {
       
     }
     
-    // add capture logic
     // add check/checkmate logic to not allow certain moves
   }
   
@@ -251,6 +255,21 @@ public class MoveValidator {
     else {
       return false;
     }
+  }
+  
+  
+  public boolean pawnCapture(int x1, int y1, int x2, int y2, boolean whiteMove) {
+    
+    if (whiteMove) {
+      
+      return Math.abs(x2-x1) == 1 && (y1-y2) == 1;
+      
+    }
+    
+    else {
+      return Math.abs(x2-x1) == 1 && (y2-y1) == 1;
+    }
+    
   }
   
   
