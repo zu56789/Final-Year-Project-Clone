@@ -32,12 +32,12 @@ public class GameThread implements Runnable{
     
     while(!this.gameOver) {
       if (this.player1turn) {
-        System.out.println("White turn");
+        System.out.println("WHITE TURN");
         this.simulateTurn(player1turn);
         
       }
       else {
-        System.out.println("Black turn");
+        System.out.println("BLACK TURN");
         this.simulateTurn(player1turn);
       }
     }
@@ -73,13 +73,22 @@ public class GameThread implements Runnable{
         // work on capture stuff later
         
         
-        System.out.println(x2 + " " + y2);
-        
-        
         Move move = new Move(x1,y1,x2,y2);
         
         if (moveValidator.validMove(move, this.getBoard(), whiteturn)) {
-          this.updateBoard(piece1, x2, y2, whiteturn);
+          
+          if (moveValidator.otherTeam(x1, y1, x2, y2, this.getBoard())) {
+            this.captureUpdate(piece1, piece2, x2, y2, whiteturn);
+            this.board.drawPieces(this.player1.getPieces(), this.player2.getPieces());
+            System.out.println("White has captured " + this.player1.getNumCaptured());
+            System.out.println("Black has captured " + this.player2.getNumCaptured());
+          }
+          
+          else {
+            this.updateBoard(piece1, x2, y2, whiteturn);
+            this.board.drawPieces(this.player1.getPieces(), this.player2.getPieces());
+            
+          }
           
           if (whiteturn) {
             this.player1turn = false;
@@ -91,8 +100,6 @@ public class GameThread implements Runnable{
         
         else {
           System.out.println("Invalid move");
-          this.getBoard().setPressed(false);
-          this.getBoard().setReleased(false);
           simulateTurn(whiteturn);
         }
       }
@@ -102,9 +109,6 @@ public class GameThread implements Runnable{
     }
     
     else {
-      
-      this.getBoard().setPressed(false);
-      this.getBoard().setReleased(false);
       
       simulateTurn(whiteturn);
     }
@@ -128,8 +132,6 @@ public class GameThread implements Runnable{
       
       this.player1.setPieces(list);
       
-      this.board.drawPieces(this.player1.getPieces(), this.player2.getPieces());
-      
       
     }
     
@@ -144,16 +146,45 @@ public class GameThread implements Runnable{
       list.add(piece1);
       
       this.player2.setPieces(list);
+
+    }
+
+  }
+  
+  
+  public void captureUpdate(Piece piece1, Piece piece2, int x2, int y2, boolean whiteturn) {
+    
+    this.updateBoard(piece1, x2, y2, whiteturn);
+
+    if (whiteturn) {
       
-      this.board.drawPieces(this.player1.getPieces(), this.player2.getPieces());
+      ArrayList<Piece> list = this.getPlayer2Pieces();
+      list.remove(piece2);
+      piece2.setColumn(20);
+      piece2.setRow(20);
+      list.add(piece2);
+      list.remove(piece2);
+      this.player2.setPieces(list);
       
-      
+      this.player1.setNumCaptured(this.player1.getNumCaptured()+1);
       
       
     }
     
-    
-    
+    else {
+      
+      ArrayList<Piece> list = this.getPlayer1Pieces();
+      list.remove(piece2);
+      piece2.setColumn(20);
+      piece2.setRow(20);
+      list.add(piece2);
+      list.remove(piece2);
+      this.player1.setPieces(list);
+      
+      this.player2.setNumCaptured(this.player2.getNumCaptured()+1);
+      
+    }
+       
   }
   
   public Board getBoard() {
@@ -167,8 +198,5 @@ public class GameThread implements Runnable{
   public ArrayList<Piece> getPlayer2Pieces() {
     return this.player2.getPieces();
   }
-  
-  
-  
   
 }
