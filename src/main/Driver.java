@@ -16,8 +16,9 @@ public class Driver {
     frame.setTitle("Chess Game");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setLayout(new GridBagLayout());
-    frame.setMinimumSize(new Dimension(1000, 600));
+    frame.setMinimumSize(new Dimension(534, 557));
     frame.setLocationRelativeTo(null);
+    frame.setResizable(false);
     
     
     Player player1 = new WhitePlayer("white");

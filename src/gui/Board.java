@@ -13,10 +13,10 @@ public class Board extends JPanel {
   
   private ArrayList<Piece> pieceList;
   
-  private Piece selectedPiece;
-  private Piece releasedPiece;
-  
   private UserInput input;
+  
+  private int pressedX;
+  private int pressedY;
   
   private int releasedX;
   private int releasedY;
@@ -117,22 +117,6 @@ public class Board extends JPanel {
     return this.tileSize;
   }
   
-  public Piece getSelectedPiece() {
-    return this.selectedPiece;
-  }
-  
-  
-  public void setSelectedPiece(Piece selectedPiece) {
-    this.selectedPiece = selectedPiece;
-  }
-  
-  public Piece getReleasedPiece() {
-    return this.releasedPiece;
-  }
-  
-  public void setReleasedPiece(Piece releasedPiece) {
-    this.releasedPiece = releasedPiece;
-  }
   
   public boolean emptyTile(int column, int row) {
     Piece piece = this.getPiece(column, row);
@@ -142,6 +126,22 @@ public class Board extends JPanel {
     else {
       return false;
     }
+  }
+  
+  public int getPressedX() {
+    return this.pressedX;
+  }
+  
+  public int getPressedY() {
+    return this.pressedY;
+  }
+  
+  public void setPressedX(int x) {
+    this.pressedX = x;
+  }
+  
+  public void setPressedY(int y) {
+    this.pressedY = y;
   }
   
   public int getReleasedX() {
@@ -175,6 +175,7 @@ public class Board extends JPanel {
   public void setReleased(boolean released) {
     this.released = released;
   }
+  
   
 
 }

@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import pieces.Piece;
 
 public class UserInput extends MouseAdapter{
   
@@ -15,44 +14,37 @@ public class UserInput extends MouseAdapter{
   @Override
   public void mousePressed(MouseEvent e) {
     
+    board.setReleased(false);
+    
+    board.setPressed(true);
+    
     int column = e.getX() / board.getTileSize();
     int row = e.getY() / board.getTileSize();
     
-    if(!board.emptyTile(column, row)) {
-      board.setReleased(false);
-      board.setReleasedPiece(null);
-      board.setReleasedX(10);
-      board.setReleasedY(10);
-      board.setPressed(true);
-      Piece pressedPiece = board.getPiece(column, row);
-      board.setSelectedPiece(pressedPiece);
-      
-    }
+    
+    
+    board.setPressedX(column);
+    board.setPressedY(row);
     
   }
 
   @Override
   public void mouseReleased(MouseEvent e) {
     
-    int column = e.getX() / board.getTileSize();
-    int row = e.getY() / board.getTileSize();
-    
     board.setReleased(true);
     
     
-    if(!board.emptyTile(column, row)) {
-      Piece relPiece = board.getPiece(column, row);
-      board.setReleasedPiece(relPiece);
-    }
-    else {
-      
-      board.setReleasedX(column);
-      board.setReleasedY(row);
-      
-    }
+    int column = e.getX() / board.getTileSize();
+    int row = e.getY() / board.getTileSize();
+    
+    board.setReleasedX(column);
+    board.setReleasedY(row);
+    
+    
     
     board.setPressed(false);
-    //board.setSelectedPiece(null);
+    
+    
     
   } 
 

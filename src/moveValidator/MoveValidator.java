@@ -100,7 +100,7 @@ public class MoveValidator {
   public boolean pawnValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
     
-    if (sameTeam(x1,y1,x2,y2,board) || collision(x1,y1,x2,y2,board)) {
+    if (sameTeam(x1,y1,x2,y2,board) || collision(x1,y1,x2,y2,board) || otherTeam(x1,y1,x2,y2,board)) {
       return false;
     }
     
@@ -126,8 +126,8 @@ public class MoveValidator {
       }
     }
     
-    // will need to change the way of checking if first move
     // add capture logic
+    // add promotion logic
  
   }
   
@@ -242,6 +242,16 @@ public class MoveValidator {
     return false;
   }
   
+  
+  public boolean otherTeam(int x1, int y1, int x2, int y2, Board board) {
+    
+    if (board.getPiece(x1, y1) != null && board.getPiece(x2,y2) != null) {
+      return board.getPiece(x1, y1).isBlack() != board.getPiece(x2, y2).isBlack();
+    }
+    else {
+      return false;
+    }
+  }
   
   
   
