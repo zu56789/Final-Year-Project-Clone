@@ -15,6 +15,7 @@ public class GameThread implements Runnable{
   private boolean gameOver;
   private int count;
   private MoveValidator moveValidator;
+  // add checking for gameOver
   
   public GameThread(Player player1, Player player2) {
     this.player1 = player1;
@@ -32,6 +33,7 @@ public class GameThread implements Runnable{
     
     while(!this.gameOver) {
       if (this.player1turn) {
+        this.count++;
         System.out.println("WHITE TURN");
         this.simulateTurn(player1turn);
         
@@ -48,13 +50,18 @@ public class GameThread implements Runnable{
   
   public void simulateTurn(boolean whiteturn) {
     
+    
+    
+    
     while (!this.getBoard().Pressed()) {
       Thread.yield();
     }
     
+    
     while (!this.getBoard().Released()) {
       Thread.yield();
     }
+     
     
     if (this.getBoard().Pressed()) {
       
@@ -70,8 +77,6 @@ public class GameThread implements Runnable{
         int y2 = this.getBoard().getReleasedY();
         
         Piece piece2 = this.getBoard().getPiece(x2, y2);
-        // work on capture stuff later
-        
         
         Move move = new Move(x1,y1,x2,y2);
         
