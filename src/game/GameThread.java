@@ -1,7 +1,7 @@
 package game;
 
-import java.util.ArrayList;
 import gui.Board;
+import java.util.ArrayList;
 import move.Move;
 import moveValidator.MoveValidator;
 import pieces.Piece;
@@ -9,12 +9,14 @@ import player.Player;
 
 public class GameThread implements Runnable{
   
-  private Player player1, player2;
+  private Player player1;
+  private Player player2;
   private Board board;
   private boolean player1turn;
   private boolean gameOver;
   private int count;
   private MoveValidator moveValidator;
+  // add checking for gameOver
   
   public GameThread(Player player1, Player player2) {
     this.player1 = player1;
@@ -24,14 +26,16 @@ public class GameThread implements Runnable{
     this.gameOver = false;
     this.count = 0;
     moveValidator = MoveValidator.getInstance();
+    // singleton instance of move validator
   }
   
   @Override
   public void run() {
-    this.board.drawPieces(this.getPlayer1Pieces(),this.getPlayer2Pieces());
+    this.board.drawPieces(this.getPlayer1Pieces(), this.getPlayer2Pieces());
     
-    while(!this.gameOver) {
+    while (!this.gameOver) {
       if (this.player1turn) {
+        this.count++;
         System.out.println("WHITE TURN");
         this.simulateTurn(player1turn);
         
@@ -48,36 +52,33 @@ public class GameThread implements Runnable{
   
   public void simulateTurn(boolean whiteturn) {
     
-    while (!this.getBoard().Pressed()) {
-      Thread.yield();
+    while (!this.getBoard().pressed()) {
+      Thread.yield(); 
     }
     
-    while (!this.getBoard().Released()) {
+    while (!this.getBoard().released()) {
       Thread.yield();
     }
-    
-    if (this.getBoard().Pressed()) {
+     
+    if (this.getBoard().pressed()) {
       
       int x1 = this.getBoard().getPressedX();
       int y1 = this.getBoard().getPressedY();
       
       Piece piece1 = this.getBoard().getPiece(x1, y1);
       
-      
-      
-      if (this.getBoard().Released()) {
+      if (this.getBoard().released()) {
         int x2 = this.getBoard().getReleasedX();
         int y2 = this.getBoard().getReleasedY();
         
         Piece piece2 = this.getBoard().getPiece(x2, y2);
-        // work on capture stuff later
         
-        
-        Move move = new Move(x1,y1,x2,y2);
+        Move move = new Move(x1, y1, x2, y2);
         
         if (moveValidator.validMove(move, this.getBoard(), whiteturn)) {
           
           if (moveValidator.otherTeam(x1, y1, x2, y2, this.getBoard())) {
+            // capture
             this.captureUpdate(piece1, piece2, x2, y2, whiteturn);
             this.board.drawPieces(this.player1.getPieces(), this.player2.getPieces());
             System.out.println("White has captured " + this.player1.getNumCaptured());
@@ -85,6 +86,7 @@ public class GameThread implements Runnable{
           }
           
           else {
+            // non capture
             this.updateBoard(piece1, x2, y2, whiteturn);
             this.board.drawPieces(this.player1.getPieces(), this.player2.getPieces());
             
@@ -103,17 +105,13 @@ public class GameThread implements Runnable{
           simulateTurn(whiteturn);
         }
       }
-      
-      
-      
+
     }
     
     else {
       
       simulateTurn(whiteturn);
     }
-    
-    
     
   }
   
@@ -131,8 +129,7 @@ public class GameThread implements Runnable{
       list.add(piece1);
       
       this.player1.setPieces(list);
-      
-      
+         
     }
     
     else {
@@ -166,8 +163,7 @@ public class GameThread implements Runnable{
       list.remove(piece2);
       this.player2.setPieces(list);
       
-      this.player1.setNumCaptured(this.player1.getNumCaptured()+1);
-      
+      this.player1.setNumCaptured(this.player1.getNumCaptured() + 1);
       
     }
     
@@ -181,7 +177,7 @@ public class GameThread implements Runnable{
       list.remove(piece2);
       this.player1.setPieces(list);
       
-      this.player2.setNumCaptured(this.player2.getNumCaptured()+1);
+      this.player2.setNumCaptured(this.player2.getNumCaptured() + 1);
       
     }
        

@@ -146,5 +146,45 @@ public class TestMoveValidator {
     
   }
   
+  @Test
+  public void testCapture() {
+    
+    list1.add(new Knight(1,7,false));
+    list2.add(new Queen(0,5,true));
+    
+    board.drawPieces(list1, list2);
+    
+    Move move11 = new Move(1,7,0,5);
+    assertEquals(moveValidator.validMove(move11, board, true),true);
+    // tests that a legal capture is accepted
+    
+  }
+  
+  @Test
+  public void testPawnCapture() {
+    list1.add(new Pawn(1,6,false));
+    list2.add(new Pawn(2,5,true));
+    
+    board.drawPieces(list1, list2);
+    
+    Move move12 = new Move(1,6,2,5);
+    assertEquals(moveValidator.validMove(move12, board, true),true);
+    // tests that a pawn can capture a piece either front right or front left from it
+    
+  }
+  
+  @Test
+  public void testPawnBlocked() {
+    list1.add(new Pawn(1,6,false));
+    list2.add(new Pawn(1,5,true));
+    
+    board.drawPieces(list1, list2);
+    
+    Move move13 = new Move(1,6,1,5);
+    assertEquals(moveValidator.validMove(move13, board, true),false);
+    // tests that a pawn can not move forward if there is an opponent piece blocking it
+    
+  }
+  
 
 }

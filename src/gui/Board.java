@@ -1,9 +1,11 @@
 package gui;
 
-import javax.swing.*;
-import pieces.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.util.ArrayList;
+import javax.swing.JPanel;
+import pieces.Piece;
 
 public class Board extends JPanel {
   
@@ -39,16 +41,13 @@ public class Board extends JPanel {
     
     this.addMouseListener(input);
     this.addMouseMotionListener(input);
-    
-    //this.pressed = false;
-    
-    
+        
   }
   
   
   public Piece getPiece(int column, int row) {
     
-    for (Piece piece: pieceList) {
+    for (Piece piece : pieceList) {
       if (piece.getRow() == row && piece.getColumn() == column) {
         return piece;
       }
@@ -61,7 +60,7 @@ public class Board extends JPanel {
   public ArrayList<Piece> getBlackPieces() {
     
     ArrayList<Piece> blackPieces = new ArrayList<>();
-    for (Piece piece: pieceList) {
+    for (Piece piece : pieceList) {
       if (piece.isBlack()) {
         blackPieces.add(piece);
       }
@@ -73,7 +72,7 @@ public class Board extends JPanel {
   public ArrayList<Piece> getWhitePieces() {
     
     ArrayList<Piece> whitePieces = new ArrayList<>();
-    for (Piece piece: pieceList) {
+    for (Piece piece : pieceList) {
       if (!piece.isBlack()) {
         whitePieces.add(piece);
       }
@@ -82,15 +81,13 @@ public class Board extends JPanel {
   }
   
   
-  
-  
   public void drawPieces(ArrayList<Piece> whitePieces, ArrayList<Piece> blackPieces) {
     
-    for (Piece piece: whitePieces) {
+    for (Piece piece : whitePieces) {
       pieceList.add(piece);
     }
     
-    for (Piece piece: blackPieces) {
+    for (Piece piece : blackPieces) {
       pieceList.add(piece);
     }
     
@@ -101,15 +98,17 @@ public class Board extends JPanel {
   
   public void paintComponent(Graphics g) {
     
-    for (int r = 0; r< rows; r++) {
-      for (int c = 0; c< columns; c++) {
-        g.setColor((c+r) %2 == 0 ? new Color(111,135,210) : new Color(160,178,250));
-        g.fillRect(c*this.getTileSize(), r*this.getTileSize(), this.getTileSize(), this.getTileSize());
+    for (int r = 0; r < rows; r++) {
+      for (int c = 0; c < columns; c++) {
+        g.setColor((c + r) % 2 == 0 ? new Color(111, 135, 210) : new Color(160, 178, 250));
+        g.fillRect(c * this.getTileSize(), r * this.getTileSize(),
+             this.getTileSize(), this.getTileSize());
       }
     }
     
     for (Piece piece : pieceList) {
-      g.drawImage(piece.getPic(),piece.getColumn()* this.getTileSize(), piece.getRow()* this.getTileSize(), null);
+      g.drawImage(piece.getPic(), piece.getColumn() * this.getTileSize(), 
+          piece.getRow() * this.getTileSize(), null);
     }
   }
   
@@ -160,7 +159,7 @@ public class Board extends JPanel {
     this.releasedY = y;
   }
   
-  public boolean Pressed() {
+  public boolean pressed() {
     return this.pressed;
   }
   
@@ -168,7 +167,7 @@ public class Board extends JPanel {
     this.pressed = pressed;
   }
   
-  public boolean Released() {
+  public boolean released() {
     return this.released;
   }
   

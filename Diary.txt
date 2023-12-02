@@ -5,3 +5,4 @@
 17/11/23: Added all basic movement logic to move validator class. In doing so, I noticed that the work I did on 14/11/23 may not have been the most relevant at the time because a lot of it will be replaced.
 19/11/23: Added collision detetction for each move.
 20/11/23: Added Capture logic to GameThread. Need to go back to work on moveValidator to implement more complex captures like pawn captures.
+21/11/23: Added Pawn capture logic. Next thing to add will be check/checkmate logic. This will require refactoring the moveValidator class.
