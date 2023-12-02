@@ -21,8 +21,6 @@ public class UserInput extends MouseAdapter{
     int column = e.getX() / board.getTileSize();
     int row = e.getY() / board.getTileSize();
     
-    
-    
     board.setPressedX(column);
     board.setPressedY(row);
     
@@ -33,18 +31,13 @@ public class UserInput extends MouseAdapter{
     
     board.setReleased(true);
     
-    
     int column = e.getX() / board.getTileSize();
     int row = e.getY() / board.getTileSize();
     
     board.setReleasedX(column);
     board.setReleasedY(row);
     
-    
-    
     board.setPressed(false);
-    
-    
     
   } 
 

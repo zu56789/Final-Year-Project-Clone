@@ -1,9 +1,9 @@
 package main;
 
-
-import java.awt.*;
-import javax.swing.JFrame;
 import game.GameThread;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import javax.swing.JFrame;
 import player.BlackPlayer;
 import player.Player;
 import player.WhitePlayer;
@@ -24,7 +24,7 @@ public class Driver {
     Player player1 = new WhitePlayer("white");
     Player player2 = new BlackPlayer("black");
     
-    GameThread game = new GameThread(player1,player2);
+    GameThread game = new GameThread(player1, player2);
     
     Thread gameThread = new Thread(game);
     

@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import game.GameThread;
-import gui.Board;
 import pieces.Piece;
 import player.*;
 

@@ -62,34 +62,36 @@ public class WhitePlayer extends Player{
     
     this.pieces = new ArrayList<>();
     
-    this.pieces.add(new Knight(1,7,false));
-    this.pieces.add(new Knight(6,7,false));
+    this.pieces.add(new Knight(1, 7, false));
+    this.pieces.add(new Knight(6, 7, false));
     
-    this.pieces.add(new Pawn(0,6,false));
-    this.pieces.add(new Pawn(1,6,false));
-    this.pieces.add(new Pawn(2,6,false));
-    this.pieces.add(new Pawn(3,6,false));
-    this.pieces.add(new Pawn(4,6,false));
-    this.pieces.add(new Pawn(5,6,false));
-    this.pieces.add(new Pawn(6,6,false));
-    this.pieces.add(new Pawn(7,6,false));
+    this.pieces.add(new Pawn(0, 6, false));
+    this.pieces.add(new Pawn(1, 6, false));
+    this.pieces.add(new Pawn(2, 6, false));
+    this.pieces.add(new Pawn(3, 6, false));
+    this.pieces.add(new Pawn(4, 6, false));
+    this.pieces.add(new Pawn(5, 6, false));
+    this.pieces.add(new Pawn(6, 6, false));
+    this.pieces.add(new Pawn(7, 6, false));
     
-    this.pieces.add(new Rook(0,7,false));
-    this.pieces.add(new Rook(7,7,false));
+    this.pieces.add(new Rook(0, 7, false));
+    this.pieces.add(new Rook(7, 7, false));
     
-    this.pieces.add(new Bishop(2,7,false));
-    this.pieces.add(new Bishop(5,7,false));
+    this.pieces.add(new Bishop(2, 7, false));
+    this.pieces.add(new Bishop(5, 7, false));
     
-    this.pieces.add(new Queen(3,7,false));
+    this.pieces.add(new Queen(3, 7, false));
     
-    this.pieces.add(new King(4,7,false));
+    this.pieces.add(new King(4, 7, false));
     
     return this.pieces;
+    // pieces at the start of the game
+    
   }
 
   @Override
   public Move makeMove(int x1, int y1, int x2, int y2) {
-    return new Move(x1,y1,x2,y2);
+    return new Move(x1, y1, x2, y2);
   }
 
 }
