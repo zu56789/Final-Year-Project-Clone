@@ -10,8 +10,19 @@ import pieces.Piece;
 import pieces.Queen;
 import pieces.Rook;
 
-public class BlackPlayer extends Player{
+/**
+ * this class represents the player with the black pieces.
 
+ * @author Zuhayr
+ *
+ */
+public class BlackPlayer extends Player {
+
+  /**
+   * constructor for a black player.
+
+   * @param name string value of the name of the player.
+   */
   public BlackPlayer(String name) {
     
     this.name = name;

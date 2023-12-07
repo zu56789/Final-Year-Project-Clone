@@ -4,8 +4,23 @@ import java.awt.Image;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class Bishop extends Piece{
+/**
+ * this class represents a bishop piece.
 
+ * @author Zuhayr
+ *
+ */
+public class Bishop extends Piece {
+
+  /**
+   * constructor for a bishop piece.
+
+   * @param column column in which the piece belongs to.
+
+   * @param row row in which the piece belongs to.
+
+   * @param isBlack boolean value determining the colour of the piece.
+   */
   public Bishop(int column, int row, boolean isBlack) {
    
     this.column = column;
@@ -16,7 +31,7 @@ public class Bishop extends Piece{
     
   }
   
-  
+  @Override
   public Image getPic() {
     if (isBlack()) {
       try {
@@ -25,8 +40,7 @@ public class Bishop extends Piece{
         e.printStackTrace();
         return null;
       }
-    }
-    else {
+    }   else {
       try {
         return ImageIO.read(Bishop.class.getResource("/resources/whiteBishop.png"));
       } catch (IOException e) {

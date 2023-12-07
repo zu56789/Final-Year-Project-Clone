@@ -4,8 +4,23 @@ import java.awt.Image;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class King extends Piece{
+/**
+ * this class represents a king piece.
 
+ * @author Zuhayr
+ *
+ */
+public class King extends Piece {
+
+  /**
+   * constructor for king piece.
+
+   * @param column column in which the piece belongs to.
+
+   * @param row row in which the piece belongs to .
+
+   * @param isBlack boolean value determining the colour of the piece.
+   */
   public King(int column, int row, boolean isBlack) {
     
     this.column = column;
@@ -16,6 +31,7 @@ public class King extends Piece{
     
   }
   
+  @Override
   public Image getPic() {
     if (isBlack()) {
       try {
@@ -24,8 +40,7 @@ public class King extends Piece{
         e.printStackTrace();
         return null;
       }
-    }
-    else {
+    }   else {
       try {
         return ImageIO.read(King.class.getResource("/resources/whiteKing.png"));
       } catch (IOException e) {

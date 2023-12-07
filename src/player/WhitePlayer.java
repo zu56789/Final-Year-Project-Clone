@@ -10,9 +10,20 @@ import pieces.Piece;
 import pieces.Queen;
 import pieces.Rook;
 
-public class WhitePlayer extends Player{
+/**
+ * this class represnts the player with the white pieces.
+
+ * @author Zuhayr
+ *
+ */
+public class WhitePlayer extends Player {
   
   
+  /**
+   * constructor for a white player.
+
+   * @param name string value of the name of the player.
+   */
   public WhitePlayer(String name) {
     
     this.name = name;

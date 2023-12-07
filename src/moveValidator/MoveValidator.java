@@ -1,8 +1,14 @@
-package moveValidator;
+package movevalidator;
 
 import gui.Board;
 import move.Move;
 
+/**
+ * this class validates movements made in a chess game.
+
+ * @author Zuhayr
+ *
+ */
 public class MoveValidator {
   
   private MoveValidator() {}
@@ -17,7 +23,18 @@ public class MoveValidator {
     // class only instantiated when this is run
   }
   
-  public synchronized boolean validMove(Move move, Board board, boolean whiteMove) {
+  /**
+   * this method validates if a move is legal or not.
+
+   * @param move the movement being validated.
+
+   * @param board the board in which the movement will take place.
+
+   * @param whiteMove boolean value used to determine which player is moving.
+
+   * @return returns a boolean value used to determine if the movement is legal or not.
+   */
+  public boolean validMove(Move move, Board board, boolean whiteMove) {
     
     int x1 = move.getx1();
     int x2 = move.getx2();
@@ -27,32 +44,22 @@ public class MoveValidator {
     
     if (x1 >= 8 || x2 >= 8 || y1 >= 8 || y2 >= 8) {
       return false; // x and y values should be from 0 to 7
-    }
-    
-    else if (board.getPiece(x1, y1) == null) {
+    }   else if (board.getPiece(x1, y1) == null) {
       return false;
-    }
-    
-    else {
+    }   else {
       
       if (whiteMove) {
         
         if (board.getPiece(x1, y1).isBlack()) {
           return false;
-        }
-        
-        else {
+        }   else {
           return pieceValidator(x1, y1, x2, y2, board, whiteMove);
         }
-      }
-      
-      else {
+      } else {
         
         if (!board.getPiece(x1, y1).isBlack()) {
           return false;
-        }
-        
-        else {
+        }   else {
           return pieceValidator(x1, y1, x2, y2, board, whiteMove);
         }
         
@@ -62,6 +69,23 @@ public class MoveValidator {
 
   }
   
+  /**
+   * this method validates which type of piece is being moved.
+
+   * @param x1 the initial x value of the movement.
+
+   * @param y1 the initial y value of the movement.
+
+   * @param x2 the destination x value of the movement.
+
+   * @param y2 the destination y value of the movement.
+
+   * @param board the board in which this movement will take place on.
+
+   * @param whiteMove boolean value used to determine which player is moving.
+
+   * @return returns a boolean value determining if the piece has moved in a legal way.
+   */
   public boolean pieceValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
     String piece = board.getPiece(x1, y1).getName();
@@ -79,18 +103,33 @@ public class MoveValidator {
         return rookValidator(x1, y1, x2, y2, board, whiteMove);
       case "Knight":
         return knightValidator(x1, y1, x2, y2, board, whiteMove);
-    }
-    
-    return false;
+      default:
+        return false;
+    }   
   }
   
+  /**
+   * this method validates if a knight moves in a legal way.
+
+   * @param x1 the initial x value of the movement.
+
+   * @param y1 the initial y value of the movement.
+
+   * @param x2 the destination x value of the movement.
+
+   * @param y2 the destination y value of the movement.
+
+   * @param board the board in which this movement is taking place.
+
+   * @param whiteMove boolean value used to determine which player is moving.
+
+   * @return returns a boolean value determining if the knight moved in a legal way.
+   */
   public boolean knightValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
     if (sameTeam(x1, y1, x2, y2, board)) {
       return false;
-    }
-    
-    else {
+    }   else {
       
       return Math.abs(x2 - x1)  * Math.abs(y2 - y1) == 2;
     }
@@ -98,39 +137,46 @@ public class MoveValidator {
     // add checking for captures
   }
   
+  /**
+   * this method validates if a pawn moves in a legal way.
+
+   * @param x1 the initial x value of the movement.
+
+   * @param y1 the initial y value of the movement.
+
+   * @param x2 the destination x value of the movement.
+
+   * @param y2 the destination y value of the movement.
+
+   * @param board the board in which this movement is taking place.
+
+   * @param whiteMove boolean value used to determine which player is moving.
+
+   * @return returns a boolean value determining if the pawn moved in a legal way.
+   */
   public boolean pawnValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
     
     if (sameTeam(x1, y1, x2, y2, board) || collision(x1, y1, x2, y2, board)) {
       return false;
-    }
-    
-    else if (otherTeam(x1, y1, x2, y2, board) && x1 == x2) {
+    }   else if (otherTeam(x1, y1, x2, y2, board) && x1 == x2) {
       return false;
       // pawns can not forward capture
-    }
-    
-    else if (otherTeam(x1, y1, x2, y2, board) && x1 != x2 && y1 != y2) {
+    }   else if (otherTeam(x1, y1, x2, y2, board) && x1 != x2 && y1 != y2) {
       return pawnCapture(x1, y1, x2, y2, whiteMove);
-    }
-    
-    else if (whiteMove) {
+    }   else if (whiteMove) {
       if (y1 == 6) {
         return (y1 - y2) <= 2 && (x1 == x2) && (y1 - y2 != 0);
         // if first pawn move, can move up to 2 spaces forward
-      }
-      else {
+      } else {
         return (y1 - y2 == 1) && (x1 == x2);
         // if not first move, can only move 1 space forward
       }
-    }
-    
-    else {
+    }   else {
       if (y1 == 1) {
         return (y2 - y1 <= 2) && (x1 == x2) && (y1 - y2 != 0);
         // if first pawn move, can move up to 2 spaces forward
-      }
-      else {
+      } else {
         return (y2 - y1 == 1) && (x1 == x2);
         // if not first move, can only move 1 space forward
       }
@@ -140,70 +186,124 @@ public class MoveValidator {
  
   }
   
+  /**
+   * this method validates if a rook moves in a legal way.
+
+   * @param x1 the initial x value of the movement.
+
+   * @param y1 the initial y value of the movement.
+
+   * @param x2 the destination x value of the movement.
+
+   * @param y2 the destination y value of the movement.
+
+   * @param board the board in which this movement is taking place.
+
+   * @param whiteMove boolean value used to determine which player is moving.
+
+   * @return returns boolean value determining if the rook moves in a legal way.
+   */
   public boolean rookValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
     if (sameTeam(x1, y1, x2, y2, board) || collision(x1, y1, x2, y2, board)) {
       return false;
-    }
-    
-    else if (x1 == x2 && y1 == y2) {
+    }   else if (x1 == x2 && y1 == y2) {
       return false;
       // piece has not moved
-  }
-    
-    else if (x1 != x2 && y1 != y2) {
+  } else if (x1 != x2 && y1 != y2) {
       return false;
       // only one of x or y can change at once
-    }
-    else {
+    }   else {
       return true;
     }
     
   }
   
+  /**
+   * this method validates if a bishop moves in a legal way.
+
+   * @param x1 the initial x value of the movement.
+
+   * @param y1 the initial y value of the movement.
+
+   * @param x2 the destination x value of the movement.
+
+   * @param y2 the destination y value of the movement.
+
+   * @param board the board in which this movement is taking place.
+
+   * @param whiteMove boolean value used to determine which player is moving.
+
+   * @return returns boolean value determining if the bishop moves in a legal way.
+   */
   public boolean bishopValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
     if (sameTeam(x1, y1, x2, y2, board) || collision(x1, y1, x2, y2, board)) {
       return false;
-    }
-    
-    else if (Math.abs(x2 - x1) == Math.abs(y2 - y1)) {
+    }   else if (Math.abs(x2 - x1) == Math.abs(y2 - y1)) {
       if (x1 == x2 && y1 == y2) {
         return false;
-      }
-      else {
+      } else {
         return true;
         // must move the same x amount as y amount
       }
-    }
-    else {
+    }   else {
       return false;
     }
     
     
   }
   
+  /**
+   * this method validates if a queen moves in a legal way.
+
+   * @param x1 the initial x value of the movement.
+
+   * @param y1 the initial y value of the movement.
+
+   * @param x2 the destination x value of the movement.
+
+   * @param y2 the destination y value of the movement.
+
+   * @param board the board in which this movement is taking place.
+
+   * @param whiteMove boolean value used to determine which player is moving.
+
+   * @return returns boolean value determining if the queen moves in a legal way.
+   */
   public boolean queenValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
-    return bishopValidator(x1, y1, x2, y2, board, whiteMove) || rookValidator(x1, y1, x2, y2, board, whiteMove);
+    return bishopValidator(x1, y1, x2, y2, board, whiteMove) 
+        ||  rookValidator(x1, y1, x2, y2, board, whiteMove);
     
   }
   
+  /**
+   * this method validates that a king moves in a legal way.
+
+   * @param x1 the initial x value of the movement.
+
+   * @param y1 the initial y value of the movement.
+
+   * @param x2 the destination x value of the movement.
+
+   * @param y2 the destination y value of the movement.
+
+   * @param board the board in which this movement is taking place.
+
+   * @param whiteMove boolean value used to determine which player is moving.
+
+   * @return returns boolean value determining if the king moves in a legal way.
+   */
   public boolean kingValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
     if (sameTeam(x1, y1, x2, y2, board) || collision(x1, y1, x2, y2, board)) {
       return false;
       
-    }
-    
-    
-    
-    else if (x1 == x2 && y1 == y2) {
+    }   else if (x1 == x2 && y1 == y2) {
       return false;
       
-    }
-    
-    else {
+    }   else {
       
       return Math.abs((x2 - x1) * (y2 - y1)) == 1 || Math.abs(x2 - x1) + Math.abs(y2 - y1) == 1;
       // can move to any adjacent tile 
@@ -213,17 +313,46 @@ public class MoveValidator {
     // add check/checkmate logic to not allow certain moves
   }
   
+  /**
+   * this method checks if a moving piece is attempting to land on a teammate piece.
+
+   * @param x1 the initial x value of the movement.
+
+   * @param y1 the initial y value of the movement.
+
+   * @param x2 the destination x value of the movement.
+
+   * @param y2 the destination y value of the movement.
+
+   * @param board the board in which this movement is taking place.
+
+   * @return returns boolean value determining if a moving pieces lands on a teammate piece.
+   */
   public boolean sameTeam(int x1, int y1, int x2, int y2, Board board) {
     
     if (board.getPiece(x1, y1) != null && board.getPiece(x2, y2) != null) {
       return board.getPiece(x1, y1).isBlack() == board.getPiece(x2, y2).isBlack();
-    }
-    else {
+    }   else {
       return false;
     }
     
   }
   
+  /**
+   * this method determines if a movement contains any collisions.
+
+   * @param x1 the initial x value of the movement.
+
+   * @param y1 the initial y value of the movement.
+
+   * @param x2 the destination x value of the movement.
+
+   * @param y2 the destination y value of the movement.
+
+   * @param board the board in which this movement is taking place.
+
+   * @return returns boolean value determining if a movemeent contains any collisions.
+   */
   public boolean collision(int x1, int y1, int x2, int y2, Board board) {
     
     int dx = Integer.compare(x2, x1);
@@ -245,17 +374,46 @@ public class MoveValidator {
   }
   
   
+  /**
+   * this method checks if a moving piece is attempting to land on an enemy piece.
+
+   * @param x1 the initial x value of the movement.
+
+   * @param y1 the initial y value of the movement.
+
+   * @param x2 the destination x value of the movement.
+
+   * @param y2 the destination y value of the movement.
+
+   * @param board the board in which this movement is taking place.
+
+   * @return returns boolean value determining if a moving piece lands on an enemy piece.
+   */
   public boolean otherTeam(int x1, int y1, int x2, int y2, Board board) {
     
     if (board.getPiece(x1, y1) != null && board.getPiece(x2, y2) != null) {
       return board.getPiece(x1, y1).isBlack() != board.getPiece(x2, y2).isBlack();
-    }
-    else {
+    }   else {
       return false;
     }
   }
   
   
+  /**
+   * this method determines if a pawn makes a legal capture.
+
+   * @param x1 the initial x value of the movement.
+
+   * @param y1 the initial y value of the movement.
+
+   * @param x2 the destination x value of the movement.
+
+   * @param y2 the destination y value of the movement.
+
+   * @param whiteMove boolean value used to determine which player is moving.
+
+   * @return returns boolean value determining if a pawn makes a legal capture.
+   */
   public boolean pawnCapture(int x1, int y1, int x2, int y2, boolean whiteMove) {
     
     if (whiteMove) {
@@ -263,11 +421,9 @@ public class MoveValidator {
       return Math.abs(x2 - x1) == 1 && (y1 - y2) == 1;
       // pawns capture diagonally right or left 1 tile
       
-    }
-    
-    else {
+    }   else {
       return Math.abs(x2 - x1) == 1 && (y2 - y1) == 1;
-   // pawns capture diagonally right or left 1 tile
+      // pawns capture diagonally right or left 1 tile
     }
     
   }

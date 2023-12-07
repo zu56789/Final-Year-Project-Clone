@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import gui.Board;
 import move.Move;
-import moveValidator.MoveValidator;
+import movevalidator.MoveValidator;
 import player.BlackPlayer;
 import player.WhitePlayer;
 import pieces.*;

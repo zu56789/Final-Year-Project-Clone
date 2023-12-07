@@ -3,10 +3,21 @@ package gui;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class UserInput extends MouseAdapter{
+/**
+ * this class handles all user input on the board.
+
+ * @author Zuhayr
+ *
+ */
+public class UserInput extends MouseAdapter {
   
   private Board board;
   
+  /**
+   * constructor for user input.
+
+   * @param board the board class that this user input is used on.
+   */
   public UserInput(Board board) {
     this.board = board;
   }

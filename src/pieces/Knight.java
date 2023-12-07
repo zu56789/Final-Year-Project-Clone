@@ -4,8 +4,23 @@ import java.awt.Image;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class Knight extends Piece{
+/**
+ * this class represents a knight piece.
 
+ * @author Zuhayr
+ *
+ */
+public class Knight extends Piece {
+
+  /**
+   * constructor for knight piece.
+
+   * @param column column in which the piece belongs to.
+
+   * @param row row in which the piece belongs to.
+
+   * @param isBlack boolean value determining the colour of the piece.
+   */
   public Knight(int column, int row, boolean isBlack) {
     
     this.column = column;
@@ -16,6 +31,7 @@ public class Knight extends Piece{
     
   }
   
+  @Override
   public Image getPic() {
     if (isBlack()) {
       try {
@@ -24,8 +40,7 @@ public class Knight extends Piece{
         e.printStackTrace();
         return null;
       }
-    }
-    else {
+    }   else {
       try {
         return ImageIO.read(Knight.class.getResource("/resources/whiteKnight.png"));
       } catch (IOException e) {

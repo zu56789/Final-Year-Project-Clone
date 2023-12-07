@@ -4,8 +4,23 @@ import java.awt.Image;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class Rook extends Piece{
+/**
+ * this class represents a rook piece.
 
+ * @author Zuhayr
+ *
+ */
+public class Rook extends Piece {
+
+  /**
+   * constructor for a rook piece.
+
+   * @param column column in which the piece belongs to.
+
+   * @param row row in which the piece belongs to.
+
+   * @param isBlack boolean value determining the colour of the piece.
+   */
   public Rook(int column, int row, boolean isBlack) {
     
     this.column = column;
@@ -16,6 +31,7 @@ public class Rook extends Piece{
     
   }
   
+  @Override
   public Image getPic() {
     if (isBlack()) {
       try {
@@ -24,8 +40,7 @@ public class Rook extends Piece{
         e.printStackTrace();
         return null;
       }
-    }
-    else {
+    }   else {
       try {
         return ImageIO.read(Rook.class.getResource("/resources/whiteRook.png"));
       } catch (IOException e) {
