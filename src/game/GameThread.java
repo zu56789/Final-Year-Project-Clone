@@ -103,6 +103,14 @@ public class GameThread implements Runnable {
             
           }
           
+          if (piece1.getName() == "Pawn" && move.gety2() == 0 && whiteturn) {
+            System.out.println("PROMOTION!!!!!");
+          }
+          
+          if (piece1.getName() == "Pawn" && move.gety2() == 7 && !whiteturn) {
+            System.out.println("PROMOTION!!!!!");
+          }
+          
           if (whiteturn) {
             this.player1turn = false;
           } else {

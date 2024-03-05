@@ -42,7 +42,7 @@ public class MoveValidator {
     int y2 = move.gety2();
     
     
-    if (x1 >= 8 || x2 >= 8 || y1 >= 8 || y2 >= 8) {
+    if ((x1 > 7  || x1 < 0) || (x2 > 7 || x2 < 0) || (y1 > 7 || y2 < 0) || (y2 > 7 || y2 < 0)) {
       return false; // x and y values should be from 0 to 7
     }   else if (board.getPiece(x1, y1) == null) {
       return false;
@@ -165,7 +165,7 @@ public class MoveValidator {
     }   else if (otherTeam(x1, y1, x2, y2, board) && x1 != x2 && y1 != y2) {
       return pawnCapture(x1, y1, x2, y2, whiteMove);
     }   else if (whiteMove) {
-      if (y1 == 6 && whiteMove) {
+      if (y1 == 6) {
         return (y1 - y2) <= 2 && (x1 == x2) && (y1 - y2 != 0);
         // if first pawn move, can move up to 2 spaces forward
       } else {
@@ -173,7 +173,7 @@ public class MoveValidator {
         // if not first move, can only move 1 space forward
       }
     }   else {
-      if (y1 == 1 && !whiteMove) {
+      if (y1 == 1) {
         return (y2 - y1 <= 2) && (x1 == x2) && (y1 - y2 != 0);
         // if first pawn move, can move up to 2 spaces forward
       } else {
