@@ -165,7 +165,7 @@ public class MoveValidator {
     }   else if (otherTeam(x1, y1, x2, y2, board) && x1 != x2 && y1 != y2) {
       return pawnCapture(x1, y1, x2, y2, whiteMove);
     }   else if (whiteMove) {
-      if (y1 == 6) {
+      if (y1 == 6 && whiteMove) {
         return (y1 - y2) <= 2 && (x1 == x2) && (y1 - y2 != 0);
         // if first pawn move, can move up to 2 spaces forward
       } else {
@@ -173,7 +173,7 @@ public class MoveValidator {
         // if not first move, can only move 1 space forward
       }
     }   else {
-      if (y1 == 1) {
+      if (y1 == 1 && !whiteMove) {
         return (y2 - y1 <= 2) && (x1 == x2) && (y1 - y2 != 0);
         // if first pawn move, can move up to 2 spaces forward
       } else {
