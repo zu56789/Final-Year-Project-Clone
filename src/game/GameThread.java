@@ -4,6 +4,7 @@ import gui.Board;
 import java.util.ArrayList;
 import move.Move;
 import movevalidator.MoveValidator;
+import pieces.Bishop;
 import pieces.Piece;
 import player.Player;
 
@@ -101,15 +102,11 @@ public class GameThread implements Runnable {
             this.updateBoard(piece1, x2, y2, whiteturn);
             this.board.drawPieces(this.player1.getPieces(), this.player2.getPieces());
             
+            
           }
           
-          if (piece1.getName() == "Pawn" && move.gety2() == 0 && whiteturn) {
-            System.out.println("PROMOTION!!!!!");
-          }
-          
-          if (piece1.getName() == "Pawn" && move.gety2() == 7 && !whiteturn) {
-            System.out.println("PROMOTION!!!!!");
-          }
+          System.out.println("Player 1 has " + this.player1.getNumPieces() + " pieces");
+          System.out.println("Player 2 has " + this.player2.getNumPieces() + " pieces");
           
           if (whiteturn) {
             this.player1turn = false;
@@ -154,6 +151,14 @@ public class GameThread implements Runnable {
       list.add(piece1);
       
       this.player1.setPieces(list);
+      
+      if (piece1.getName() == "Pawn" && y2 == 0) {
+        
+        System.out.println("PROMOTION!!");
+        
+        pawnPromotion(piece1,whiteturn);
+        
+      }
          
     }   else {
       
@@ -166,9 +171,55 @@ public class GameThread implements Runnable {
       list.add(piece1);
       
       this.player2.setPieces(list);
+      
+      if (piece1.getName() == "Pawn" && y2 == 7) {
+        
+        System.out.println("PROMOTION!!");
+        
+        pawnPromotion(piece1,whiteturn);
+        
+      }
 
     }
 
+  }
+  
+  
+  public void pawnPromotion(Piece piece1, boolean whiteturn) {
+    
+    Piece newPiece;
+    
+    if (whiteturn) {
+      
+      newPiece = new Bishop(piece1.getColumn(),piece1.getRow(), false);
+      ArrayList<Piece> list = this.getPlayer1Pieces();
+      list.remove(piece1);
+      piece1.setColumn(20);
+      piece1.setRow(20);
+      list.add(piece1);
+      list.remove(piece1);
+      list.add(newPiece);
+      this.player1.setPieces(list);
+      
+    }
+    
+    else {
+      
+      newPiece = new Bishop(piece1.getColumn(),piece1.getRow(), true);
+      
+      ArrayList<Piece> list = this.getPlayer2Pieces();
+      list.remove(piece1);
+      piece1.setColumn(20);
+      piece1.setRow(20);
+      list.add(piece1);
+      list.remove(piece1);
+      
+      list.add(newPiece);
+      
+      this.player2.setPieces(list);
+      
+    }
+    
   }
   
   
@@ -200,6 +251,8 @@ public class GameThread implements Runnable {
       this.player2.setPieces(list);
       
       this.player1.setNumCaptured(this.player1.getNumCaptured() + 1);
+      
+      
       
     }   else {
       
