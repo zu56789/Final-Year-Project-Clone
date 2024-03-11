@@ -1,11 +1,17 @@
 package game;
 
 import gui.Board;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import move.Move;
 import movevalidator.MoveValidator;
 import pieces.Bishop;
+import pieces.Knight;
 import pieces.Piece;
+import pieces.Queen;
+import pieces.Rook;
 import player.Player;
 
 /**
@@ -191,7 +197,13 @@ public class GameThread implements Runnable {
     
     if (whiteturn) {
       
-      newPiece = new Bishop(piece1.getColumn(),piece1.getRow(), false);
+      /*Bishop whiteBishop = new Bishop(piece1.getColumn(),piece1.getRow(),false);
+      Queen whiteQueen = new Queen(piece1.getColumn(),piece1.getRow(),false);
+      Rook whiteRook = new Rook(piece1.getColumn(),piece1.getRow(),false);
+      Knight whiteKnight = new Knight(piece1.getColumn(),piece1.getRow(),false);*/
+      
+      
+      newPiece = new Queen(piece1.getColumn(),piece1.getRow(), false);
       ArrayList<Piece> list = this.getPlayer1Pieces();
       list.remove(piece1);
       piece1.setColumn(20);
@@ -205,7 +217,13 @@ public class GameThread implements Runnable {
     
     else {
       
-      newPiece = new Bishop(piece1.getColumn(),piece1.getRow(), true);
+      
+      /*Bishop blackBishop = new Bishop(piece1.getColumn(),piece1.getRow(),true);
+      Queen blackQueen = new Queen(piece1.getColumn(),piece1.getRow(),true);
+      Rook blackRook = new Rook(piece1.getColumn(),piece1.getRow(),true);
+      Knight blackKnight = new Knight(piece1.getColumn(),piece1.getRow(),true);*/
+      
+      newPiece = new Queen(piece1.getColumn(),piece1.getRow(), true);
       
       ArrayList<Piece> list = this.getPlayer2Pieces();
       list.remove(piece1);
@@ -221,6 +239,38 @@ public class GameThread implements Runnable {
     }
     
   }
+  
+  
+  /*public Piece promotedPieceSelection(Bishop bishop, Queen queen, Rook rook, Knight knight) {
+    
+    
+    JFrame frame1 = new JFrame();
+    frame1.setTitle("Promotion Choice");
+    frame1.setLayout(new GridBagLayout());
+    frame1.setMinimumSize(new Dimension(534, 557));
+    frame1.setLocationRelativeTo(null);
+    frame1.setResizable(false);
+    
+    
+    ImageIcon bishopImage = new ImageIcon(bishop.getPic());
+    JLabel bishopLabel = new JLabel(bishopImage);
+    bishopLabel.setName("Bishop");
+    
+    
+    ImageIcon queenImage = new ImageIcon(queen.getPic());
+    JLabel queenLabel = new JLabel(queenImage);
+    
+    ImageIcon rookImage = new ImageIcon(rook.getPic());
+    JLabel rookLabel = new JLabel(rookImage);
+    
+    ImageIcon knightImage = new ImageIcon(knight.getPic());
+    JLabel knightLabel = new JLabel(knightImage); 
+    
+    
+    frame1.setVisible(true);
+    
+    return bishop;
+  }*/
   
   
   /**
