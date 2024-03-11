@@ -75,6 +75,32 @@ public class Board extends JPanel {
     
   }
   
+  
+  public Piece getBlackKing() {
+    
+    for (Piece piece : pieceList) {
+      if (piece.getName() == "King" && piece.isBlack()) {
+        return piece;
+      }
+    }
+    
+    return null;
+    
+  }
+  
+  
+  public Piece getWhiteKing() {
+      
+      for (Piece piece : pieceList) {
+        if (piece.getName() == "King" && !piece.isBlack()) {
+          return piece;
+        }
+      }
+      
+      return null;
+      
+    }
+  
   /**
    * this method returns a list of all black pieces on the board.
 

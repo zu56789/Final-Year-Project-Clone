@@ -2,6 +2,7 @@ package movevalidator;
 
 import gui.Board;
 import move.Move;
+import pieces.Piece;
 
 /**
  * this class validates movements made in a chess game.
@@ -427,5 +428,25 @@ public class MoveValidator {
     }
     
   }
+  
+  
+  public boolean kingCheck(Board board, boolean whiteMove) {
+    
+    Piece king;
+    
+    if (whiteMove) {
+      
+      king = board.getWhiteKing();
+      
+      return true;
+      
+      
+      
+    }
+    
+    return false;
+    
+  }
+  
   
 }
