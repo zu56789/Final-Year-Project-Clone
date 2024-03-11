@@ -42,7 +42,7 @@ public class MoveValidator {
     int y2 = move.gety2();
     
     
-    if (x1 >= 8 || x2 >= 8 || y1 >= 8 || y2 >= 8) {
+    if ((x1 > 7  || x1 < 0) || (x2 > 7 || x2 < 0) || (y1 > 7 || y2 < 0) || (y2 > 7 || y2 < 0)) {
       return false; // x and y values should be from 0 to 7
     }   else if (board.getPiece(x1, y1) == null) {
       return false;
