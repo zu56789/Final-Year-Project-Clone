@@ -433,16 +433,37 @@ public class MoveValidator {
   public boolean kingCheck(Board board, boolean whiteMove) {
     
     Piece king;
+    int kingColumn;
+    int kingRow;
     
-    if (whiteMove) {
-      
+    if (whiteMove) {     
       king = board.getWhiteKing();
+      kingColumn = king.getColumn();
+      kingRow = king.getRow();
+      for (Piece piece: board.getBlackPieces()) {
+        int x1 = piece.getColumn();
+        int y1 = piece.getRow();
+        Move move = new Move(x1, y1, kingColumn, kingRow);
+        if(validMove(move,board, whiteMove)) {
+          return true;
+        }
+      }
       
-      return true;
-      
-      
-      
+    }   else {
+      king = board.getBlackKing();
+      kingColumn = king.getColumn();
+      kingRow = king.getRow();
+      for (Piece piece: board.getWhitePieces()) {
+        int x1 = piece.getColumn();
+        int y1 = piece.getRow();
+        Move move = new Move(x1, y1, kingColumn, kingRow);
+        if(validMove(move,board,!whiteMove)) {
+          return true;
+        }
+      }
     }
+    
+    
     
     return false;
     
