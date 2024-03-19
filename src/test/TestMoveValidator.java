@@ -271,6 +271,28 @@ public class TestMoveValidator {
     
   }
   
+  
+  @Test
+  public void testKingCheck() {
+    
+    King blackKing = new King(4,1,true); // black king
+    King whiteKing = new King(4,2,false); // white king
+    
+    list1.add(whiteKing);
+    list2.add(blackKing);
+    
+    board.drawPieces(list1, list2);
+    
+    Move move18 = new Move(4,2,3,2);
+    
+    assertEquals(moveValidator.validMove(move18, board, true),false);
+    // tests that a pawn checking a king restricts the kings movements
+    
+    
+    
+    
+  }
+  
  
   
 
