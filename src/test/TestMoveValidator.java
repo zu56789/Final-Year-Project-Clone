@@ -186,5 +186,29 @@ public class TestMoveValidator {
     
   }
   
+  
+  @Test
+  public void testRookCheck() {
+    
+    Rook rook = new Rook(1,2,true); // black rook
+    King king = new King(1,1,false); // white king
+    
+    list1.add(king);
+    list2.add(rook);
+    
+    board.drawPieces(list1, list2);
+    
+    Move move14 = new Move(1,1,1,0);
+    
+    assertEquals(moveValidator.validMove(move14, board, true),false);
+    // tests that a rook or queen checking a king restricts the kings movements
+    
+    
+    
+    
+  }
+  
+ 
+  
 
 }
