@@ -473,6 +473,30 @@ public class MoveValidator {
   }
   
   
+  public boolean hitByBishop(int x1, int y1, int col, int row, Piece king, int kingCol, int kingRow,
+      int colVal, int rowVal, Board board) {
+    
+    for (int i = 1; i<8; i++) {
+      if (kingCol - (i*colVal) == col && kingRow - (i * rowVal) == row) {
+        break;
+      }
+      
+      Piece piece = board.getPiece(kingCol - (i * colVal), kingRow - (i * rowVal));
+      if (piece != null && piece != board.getPiece(x1, y1)) {
+        if (piece.isBlack() != king.isBlack() && (piece.getName().equals("Bishop") || piece.getName().equals("Queen"))) {
+          System.out.println("Bishop or Queen is checking the King");
+          return true;
+        }
+        break;
+      }
+      
+      
+    }
+    
+    return false;
+  }
+  
+  
   
   
   
