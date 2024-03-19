@@ -42,6 +42,10 @@ public class MoveValidator {
     int y1 = move.gety1();
     int y2 = move.gety2();
     
+    if (this.isKingChecked(x1, y1, x2, y2, board, whiteMove)) {
+      return false;
+    }
+    
     
     if ((x1 > 7  || x1 < 0) || (x2 > 7 || x2 < 0) || (y1 > 7 || y2 < 0) || (y2 > 7 || y2 < 0)) {
       return false; // x and y values should be from 0 to 7
@@ -444,7 +448,21 @@ public class MoveValidator {
     }
     
     
-    return false;
+    return hitByRook(x1, y1, x2, y2, king, kingCol, kingRow, 0, 1, board) ||
+           hitByRook(x1, y1, x2, y2, king, kingCol, kingRow, 0, -1, board) ||
+           hitByRook(x1, y1, x2, y2, king, kingCol, kingRow, 1, 0, board) ||
+           hitByRook(x1, y1, x2, y2, king, kingCol, kingRow, -1, 0, board) ||
+          
+           hitByBishop(x1, y1, x2, y2, king, kingCol, kingRow, 1, 1, board) ||
+           hitByBishop(x1, y1, x2, y2, king, kingCol, kingRow, 1, -1, board) ||
+           hitByBishop(x1, y1, x2, y2, king, kingCol, kingRow, -1, 1, board) ||
+           hitByBishop(x1, y1, x2, y2, king, kingCol, kingRow, -1, -1, board) ||
+          
+           hitByKnight(x2, y2, king, kingCol, kingRow, board) ||
+          
+           hitByPawn(x2, y2, king, kingCol, kingRow, board) ||
+          
+           hitByKing(king, kingCol, kingRow, board);
            
   }
   
@@ -531,17 +549,13 @@ public class MoveValidator {
     return piece != null && piece.isBlack() != king.isBlack() && piece.getName().equals("King");
   }
   
-  
-  
   public boolean hitByPawn(int col, int row, Piece king, int kingCol, int kingRow, Board board) {
     
     int val = king.isBlack() ? 1 : -1;
     
     return checkPawn(board.getPiece(kingCol + 1, kingRow + val ), king, col, row) ||
            checkPawn(board.getPiece(kingCol - 1, kingRow + val ), king, col, row);
-        
-        
-    
+
   }
   
   public boolean checkPawn(Piece piece, Piece king, int col, int row) {
@@ -549,11 +563,5 @@ public class MoveValidator {
         !(piece.getColumn() == col && piece.getRow() == row);
   }
   
-  
-  
-  
-  
-  
-  
-  
+
 }
