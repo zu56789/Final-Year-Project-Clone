@@ -203,6 +203,25 @@ public class TestMoveValidator {
     assertEquals(moveValidator.validMove(move14, board, true),false);
     // tests that a rook or queen checking a king restricts the kings movements
     
+  }
+  
+  
+  @Test
+  public void testBishopCheck() {
+    
+    Bishop bishop = new Bishop(1,2,true); // black bishop
+    King king = new King(1,1,false); // white king
+    
+    list1.add(king);
+    list2.add(bishop);
+    
+    board.drawPieces(list1, list2);
+    
+    Move move15 = new Move(1,1,0,1);
+    
+    assertEquals(moveValidator.validMove(move15, board, true),false);
+    // tests that a bishop or queen checking a king restricts the kings movements
+    
     
     
     
