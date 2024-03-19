@@ -120,8 +120,16 @@ public class GameThread implements Runnable {
             this.player1turn = true;
           }
         }   else {
-          System.out.println("Invalid move");
-          simulateTurn(whiteturn);
+          
+          if (moveValidator.isKingChecked(x1, y1, x2, y2, board, whiteturn)) {
+            System.out.println("Check");
+            simulateTurn(whiteturn);
+          } else {
+            System.out.println("Invalid move");
+            simulateTurn(whiteturn);
+          }
+          
+          
         }
       }
 

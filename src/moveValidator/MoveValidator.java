@@ -478,7 +478,6 @@ public class MoveValidator {
       Piece piece = board.getPiece(kingCol + (i * colVal), kingRow + (i * rowVal));
       if (piece != null && piece != board.getPiece(x1, y1)) {
         if (piece.isBlack() != king.isBlack() && (piece.getName().equals("Rook") || piece.getName().equals("Queen"))) {
-          System.out.println("Rook or Queen is checking the King");
           return true;
         }
         break;
@@ -502,7 +501,6 @@ public class MoveValidator {
       Piece piece = board.getPiece(kingCol - (i * colVal), kingRow - (i * rowVal));
       if (piece != null && piece != board.getPiece(x1, y1)) {
         if (piece.isBlack() != king.isBlack() && (piece.getName().equals("Bishop") || piece.getName().equals("Queen"))) {
-          System.out.println("Bishop or Queen is checking the King");
           return true;
         }
         break;

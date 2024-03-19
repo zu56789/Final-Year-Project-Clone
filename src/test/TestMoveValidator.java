@@ -221,10 +221,6 @@ public class TestMoveValidator {
     
     assertEquals(moveValidator.validMove(move15, board, true),false);
     // tests that a bishop or queen checking a king restricts the kings movements
-    
-    
-    
-    
   }
   
   
@@ -243,10 +239,6 @@ public class TestMoveValidator {
     
     assertEquals(moveValidator.validMove(move16, board, true),false);
     // tests that a knight checking a king restricts the kings movements
-    
-    
-    
-    
   }
   
   
@@ -265,10 +257,6 @@ public class TestMoveValidator {
     
     assertEquals(moveValidator.validMove(move17, board, true),false);
     // tests that a pawn checking a king restricts the kings movements
-    
-    
-    
-    
   }
   
   
@@ -286,14 +274,6 @@ public class TestMoveValidator {
     Move move18 = new Move(4,2,3,2);
     
     assertEquals(moveValidator.validMove(move18, board, true),false);
-    // tests that a pawn checking a king restricts the kings movements
-    
-    
-    
-    
+    // tests that a king checking a king restricts the kings movements
   }
-  
- 
-  
-
 }
