@@ -533,6 +533,24 @@ public class MoveValidator {
   
   
   
+  public boolean hitByPawn(int col, int row, Piece king, int kingCol, int kingRow, Board board) {
+    
+    int val = king.isBlack() ? 1 : -1;
+    
+    return checkPawn(board.getPiece(kingCol + 1, kingRow + val ), king, col, row) ||
+           checkPawn(board.getPiece(kingCol - 1, kingRow + val ), king, col, row);
+        
+        
+    
+  }
+  
+  public boolean checkPawn(Piece piece, Piece king, int col, int row) {
+    return piece != null && piece.isBlack() != king.isBlack() && piece.getName().equals("Pawn") &&
+        !(piece.getColumn() == col && piece.getRow() == row);
+  }
+  
+  
+  
   
   
   
