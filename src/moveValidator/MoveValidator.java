@@ -430,44 +430,53 @@ public class MoveValidator {
   }
   
   
-  public boolean kingCheck(Board board, boolean whiteMove) {
+  public boolean isKingChecked(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
-    Piece king;
-    int kingColumn;
-    int kingRow;
+    Piece king = whiteMove ? board.getWhiteKing() : board.getBlackKing();
+    assert king != null;
     
-    if (whiteMove) {     
-      king = board.getWhiteKing();
-      kingColumn = king.getColumn();
-      kingRow = king.getRow();
-      for (Piece piece: board.getBlackPieces()) {
-        int x1 = piece.getColumn();
-        int y1 = piece.getRow();
-        Move move = new Move(x1, y1, kingColumn, kingRow);
-        if(validMove(move,board, whiteMove)) {
-          return true;
-        }
-      }
-      
-    }   else {
-      king = board.getBlackKing();
-      kingColumn = king.getColumn();
-      kingRow = king.getRow();
-      for (Piece piece: board.getWhitePieces()) {
-        int x1 = piece.getColumn();
-        int y1 = piece.getRow();
-        Move move = new Move(x1, y1, kingColumn, kingRow);
-        if(validMove(move,board,!whiteMove)) {
-          return true;
-        }
-      }
+    int kingCol = king.getColumn();
+    int kingRow = king.getRow();
+    
+    if (board.getPiece(x1, y1) != null && board.getPiece(x1, y1).getName().equals("King")) {
+      kingCol = x2;
+      kingRow = y2;
     }
     
     
+    return false;
+           
+  }
+  
+  
+  public boolean hitByRook(int x1, int y1, int col, int row, Piece king, int kingCol, int kingRow,
+      int colVal, int rowVal, Board board) {
+    
+    for (int i = 1; i<8; i++) {
+      if (kingCol + (i*colVal) == col && kingRow + (i * rowVal) == row) {
+        break;
+      }
+      
+      Piece piece = board.getPiece(kingCol + (i * colVal), kingRow + (i * rowVal));
+      if (piece != null && piece != board.getPiece(x1, y1)) {
+        if (piece.isBlack() != king.isBlack() && (piece.getName().equals("Rook") || piece.getName().equals("Queen"))) {
+          System.out.println("Rook or Queen is checking the King");
+          return true;
+        }
+        break;
+      }
+      
+      
+    }
     
     return false;
-    
   }
+  
+  
+  
+  
+  
+  
   
   
 }
