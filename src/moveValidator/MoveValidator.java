@@ -497,6 +497,24 @@ public class MoveValidator {
   }
   
   
+  public boolean hitByKnight(int col, int row, Piece king, int kingCol, int kingRow, Board board) {
+    return checkKnight(board.getPiece(kingCol - 1, kingRow - 2), king, col, row) || 
+           checkKnight(board.getPiece(kingCol - 2, kingRow - 1), king, col, row) ||
+           checkKnight(board.getPiece(kingCol + 2, kingRow + 1), king, col, row) || 
+           checkKnight(board.getPiece(kingCol + 1, kingRow + 2), king, col, row) || 
+           checkKnight(board.getPiece(kingCol - 1, kingRow + 2), king, col, row) || 
+           checkKnight(board.getPiece(kingCol + 1, kingRow - 2), king, col, row) || 
+           checkKnight(board.getPiece(kingCol + 2, kingRow - 1), king, col, row) || 
+           checkKnight(board.getPiece(kingCol - 2, kingRow + 1), king, col, row); 
+  }
+  
+  public boolean checkKnight(Piece piece, Piece king, int col, int row) {
+    return piece != null && piece.isBlack() != king.isBlack() && piece.getName().equals("Knight") &&
+        !(piece.getColumn() == col && piece.getRow() == row);
+    
+  }
+  
+  
   
   
   
