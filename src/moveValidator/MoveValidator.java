@@ -515,6 +515,23 @@ public class MoveValidator {
   }
   
   
+  public boolean hitByKing(Piece king, int kingCol, int kingRow, Board board) {
+    
+    return checkKing(board.getPiece(kingCol + 1, kingRow + 1), king) ||
+           checkKing(board.getPiece(kingCol - 1, kingRow - 1), king) || 
+           checkKing(board.getPiece(kingCol + 1, kingRow), king) ||
+           checkKing(board.getPiece(kingCol - 1, kingRow), king) ||
+           checkKing(board.getPiece(kingCol, kingRow - 1), king) ||
+           checkKing(board.getPiece(kingCol, kingRow + 1), king) ||
+           checkKing(board.getPiece(kingCol + 1, kingRow - 1), king) ||
+           checkKing(board.getPiece(kingCol - 1, kingRow + 1), king);
+  }
+  
+  public boolean checkKing(Piece piece, Piece king) {
+    return piece != null && piece.isBlack() != king.isBlack() && piece.getName().equals("King");
+  }
+  
+  
   
   
   
