@@ -7,3 +7,4 @@
 20/11/23: Added Capture logic to GameThread. Need to go back to work on moveValidator to implement more complex captures like pawn captures.
 21/11/23: Added Pawn capture logic. Next thing to add will be check/checkmate logic. This will require refactoring the moveValidator class.
 11/03/24: Added Pawn promotion logic. Currently stuck on implementing a choice factor into it so th system currently only promotes to a Queen.
+19/03/24: Added Check and checkmate logic. Struggling to find a way to allow gameThread to recognise a checkmate.
