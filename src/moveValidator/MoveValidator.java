@@ -2,6 +2,7 @@ package movevalidator;
 
 import gui.Board;
 import move.Move;
+import pieces.Piece;
 
 /**
  * this class validates movements made in a chess game.
@@ -40,6 +41,10 @@ public class MoveValidator {
     int x2 = move.getx2();
     int y1 = move.gety1();
     int y2 = move.gety2();
+    
+    if (this.isKingChecked(x1, y1, x2, y2, board, whiteMove)) {
+      return false;
+    }
     
     
     if ((x1 > 7  || x1 < 0) || (x2 > 7 || x2 < 0) || (y1 > 7 || y2 < 0) || (y2 > 7 || y2 < 0)) {
@@ -428,4 +433,133 @@ public class MoveValidator {
     
   }
   
+  
+  public boolean isKingChecked(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
+    
+    Piece king = whiteMove ? board.getWhiteKing() : board.getBlackKing();
+    assert king != null;
+    
+    int kingCol = king.getColumn();
+    int kingRow = king.getRow();
+    
+    if (board.getPiece(x1, y1) != null && board.getPiece(x1, y1).getName().equals("King")) {
+      kingCol = x2;
+      kingRow = y2;
+    }
+    
+    
+    return hitByRook(x1, y1, x2, y2, king, kingCol, kingRow, 0, 1, board) ||
+           hitByRook(x1, y1, x2, y2, king, kingCol, kingRow, 0, -1, board) ||
+           hitByRook(x1, y1, x2, y2, king, kingCol, kingRow, 1, 0, board) ||
+           hitByRook(x1, y1, x2, y2, king, kingCol, kingRow, -1, 0, board) ||
+          
+           hitByBishop(x1, y1, x2, y2, king, kingCol, kingRow, 1, 1, board) ||
+           hitByBishop(x1, y1, x2, y2, king, kingCol, kingRow, 1, -1, board) ||
+           hitByBishop(x1, y1, x2, y2, king, kingCol, kingRow, -1, 1, board) ||
+           hitByBishop(x1, y1, x2, y2, king, kingCol, kingRow, -1, -1, board) ||
+          
+           hitByKnight(x2, y2, king, kingCol, kingRow, board) ||
+          
+           hitByPawn(x2, y2, king, kingCol, kingRow, board) ||
+          
+           hitByKing(king, kingCol, kingRow, board);
+           
+  }
+  
+  
+  public boolean hitByRook(int x1, int y1, int col, int row, Piece king, int kingCol, int kingRow,
+      int colVal, int rowVal, Board board) {
+    
+    for (int i = 1; i<8; i++) {
+      if (kingCol + (i*colVal) == col && kingRow + (i * rowVal) == row) {
+        break;
+      }
+      
+      Piece piece = board.getPiece(kingCol + (i * colVal), kingRow + (i * rowVal));
+      if (piece != null && piece != board.getPiece(x1, y1)) {
+        if (piece.isBlack() != king.isBlack() && (piece.getName().equals("Rook") || piece.getName().equals("Queen"))) {
+          return true;
+        }
+        break;
+      }
+      
+      
+    }
+    
+    return false;
+  }
+  
+  
+  public boolean hitByBishop(int x1, int y1, int col, int row, Piece king, int kingCol, int kingRow,
+      int colVal, int rowVal, Board board) {
+    
+    for (int i = 1; i<8; i++) {
+      if (kingCol - (i*colVal) == col && kingRow - (i * rowVal) == row) {
+        break;
+      }
+      
+      Piece piece = board.getPiece(kingCol - (i * colVal), kingRow - (i * rowVal));
+      if (piece != null && piece != board.getPiece(x1, y1)) {
+        if (piece.isBlack() != king.isBlack() && (piece.getName().equals("Bishop") || piece.getName().equals("Queen"))) {
+          return true;
+        }
+        break;
+      }
+      
+      
+    }
+    
+    return false;
+  }
+  
+  
+  public boolean hitByKnight(int col, int row, Piece king, int kingCol, int kingRow, Board board) {
+    return checkKnight(board.getPiece(kingCol - 1, kingRow - 2), king, col, row) || 
+           checkKnight(board.getPiece(kingCol - 2, kingRow - 1), king, col, row) ||
+           checkKnight(board.getPiece(kingCol + 2, kingRow + 1), king, col, row) || 
+           checkKnight(board.getPiece(kingCol + 1, kingRow + 2), king, col, row) || 
+           checkKnight(board.getPiece(kingCol - 1, kingRow + 2), king, col, row) || 
+           checkKnight(board.getPiece(kingCol + 1, kingRow - 2), king, col, row) || 
+           checkKnight(board.getPiece(kingCol + 2, kingRow - 1), king, col, row) || 
+           checkKnight(board.getPiece(kingCol - 2, kingRow + 1), king, col, row); 
+  }
+  
+  public boolean checkKnight(Piece piece, Piece king, int col, int row) {
+    return piece != null && piece.isBlack() != king.isBlack() && piece.getName().equals("Knight") &&
+        !(piece.getColumn() == col && piece.getRow() == row);
+    
+  }
+  
+  
+  public boolean hitByKing(Piece king, int kingCol, int kingRow, Board board) {
+    
+    return checkKing(board.getPiece(kingCol + 1, kingRow + 1), king) ||
+           checkKing(board.getPiece(kingCol - 1, kingRow - 1), king) || 
+           checkKing(board.getPiece(kingCol + 1, kingRow), king) ||
+           checkKing(board.getPiece(kingCol - 1, kingRow), king) ||
+           checkKing(board.getPiece(kingCol, kingRow - 1), king) ||
+           checkKing(board.getPiece(kingCol, kingRow + 1), king) ||
+           checkKing(board.getPiece(kingCol + 1, kingRow - 1), king) ||
+           checkKing(board.getPiece(kingCol - 1, kingRow + 1), king);
+  }
+  
+  public boolean checkKing(Piece piece, Piece king) {
+    return piece != null && piece.isBlack() != king.isBlack() && piece.getName().equals("King");
+  }
+  
+  public boolean hitByPawn(int col, int row, Piece king, int kingCol, int kingRow, Board board) {
+    
+    int val = king.isBlack() ? 1 : -1;
+    
+    return checkPawn(board.getPiece(kingCol + 1, kingRow + val ), king, col, row) ||
+           checkPawn(board.getPiece(kingCol - 1, kingRow + val ), king, col, row);
+
+  }
+  
+  public boolean checkPawn(Piece piece, Piece king, int col, int row) {
+    return piece != null && piece.isBlack() != king.isBlack() && piece.getName().equals("Pawn") &&
+        !(piece.getColumn() == col && piece.getRow() == row);
+  }
+  
+
 }

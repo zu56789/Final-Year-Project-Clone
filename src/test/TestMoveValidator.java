@@ -186,5 +186,94 @@ public class TestMoveValidator {
     
   }
   
-
+  
+  @Test
+  public void testRookCheck() {
+    
+    Rook rook = new Rook(1,2,true); // black rook
+    King king = new King(1,1,false); // white king
+    
+    list1.add(king);
+    list2.add(rook);
+    
+    board.drawPieces(list1, list2);
+    
+    Move move14 = new Move(1,1,1,0);
+    
+    assertEquals(moveValidator.validMove(move14, board, true),false);
+    // tests that a rook or queen checking a king restricts the kings movements
+    
+  }
+  
+  
+  @Test
+  public void testBishopCheck() {
+    
+    Bishop bishop = new Bishop(1,2,true); // black bishop
+    King king = new King(1,1,false); // white king
+    
+    list1.add(king);
+    list2.add(bishop);
+    
+    board.drawPieces(list1, list2);
+    
+    Move move15 = new Move(1,1,0,1);
+    
+    assertEquals(moveValidator.validMove(move15, board, true),false);
+    // tests that a bishop or queen checking a king restricts the kings movements
+  }
+  
+  
+  @Test
+  public void testKnightCheck() {
+    
+    Knight knight = new Knight(1,2,true); // black knight
+    King king = new King(3,2,false); // white king
+    
+    list1.add(king);
+    list2.add(knight);
+    
+    board.drawPieces(list1, list2);
+    
+    Move move16 = new Move(3,2,3,1);
+    
+    assertEquals(moveValidator.validMove(move16, board, true),false);
+    // tests that a knight checking a king restricts the kings movements
+  }
+  
+  
+  @Test
+  public void testPawnCheck() {
+    
+    Pawn pawn = new Pawn(4,1,true); // black pawn
+    King king = new King(4,2,false); // white king
+    
+    list1.add(king);
+    list2.add(pawn);
+    
+    board.drawPieces(list1, list2);
+    
+    Move move17 = new Move(4,2,3,2);
+    
+    assertEquals(moveValidator.validMove(move17, board, true),false);
+    // tests that a pawn checking a king restricts the kings movements
+  }
+  
+  
+  @Test
+  public void testKingCheck() {
+    
+    King blackKing = new King(4,1,true); // black king
+    King whiteKing = new King(4,2,false); // white king
+    
+    list1.add(whiteKing);
+    list2.add(blackKing);
+    
+    board.drawPieces(list1, list2);
+    
+    Move move18 = new Move(4,2,3,2);
+    
+    assertEquals(moveValidator.validMove(move18, board, true),false);
+    // tests that a king checking a king restricts the kings movements
+  }
 }
