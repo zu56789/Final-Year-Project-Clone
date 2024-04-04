@@ -122,7 +122,6 @@ public class GameThread implements Runnable {
       }
     }
     
-    
   }
   
   
@@ -167,8 +166,6 @@ public class GameThread implements Runnable {
                 ") to (" + x2 + "," + y2 + ")\n");
           }
           
-          
-          
           if (moveValidator.otherTeam(x1, y1, x2, y2, this.getBoard())) {
             // capture
             this.captureUpdate(piece1, piece2, x2, y2, whiteturn);
@@ -177,7 +174,6 @@ public class GameThread implements Runnable {
             // non capture
             this.updateBoard(piece1, x2, y2, whiteturn);
             this.board.drawPieces(this.player1.getPieces(), this.player2.getPieces());
-            
             
           }
           
@@ -226,9 +222,7 @@ public class GameThread implements Runnable {
       this.player1.setPieces(list);
       
       if (piece1.getName() == "Pawn" && y2 == 0) {
-        
-        //JOptionPane.showMessageDialog(frame,"Promotion" + "", " ",JOptionPane.INFORMATION_MESSAGE);
-        
+
         pawnPromotion(piece1,whiteturn);
         
       }
@@ -247,8 +241,6 @@ public class GameThread implements Runnable {
       
       if (piece1.getName() == "Pawn" && y2 == 7) {
         
-        //JOptionPane.showMessageDialog(frame,"Promotion" + "", " ",JOptionPane.INFORMATION_MESSAGE);
-        
         pawnPromotion(piece1,whiteturn);
         
       }
@@ -265,9 +257,7 @@ public class GameThread implements Runnable {
     String[] options = {"Queen", "Rook", "Bishop", "Knight"};
     
     if (whiteturn) {
-      
-      
-      
+
       int choice = JOptionPane.showOptionDialog(null,
           "Choose an option:", 
           "Option Chooser",
@@ -317,7 +307,6 @@ public class GameThread implements Runnable {
           options, 
           options[0]);
       
-      
       switch(choice) {
         case 0:
           newPiece = new Queen(piece1.getColumn(),piece1.getRow(), true);
@@ -351,39 +340,6 @@ public class GameThread implements Runnable {
     
   }
   
-  
-  /*public Piece promotedPieceSelection(Bishop bishop, Queen queen, Rook rook, Knight knight) {
-    
-    
-    JFrame frame1 = new JFrame();
-    frame1.setTitle("Promotion Choice");
-    frame1.setLayout(new GridBagLayout());
-    frame1.setMinimumSize(new Dimension(534, 557));
-    frame1.setLocationRelativeTo(null);
-    frame1.setResizable(false);
-    
-    
-    ImageIcon bishopImage = new ImageIcon(bishop.getPic());
-    JLabel bishopLabel = new JLabel(bishopImage);
-    bishopLabel.setName("Bishop");
-    
-    
-    ImageIcon queenImage = new ImageIcon(queen.getPic());
-    JLabel queenLabel = new JLabel(queenImage);
-    
-    ImageIcon rookImage = new ImageIcon(rook.getPic());
-    JLabel rookLabel = new JLabel(rookImage);
-    
-    ImageIcon knightImage = new ImageIcon(knight.getPic());
-    JLabel knightLabel = new JLabel(knightImage); 
-    
-    
-    frame1.setVisible(true);
-    
-    return bishop;
-  }*/
-  
-  
   /**
    * this method updates the board after a successful capture takes place.
 
@@ -412,9 +368,7 @@ public class GameThread implements Runnable {
       this.player2.setPieces(list);
       
       this.player1.setNumCaptured(this.player1.getNumCaptured() + 1);
-      
-      
-      
+
     }   else {
       
       ArrayList<Piece> list = this.getPlayer1Pieces();
