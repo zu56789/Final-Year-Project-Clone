@@ -10,6 +10,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import move.Move;
 import movevalidator.MoveValidator;
@@ -36,6 +38,8 @@ public class GameThread implements Runnable {
   private JFrame frame;
   private JLabel whitePieceCountLabel;
   private JLabel blackPieceCountLabel;
+  private JTextArea whiteMovesArea;
+  private JTextArea blackMovesArea;
   // add checking for gameOver
   
   /**
@@ -83,6 +87,28 @@ public class GameThread implements Runnable {
     countsPanel.add(blackPieceCountLabel);
 
     frame.add(countsPanel, BorderLayout.SOUTH);
+    
+    
+    JPanel movesPanel = new JPanel(new GridLayout(1, 2));
+    
+    whiteMovesArea = new JTextArea();
+    whiteMovesArea.setEditable(false);
+    JScrollPane whiteScroll = new JScrollPane(whiteMovesArea);
+    whiteScroll.setBorder(BorderFactory.createTitledBorder("White Moves"));
+    movesPanel.add(whiteScroll);
+    
+    
+    blackMovesArea = new JTextArea();
+    blackMovesArea.setEditable(false);
+    JScrollPane blackScroll = new JScrollPane(blackMovesArea);
+    blackScroll.setBorder(BorderFactory.createTitledBorder("Black Moves"));
+    movesPanel.add(blackScroll);
+
+    frame.add(movesPanel, BorderLayout.CENTER);
+    
+    
+    
+    
     
     
     frame.setVisible(true);
@@ -136,12 +162,21 @@ public class GameThread implements Runnable {
         
         if (moveValidator.validMove(move, this.getBoard(), whiteturn)) {
           
+          
+          if (whiteturn) {
+            whiteMovesArea.append(piece1.getName() + " from (" + piece1.getColumn() + "," + piece1.getRow() +
+            ") to (" + x2 + "," + y2 + ")\n");
+          } else {
+            blackMovesArea.append(piece1.getName() + " from (" + piece1.getColumn() + "," + piece1.getRow() +
+                ") to (" + x2 + "," + y2 + ")\n");
+          }
+          
+          
+          
           if (moveValidator.otherTeam(x1, y1, x2, y2, this.getBoard())) {
             // capture
             this.captureUpdate(piece1, piece2, x2, y2, whiteturn);
             this.board.drawPieces(this.player1.getPieces(), this.player2.getPieces());
-            System.out.println("White has captured " + this.player1.getNumCaptured());
-            System.out.println("Black has captured " + this.player2.getNumCaptured());
           } else {
             // non capture
             this.updateBoard(piece1, x2, y2, whiteturn);
@@ -149,9 +184,6 @@ public class GameThread implements Runnable {
             
             
           }
-          
-          System.out.println("Player 1 has " + this.player1.getNumPieces() + " pieces");
-          System.out.println("Player 2 has " + this.player2.getNumPieces() + " pieces");
           
           if (whiteturn) {
             this.player1turn = false;
