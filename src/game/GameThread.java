@@ -227,7 +227,7 @@ public class GameThread implements Runnable {
       
       if (piece1.getName() == "Pawn" && y2 == 0) {
         
-        JOptionPane.showMessageDialog(frame,"Promotion" + "", " ",JOptionPane.INFORMATION_MESSAGE);
+        //JOptionPane.showMessageDialog(frame,"Promotion" + "", " ",JOptionPane.INFORMATION_MESSAGE);
         
         pawnPromotion(piece1,whiteturn);
         
@@ -247,7 +247,7 @@ public class GameThread implements Runnable {
       
       if (piece1.getName() == "Pawn" && y2 == 7) {
         
-        JOptionPane.showMessageDialog(frame,"Promotion" + "", " ",JOptionPane.INFORMATION_MESSAGE);
+        //JOptionPane.showMessageDialog(frame,"Promotion" + "", " ",JOptionPane.INFORMATION_MESSAGE);
         
         pawnPromotion(piece1,whiteturn);
         
@@ -262,15 +262,39 @@ public class GameThread implements Runnable {
     
     Piece newPiece;
     
+    String[] options = {"Queen", "Rook", "Bishop", "Knight"};
+    
     if (whiteturn) {
       
-      /*Bishop whiteBishop = new Bishop(piece1.getColumn(),piece1.getRow(),false);
-      Queen whiteQueen = new Queen(piece1.getColumn(),piece1.getRow(),false);
-      Rook whiteRook = new Rook(piece1.getColumn(),piece1.getRow(),false);
-      Knight whiteKnight = new Knight(piece1.getColumn(),piece1.getRow(),false);*/
       
       
-      newPiece = new Queen(piece1.getColumn(),piece1.getRow(), false);
+      int choice = JOptionPane.showOptionDialog(null,
+          "Choose an option:", 
+          "Option Chooser",
+          JOptionPane.DEFAULT_OPTION,
+          JOptionPane.INFORMATION_MESSAGE,
+          null,
+          options,
+          options[0]);
+      
+      switch(choice) {
+        case 0:
+          newPiece = new Queen(piece1.getColumn(),piece1.getRow(), false);
+          break;
+        case 1:
+          newPiece = new Rook(piece1.getColumn(),piece1.getRow(), false);
+          break;
+        case 2:
+          newPiece = new Bishop(piece1.getColumn(),piece1.getRow(), false);
+          break;
+        case 3:
+          newPiece = new Knight(piece1.getColumn(),piece1.getRow(), false);
+          break;
+        default:
+          newPiece = new Queen(piece1.getColumn(),piece1.getRow(), false);
+          break;
+      }
+      
       ArrayList<Piece> list = this.getPlayer1Pieces();
       list.remove(piece1);
       piece1.setColumn(20);
@@ -284,13 +308,33 @@ public class GameThread implements Runnable {
     
     else {
       
+      int choice = JOptionPane.showOptionDialog(null, 
+          "Choose an option:", 
+          "Option Chooser", 
+          JOptionPane.DEFAULT_OPTION, 
+          JOptionPane.INFORMATION_MESSAGE, 
+          null, 
+          options, 
+          options[0]);
       
-      /*Bishop blackBishop = new Bishop(piece1.getColumn(),piece1.getRow(),true);
-      Queen blackQueen = new Queen(piece1.getColumn(),piece1.getRow(),true);
-      Rook blackRook = new Rook(piece1.getColumn(),piece1.getRow(),true);
-      Knight blackKnight = new Knight(piece1.getColumn(),piece1.getRow(),true);*/
       
-      newPiece = new Queen(piece1.getColumn(),piece1.getRow(), true);
+      switch(choice) {
+        case 0:
+          newPiece = new Queen(piece1.getColumn(),piece1.getRow(), true);
+          break;
+        case 1:
+          newPiece = new Rook(piece1.getColumn(),piece1.getRow(), true);
+          break;
+        case 2:
+          newPiece = new Bishop(piece1.getColumn(),piece1.getRow(), true);
+          break;
+        case 3:
+          newPiece = new Knight(piece1.getColumn(),piece1.getRow(), true);
+          break;
+        default:
+          newPiece = new Queen(piece1.getColumn(),piece1.getRow(), true);
+          break;
+      }
       
       ArrayList<Piece> list = this.getPlayer2Pieces();
       list.remove(piece1);
