@@ -4,9 +4,12 @@ import gui.Board;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import move.Move;
 import movevalidator.MoveValidator;
@@ -31,6 +34,8 @@ public class GameThread implements Runnable {
   private boolean gameOver;
   private MoveValidator moveValidator;
   private JFrame frame;
+  private JLabel whitePieceCountLabel;
+  private JLabel blackPieceCountLabel;
   // add checking for gameOver
   
   /**
@@ -67,6 +72,17 @@ public class GameThread implements Runnable {
     JLabel turnLabel = new JLabel ("White Turn", SwingConstants.CENTER);
     frame.add(turnLabel, BorderLayout.NORTH);
     
+    
+    JPanel countsPanel = new JPanel(new GridLayout(1, 2));
+    whitePieceCountLabel = new JLabel("White Pieces: 16", SwingConstants.CENTER);
+    whitePieceCountLabel.setBorder(BorderFactory.createTitledBorder("White Count"));
+    countsPanel.add(whitePieceCountLabel);
+
+    blackPieceCountLabel = new JLabel("Black Pieces: 16", SwingConstants.CENTER);
+    blackPieceCountLabel.setBorder(BorderFactory.createTitledBorder("Black Count"));
+    countsPanel.add(blackPieceCountLabel);
+
+    frame.add(countsPanel, BorderLayout.SOUTH);
     
     
     frame.setVisible(true);
@@ -156,9 +172,6 @@ public class GameThread implements Runnable {
         }
       }
 
-    }   else {
-      
-      simulateTurn(whiteturn);
     }
     
   }
@@ -348,6 +361,9 @@ public class GameThread implements Runnable {
       this.player2.setNumCaptured(this.player2.getNumCaptured() + 1);
       
     }
+    
+    whitePieceCountLabel.setText("White Pieces: " + this.player1.getNumPieces());
+    blackPieceCountLabel.setText("Black Pieces: " + this.player2.getNumPieces());
        
   }
   
