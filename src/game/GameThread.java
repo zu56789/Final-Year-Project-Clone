@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -106,11 +107,6 @@ public class GameThread implements Runnable {
 
     frame.add(movesPanel, BorderLayout.CENTER);
     
-    
-    
-    
-    
-    
     frame.setVisible(true);
     
     this.board.drawPieces(this.getPlayer1Pieces(), this.getPlayer2Pieces());
@@ -192,13 +188,8 @@ public class GameThread implements Runnable {
           }
         }   else {
           
-          if (moveValidator.isKingChecked(x1, y1, x2, y2, board, whiteturn)) {
-            System.out.println("Check");
-            simulateTurn(whiteturn);
-          } else {
-            System.out.println("Invalid move");
-            simulateTurn(whiteturn);
-          }
+          JOptionPane.showMessageDialog(frame,"Invalid Move" + "", " ",JOptionPane.ERROR_MESSAGE);
+          simulateTurn(whiteturn);
           
           
         }
