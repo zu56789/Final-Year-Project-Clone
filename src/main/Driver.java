@@ -4,6 +4,7 @@ import game.GameThread;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import player.BlackPlayer;
 import player.Player;
 import player.WhitePlayer;
@@ -11,6 +12,16 @@ import player.WhitePlayer;
 public class Driver {
 
   public static void main(String[] args) {
+    
+    
+    String input = JOptionPane.showInputDialog("How many games do you want to play (up to 4)?");
+    int numberOfGames;
+    try {
+        numberOfGames = Math.min(Integer.parseInt(input),4);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Starting 1 game by default.");
+        numberOfGames = 1;
+    }
     
     JFrame frame = new JFrame();
     frame.setTitle("Chess Game");
