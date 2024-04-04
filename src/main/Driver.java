@@ -46,8 +46,21 @@ public class Driver {
     
     
     for (int i = 0; i < numberOfGames; i++) {
-      Player player1 = new WhitePlayer("white");
-      Player player2 = new BlackPlayer("black");
+      
+      String whitePlayerName = JOptionPane.showInputDialog(frame, "Enter name for White Player for Game " + (i + 1) + ":");
+      if (whitePlayerName == null || whitePlayerName.trim().isEmpty()) {
+          whitePlayerName = "White Player " + (i + 1);
+      }
+
+      String blackPlayerName = JOptionPane.showInputDialog(frame, "Enter name for Black Player for Game " + (i + 1) + ":");
+      if (blackPlayerName == null || blackPlayerName.trim().isEmpty()) {
+          blackPlayerName = "Black Player " + (i + 1);
+      }
+      
+      
+      
+      Player player1 = new WhitePlayer(whitePlayerName);
+      Player player2 = new BlackPlayer(blackPlayerName);
       GameThread game = new GameThread(player1, player2);
       Thread gameThread = new Thread(game);
       gameThread.start();
