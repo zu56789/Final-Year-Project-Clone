@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import move.Move;
 import movevalidator.MoveValidator;
 import pieces.Bishop;
@@ -60,19 +62,24 @@ public class GameThread implements Runnable {
     frame.setLayout(new BorderLayout());
     frame.setLocationRelativeTo(null);
     frame.setResizable(false);
+    
+    
+    JLabel turnLabel = new JLabel ("White Turn", SwingConstants.CENTER);
+    frame.add(turnLabel, BorderLayout.NORTH);
+    
+    
+    
     frame.setVisible(true);
-    
-    
     
     this.board.drawPieces(this.getPlayer1Pieces(), this.getPlayer2Pieces());
     
     while (!this.gameOver) {
       if (this.player1turn) {
-        System.out.println("WHITE TURN");
+        turnLabel.setText("White Turn");
         this.simulateTurn(player1turn);
         
       } else {
-        System.out.println("BLACK TURN");
+        turnLabel.setText("Black Turn");
         this.simulateTurn(player1turn);
       }
     }
