@@ -227,7 +227,7 @@ public class GameThread implements Runnable {
       
       if (piece1.getName() == "Pawn" && y2 == 0) {
         
-        System.out.println("PROMOTION!!");
+        JOptionPane.showMessageDialog(frame,"Promotion" + "", " ",JOptionPane.INFORMATION_MESSAGE);
         
         pawnPromotion(piece1,whiteturn);
         
@@ -247,7 +247,7 @@ public class GameThread implements Runnable {
       
       if (piece1.getName() == "Pawn" && y2 == 7) {
         
-        System.out.println("PROMOTION!!");
+        JOptionPane.showMessageDialog(frame,"Promotion" + "", " ",JOptionPane.INFORMATION_MESSAGE);
         
         pawnPromotion(piece1,whiteturn);
         
