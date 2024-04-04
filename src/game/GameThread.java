@@ -1,6 +1,7 @@
 package game;
 
 import gui.Board;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class GameThread implements Runnable {
   private boolean player1turn;
   private boolean gameOver;
   private MoveValidator moveValidator;
+  private JFrame frame;
   // add checking for gameOver
   
   /**
@@ -48,6 +50,20 @@ public class GameThread implements Runnable {
   
   @Override
   public void run() {
+    
+    
+    frame = new JFrame();
+    
+    frame.setTitle("Game Status");
+    frame.setLayout(new GridBagLayout());
+    frame.setSize(new Dimension(600, 400));
+    frame.setLayout(new BorderLayout());
+    frame.setLocationRelativeTo(null);
+    frame.setResizable(false);
+    frame.setVisible(true);
+    
+    
+    
     this.board.drawPieces(this.getPlayer1Pieces(), this.getPlayer2Pieces());
     
     while (!this.gameOver) {
