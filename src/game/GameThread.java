@@ -1,10 +1,19 @@
 package game;
 
 import gui.Board;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import move.Move;
 import movevalidator.MoveValidator;
 import pieces.Bishop;
@@ -27,6 +36,11 @@ public class GameThread implements Runnable {
   private boolean player1turn;
   private boolean gameOver;
   private MoveValidator moveValidator;
+  private JFrame frame;
+  private JLabel whitePieceCountLabel;
+  private JLabel blackPieceCountLabel;
+  private JTextArea whiteMovesArea;
+  private JTextArea blackMovesArea;
   // add checking for gameOver
   
   /**
@@ -48,19 +62,65 @@ public class GameThread implements Runnable {
   
   @Override
   public void run() {
+    
+    
+    frame = new JFrame();
+    
+    frame.setTitle("Game Status");
+    frame.setLayout(new GridBagLayout());
+    frame.setSize(new Dimension(600, 400));
+    frame.setLayout(new BorderLayout());
+    frame.setLocationRelativeTo(null);
+    frame.setResizable(false);
+    
+    
+    JLabel turnLabel = new JLabel ("White Turn", SwingConstants.CENTER);
+    frame.add(turnLabel, BorderLayout.NORTH);
+    
+    
+    JPanel countsPanel = new JPanel(new GridLayout(1, 2));
+    whitePieceCountLabel = new JLabel("White Pieces: 16", SwingConstants.CENTER);
+    whitePieceCountLabel.setBorder(BorderFactory.createTitledBorder("White Count"));
+    countsPanel.add(whitePieceCountLabel);
+
+    blackPieceCountLabel = new JLabel("Black Pieces: 16", SwingConstants.CENTER);
+    blackPieceCountLabel.setBorder(BorderFactory.createTitledBorder("Black Count"));
+    countsPanel.add(blackPieceCountLabel);
+
+    frame.add(countsPanel, BorderLayout.SOUTH);
+    
+    
+    JPanel movesPanel = new JPanel(new GridLayout(1, 2));
+    
+    whiteMovesArea = new JTextArea();
+    whiteMovesArea.setEditable(false);
+    JScrollPane whiteScroll = new JScrollPane(whiteMovesArea);
+    whiteScroll.setBorder(BorderFactory.createTitledBorder("White Moves"));
+    movesPanel.add(whiteScroll);
+    
+    
+    blackMovesArea = new JTextArea();
+    blackMovesArea.setEditable(false);
+    JScrollPane blackScroll = new JScrollPane(blackMovesArea);
+    blackScroll.setBorder(BorderFactory.createTitledBorder("Black Moves"));
+    movesPanel.add(blackScroll);
+
+    frame.add(movesPanel, BorderLayout.CENTER);
+    
+    frame.setVisible(true);
+    
     this.board.drawPieces(this.getPlayer1Pieces(), this.getPlayer2Pieces());
     
     while (!this.gameOver) {
       if (this.player1turn) {
-        System.out.println("WHITE TURN");
+        turnLabel.setText("White Turn");
         this.simulateTurn(player1turn);
         
       } else {
-        System.out.println("BLACK TURN");
+        turnLabel.setText("Black Turn");
         this.simulateTurn(player1turn);
       }
     }
-    
     
   }
   
@@ -97,22 +157,25 @@ public class GameThread implements Runnable {
         
         if (moveValidator.validMove(move, this.getBoard(), whiteturn)) {
           
+          
+          if (whiteturn) {
+            whiteMovesArea.append(piece1.getName() + " from (" + piece1.getColumn() + "," + piece1.getRow() +
+            ") to (" + x2 + "," + y2 + ")\n");
+          } else {
+            blackMovesArea.append(piece1.getName() + " from (" + piece1.getColumn() + "," + piece1.getRow() +
+                ") to (" + x2 + "," + y2 + ")\n");
+          }
+          
           if (moveValidator.otherTeam(x1, y1, x2, y2, this.getBoard())) {
             // capture
             this.captureUpdate(piece1, piece2, x2, y2, whiteturn);
             this.board.drawPieces(this.player1.getPieces(), this.player2.getPieces());
-            System.out.println("White has captured " + this.player1.getNumCaptured());
-            System.out.println("Black has captured " + this.player2.getNumCaptured());
           } else {
             // non capture
             this.updateBoard(piece1, x2, y2, whiteturn);
             this.board.drawPieces(this.player1.getPieces(), this.player2.getPieces());
             
-            
           }
-          
-          System.out.println("Player 1 has " + this.player1.getNumPieces() + " pieces");
-          System.out.println("Player 2 has " + this.player2.getNumPieces() + " pieces");
           
           if (whiteturn) {
             this.player1turn = false;
@@ -121,21 +184,13 @@ public class GameThread implements Runnable {
           }
         }   else {
           
-          if (moveValidator.isKingChecked(x1, y1, x2, y2, board, whiteturn)) {
-            System.out.println("Check");
-            simulateTurn(whiteturn);
-          } else {
-            System.out.println("Invalid move");
-            simulateTurn(whiteturn);
-          }
+          JOptionPane.showMessageDialog(frame,"Invalid Move" + "", " ",JOptionPane.ERROR_MESSAGE);
+          simulateTurn(whiteturn);
           
           
         }
       }
 
-    }   else {
-      
-      simulateTurn(whiteturn);
     }
     
   }
@@ -167,9 +222,7 @@ public class GameThread implements Runnable {
       this.player1.setPieces(list);
       
       if (piece1.getName() == "Pawn" && y2 == 0) {
-        
-        System.out.println("PROMOTION!!");
-        
+
         pawnPromotion(piece1,whiteturn);
         
       }
@@ -188,8 +241,6 @@ public class GameThread implements Runnable {
       
       if (piece1.getName() == "Pawn" && y2 == 7) {
         
-        System.out.println("PROMOTION!!");
-        
         pawnPromotion(piece1,whiteturn);
         
       }
@@ -203,15 +254,37 @@ public class GameThread implements Runnable {
     
     Piece newPiece;
     
+    String[] options = {"Queen", "Rook", "Bishop", "Knight"};
+    
     if (whiteturn) {
+
+      int choice = JOptionPane.showOptionDialog(null,
+          "Choose an option:", 
+          "Option Chooser",
+          JOptionPane.DEFAULT_OPTION,
+          JOptionPane.INFORMATION_MESSAGE,
+          null,
+          options,
+          options[0]);
       
-      /*Bishop whiteBishop = new Bishop(piece1.getColumn(),piece1.getRow(),false);
-      Queen whiteQueen = new Queen(piece1.getColumn(),piece1.getRow(),false);
-      Rook whiteRook = new Rook(piece1.getColumn(),piece1.getRow(),false);
-      Knight whiteKnight = new Knight(piece1.getColumn(),piece1.getRow(),false);*/
+      switch(choice) {
+        case 0:
+          newPiece = new Queen(piece1.getColumn(),piece1.getRow(), false);
+          break;
+        case 1:
+          newPiece = new Rook(piece1.getColumn(),piece1.getRow(), false);
+          break;
+        case 2:
+          newPiece = new Bishop(piece1.getColumn(),piece1.getRow(), false);
+          break;
+        case 3:
+          newPiece = new Knight(piece1.getColumn(),piece1.getRow(), false);
+          break;
+        default:
+          newPiece = new Queen(piece1.getColumn(),piece1.getRow(), false);
+          break;
+      }
       
-      
-      newPiece = new Queen(piece1.getColumn(),piece1.getRow(), false);
       ArrayList<Piece> list = this.getPlayer1Pieces();
       list.remove(piece1);
       piece1.setColumn(20);
@@ -225,13 +298,32 @@ public class GameThread implements Runnable {
     
     else {
       
+      int choice = JOptionPane.showOptionDialog(null, 
+          "Choose an option:", 
+          "Option Chooser", 
+          JOptionPane.DEFAULT_OPTION, 
+          JOptionPane.INFORMATION_MESSAGE, 
+          null, 
+          options, 
+          options[0]);
       
-      /*Bishop blackBishop = new Bishop(piece1.getColumn(),piece1.getRow(),true);
-      Queen blackQueen = new Queen(piece1.getColumn(),piece1.getRow(),true);
-      Rook blackRook = new Rook(piece1.getColumn(),piece1.getRow(),true);
-      Knight blackKnight = new Knight(piece1.getColumn(),piece1.getRow(),true);*/
-      
-      newPiece = new Queen(piece1.getColumn(),piece1.getRow(), true);
+      switch(choice) {
+        case 0:
+          newPiece = new Queen(piece1.getColumn(),piece1.getRow(), true);
+          break;
+        case 1:
+          newPiece = new Rook(piece1.getColumn(),piece1.getRow(), true);
+          break;
+        case 2:
+          newPiece = new Bishop(piece1.getColumn(),piece1.getRow(), true);
+          break;
+        case 3:
+          newPiece = new Knight(piece1.getColumn(),piece1.getRow(), true);
+          break;
+        default:
+          newPiece = new Queen(piece1.getColumn(),piece1.getRow(), true);
+          break;
+      }
       
       ArrayList<Piece> list = this.getPlayer2Pieces();
       list.remove(piece1);
@@ -247,39 +339,6 @@ public class GameThread implements Runnable {
     }
     
   }
-  
-  
-  /*public Piece promotedPieceSelection(Bishop bishop, Queen queen, Rook rook, Knight knight) {
-    
-    
-    JFrame frame1 = new JFrame();
-    frame1.setTitle("Promotion Choice");
-    frame1.setLayout(new GridBagLayout());
-    frame1.setMinimumSize(new Dimension(534, 557));
-    frame1.setLocationRelativeTo(null);
-    frame1.setResizable(false);
-    
-    
-    ImageIcon bishopImage = new ImageIcon(bishop.getPic());
-    JLabel bishopLabel = new JLabel(bishopImage);
-    bishopLabel.setName("Bishop");
-    
-    
-    ImageIcon queenImage = new ImageIcon(queen.getPic());
-    JLabel queenLabel = new JLabel(queenImage);
-    
-    ImageIcon rookImage = new ImageIcon(rook.getPic());
-    JLabel rookLabel = new JLabel(rookImage);
-    
-    ImageIcon knightImage = new ImageIcon(knight.getPic());
-    JLabel knightLabel = new JLabel(knightImage); 
-    
-    
-    frame1.setVisible(true);
-    
-    return bishop;
-  }*/
-  
   
   /**
    * this method updates the board after a successful capture takes place.
@@ -309,9 +368,7 @@ public class GameThread implements Runnable {
       this.player2.setPieces(list);
       
       this.player1.setNumCaptured(this.player1.getNumCaptured() + 1);
-      
-      
-      
+
     }   else {
       
       ArrayList<Piece> list = this.getPlayer1Pieces();
@@ -325,6 +382,9 @@ public class GameThread implements Runnable {
       this.player2.setNumCaptured(this.player2.getNumCaptured() + 1);
       
     }
+    
+    whitePieceCountLabel.setText("White Pieces: " + this.player1.getNumPieces());
+    blackPieceCountLabel.setText("Black Pieces: " + this.player2.getNumPieces());
        
   }
   
