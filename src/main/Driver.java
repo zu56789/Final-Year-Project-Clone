@@ -26,8 +26,8 @@ public class Driver {
         numberOfGames = 1;
     }
     
-    int totalWidth = 534 * numberOfGames;
-    int height = 577;
+    int totalWidth = 525 * numberOfGames;
+    int height = 527;
     
     JFrame frame = new JFrame();
     frame.setTitle("Chess Environment");

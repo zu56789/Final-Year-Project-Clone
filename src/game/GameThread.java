@@ -2,6 +2,7 @@ package game;
 
 import gui.Board;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -66,7 +67,7 @@ public class GameThread implements Runnable {
     
     frame = new JFrame();
     
-    frame.setTitle("Game Status");
+    frame.setTitle(this.player1.getName().toUpperCase() + " vs " + this.player2.getName().toUpperCase() + " Game Status");
     frame.setLayout(new GridBagLayout());
     frame.setSize(new Dimension(600, 400));
     frame.setLayout(new BorderLayout());
@@ -74,17 +75,17 @@ public class GameThread implements Runnable {
     frame.setResizable(false);
     
     
-    JLabel turnLabel = new JLabel ("White Turn", SwingConstants.CENTER);
+    JLabel turnLabel = new JLabel (this.player1.getName().toUpperCase() + " turn", SwingConstants.CENTER);
     frame.add(turnLabel, BorderLayout.NORTH);
     
     
     JPanel countsPanel = new JPanel(new GridLayout(1, 2));
-    whitePieceCountLabel = new JLabel("White Pieces: 16", SwingConstants.CENTER);
-    whitePieceCountLabel.setBorder(BorderFactory.createTitledBorder("White Count"));
+    whitePieceCountLabel = new JLabel(this.player1.getName().toUpperCase() + " Pieces: 16", SwingConstants.CENTER);
+    whitePieceCountLabel.setBorder(BorderFactory.createTitledBorder(this.player1.getName().toUpperCase() + " Count"));
     countsPanel.add(whitePieceCountLabel);
 
-    blackPieceCountLabel = new JLabel("Black Pieces: 16", SwingConstants.CENTER);
-    blackPieceCountLabel.setBorder(BorderFactory.createTitledBorder("Black Count"));
+    blackPieceCountLabel = new JLabel(this.player2.getName().toUpperCase() + " Pieces: 16", SwingConstants.CENTER);
+    blackPieceCountLabel.setBorder(BorderFactory.createTitledBorder(this.player2.getName().toUpperCase() + " Count"));
     countsPanel.add(blackPieceCountLabel);
 
     frame.add(countsPanel, BorderLayout.SOUTH);
@@ -95,14 +96,14 @@ public class GameThread implements Runnable {
     whiteMovesArea = new JTextArea();
     whiteMovesArea.setEditable(false);
     JScrollPane whiteScroll = new JScrollPane(whiteMovesArea);
-    whiteScroll.setBorder(BorderFactory.createTitledBorder("White Moves"));
+    whiteScroll.setBorder(BorderFactory.createTitledBorder(this.player1.getName().toUpperCase() + " Moves"));
     movesPanel.add(whiteScroll);
     
     
     blackMovesArea = new JTextArea();
     blackMovesArea.setEditable(false);
     JScrollPane blackScroll = new JScrollPane(blackMovesArea);
-    blackScroll.setBorder(BorderFactory.createTitledBorder("Black Moves"));
+    blackScroll.setBorder(BorderFactory.createTitledBorder(this.player2.getName().toUpperCase() + " Moves"));
     movesPanel.add(blackScroll);
 
     frame.add(movesPanel, BorderLayout.CENTER);
@@ -113,11 +114,11 @@ public class GameThread implements Runnable {
     
     while (!this.gameOver) {
       if (this.player1turn) {
-        turnLabel.setText("White Turn");
+        turnLabel.setText(this.player1.getName().toUpperCase() + " turn");
         this.simulateTurn(player1turn);
         
       } else {
-        turnLabel.setText("Black Turn");
+        turnLabel.setText(this.player2.getName().toUpperCase() + " turn");
         this.simulateTurn(player1turn);
       }
     }
@@ -383,8 +384,8 @@ public class GameThread implements Runnable {
       
     }
     
-    whitePieceCountLabel.setText("White Pieces: " + this.player1.getNumPieces());
-    blackPieceCountLabel.setText("Black Pieces: " + this.player2.getNumPieces());
+    whitePieceCountLabel.setText(this.player1.getName().toUpperCase() + " Pieces: " + this.player1.getNumPieces());
+    blackPieceCountLabel.setText(this.player2.getName().toUpperCase() + " Pieces: " + this.player2.getNumPieces());
        
   }
   
