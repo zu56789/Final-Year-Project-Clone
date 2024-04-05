@@ -29,8 +29,7 @@ public class Driver {
     int totalWidth = 525 * numberOfGames;
     int height = 527;
     
-    JFrame frame = new JFrame();
-    frame.setTitle("Chess Environment");
+    JFrame frame = new JFrame("Chess Environment" + "(" + numberOfGames + ")");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setLocationRelativeTo(null);
     frame.setResizable(false);
@@ -49,12 +48,12 @@ public class Driver {
       
       String whitePlayerName = JOptionPane.showInputDialog(frame, "Enter name for White Player for Game " + (i + 1) + ":");
       if (whitePlayerName == null || whitePlayerName.trim().isEmpty()) {
-          whitePlayerName = "White Player " + (i + 1);
+          whitePlayerName = "White Player " + (i+1);
       }
 
       String blackPlayerName = JOptionPane.showInputDialog(frame, "Enter name for Black Player for Game " + (i + 1) + ":");
       if (blackPlayerName == null || blackPlayerName.trim().isEmpty()) {
-          blackPlayerName = "Black Player " + (i + 1);
+          blackPlayerName = "Black Player " + (i+1);
       }
       
       

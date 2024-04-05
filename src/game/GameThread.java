@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
 import move.Move;
 import movevalidator.MoveValidator;
 import pieces.Bishop;
@@ -73,40 +74,69 @@ public class GameThread implements Runnable {
     frame.setLayout(new BorderLayout());
     frame.setLocationRelativeTo(null);
     frame.setResizable(false);
+    frame.getContentPane().setBackground(new Color(160, 178, 250));
     
     
     JLabel turnLabel = new JLabel (this.player1.getName().toUpperCase() + " turn", SwingConstants.CENTER);
+    turnLabel.setForeground(Color.WHITE);
+    
     frame.add(turnLabel, BorderLayout.NORTH);
     
     
     JPanel countsPanel = new JPanel(new GridLayout(1, 2));
+    countsPanel.setOpaque(false);
+    
     whitePieceCountLabel = new JLabel(this.player1.getName().toUpperCase() + " Pieces: 16", SwingConstants.CENTER);
-    whitePieceCountLabel.setBorder(BorderFactory.createTitledBorder(this.player1.getName().toUpperCase() + " Count"));
+    whitePieceCountLabel.setForeground(Color.WHITE);
+    
+    TitledBorder whitePiecesBorder = BorderFactory.createTitledBorder(this.player1.getName().toUpperCase() + " Count");
+    whitePiecesBorder.setTitleColor(Color.WHITE);
+    whitePieceCountLabel.setBorder(whitePiecesBorder);
+    
     countsPanel.add(whitePieceCountLabel);
 
     blackPieceCountLabel = new JLabel(this.player2.getName().toUpperCase() + " Pieces: 16", SwingConstants.CENTER);
     blackPieceCountLabel.setBorder(BorderFactory.createTitledBorder(this.player2.getName().toUpperCase() + " Count"));
-    countsPanel.add(blackPieceCountLabel);
-
-    frame.add(countsPanel, BorderLayout.SOUTH);
+    blackPieceCountLabel.setForeground(Color.BLACK);
     
+    countsPanel.add(blackPieceCountLabel);
+    frame.add(countsPanel, BorderLayout.SOUTH);
     
     JPanel movesPanel = new JPanel(new GridLayout(1, 2));
     
+    movesPanel.setOpaque(false);
+    
     whiteMovesArea = new JTextArea();
     whiteMovesArea.setEditable(false);
+    
     JScrollPane whiteScroll = new JScrollPane(whiteMovesArea);
-    whiteScroll.setBorder(BorderFactory.createTitledBorder(this.player1.getName().toUpperCase() + " Moves"));
+    whiteScroll.setOpaque(false);
+    
+    TitledBorder whiteBorder = BorderFactory.createTitledBorder(this.player1.getName().toUpperCase() + " Moves");
+    
+    whiteBorder.setTitleColor(new Color(255,255,255));
+    
+    whiteScroll.setBorder(whiteBorder);
     movesPanel.add(whiteScroll);
-    
-    
+     
     blackMovesArea = new JTextArea();
     blackMovesArea.setEditable(false);
+    
     JScrollPane blackScroll = new JScrollPane(blackMovesArea);
+    blackScroll.setOpaque(false);
     blackScroll.setBorder(BorderFactory.createTitledBorder(this.player2.getName().toUpperCase() + " Moves"));
+    
     movesPanel.add(blackScroll);
 
     frame.add(movesPanel, BorderLayout.CENTER);
+    
+    
+    
+    
+    
+    
+    
+    
     
     frame.setVisible(true);
     
@@ -115,10 +145,12 @@ public class GameThread implements Runnable {
     while (!this.gameOver) {
       if (this.player1turn) {
         turnLabel.setText(this.player1.getName().toUpperCase() + " turn");
+        turnLabel.setForeground(Color.WHITE);
         this.simulateTurn(player1turn);
         
       } else {
         turnLabel.setText(this.player2.getName().toUpperCase() + " turn");
+        turnLabel.setForeground(Color.BLACK);
         this.simulateTurn(player1turn);
       }
     }
