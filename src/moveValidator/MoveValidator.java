@@ -524,22 +524,18 @@ public class MoveValidator {
         for (int i = 1; i < 8; i++) {
           if (bishopValidator(pieceCol, pieceRow, pieceCol - (i * 1), pieceRow - (i * 1), board, whiteMove) &&
               !isKingChecked(pieceCol, pieceRow, pieceCol - (i * 1), pieceRow - (i * 1), board, whiteMove)) {
-            System.out.println("Bishop");
             return false;
             
           }   else if (bishopValidator(pieceCol, pieceRow, pieceCol - (i * 1), pieceRow - (i * -1), board, whiteMove) &&
               !isKingChecked(pieceCol, pieceRow, pieceCol - (i * 1), pieceRow - (i * -1), board, whiteMove)) {
-            System.out.println("Bishop");
             return false;
             
           }   else if (bishopValidator(pieceCol, pieceRow, pieceCol - (i * -1), pieceRow - (i * 1), board, whiteMove) &&
               !isKingChecked(pieceCol, pieceRow, pieceCol - (i * -1), pieceRow - (i * 1), board, whiteMove)) {
-            System.out.println("Bishop");
             return false;
             
           }   else if (bishopValidator(pieceCol, pieceRow, pieceCol - (i * -1), pieceRow - (i * -1), board, whiteMove) && 
               !isKingChecked(pieceCol, pieceRow, pieceCol - (i * -1), pieceRow - (i * -1), board, whiteMove)) {
-            System.out.println("Bishop");
             return false;
           }
         }
@@ -549,49 +545,37 @@ public class MoveValidator {
         
         if (checkkingValidator(pieceCol,pieceRow, pieceCol + 1, pieceRow + 1, board, whiteMove) &&
             !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow + 1, board, whiteMove)) {
-          System.out.println("King 1");
           return false;
           
         }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol - 1, pieceRow -1, board, whiteMove) &&
             !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow - 1, board, whiteMove)) {
-          System.out.println("King 2"); 
           return false;
           
         }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol + 1, pieceRow, board, whiteMove) &&
-            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow, board, whiteMove)) {
-          System.out.println("King 3");    
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow, board, whiteMove)) { 
           return false;
           
         }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol - 1, pieceRow, board, whiteMove) &&
-            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow, board, whiteMove)) {
-          System.out.println("King 4");    
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow, board, whiteMove)) { 
           return false;
           
         }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol, pieceRow - 1, board, whiteMove) &&
             !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow - 1, board, whiteMove)) {
-          System.out.println("King 5");
           return false;
           
         }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol, pieceRow + 1, board, whiteMove) &&
             !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow + 1, board, whiteMove)) {
-          System.out.println("King 6");
           return false;
           
         }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol + 1, pieceRow - 1, board, whiteMove) &&
             !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow - 1, board, whiteMove)) {
-          System.out.println("King 7");
           return false;
           
         }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol - 1, pieceRow + 1, board, whiteMove) &&
             !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow + 1, board, whiteMove)) {
-          System.out.println("King 8");
           return false;
           
         }
-        
-        
-        
-        
         
       }
       

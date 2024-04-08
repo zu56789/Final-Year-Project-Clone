@@ -217,6 +217,10 @@ public class GameThread implements Runnable {
           }
         }   else {
           
+          if (moveValidator.isKingCheckmated(x1, y1, x2, y2, board, whiteturn)) {
+            System.out.println("checkmate");
+          }
+          
           JOptionPane.showMessageDialog(frame,"Invalid Move" + "", " ",JOptionPane.ERROR_MESSAGE);
           simulateTurn(whiteturn);
           
