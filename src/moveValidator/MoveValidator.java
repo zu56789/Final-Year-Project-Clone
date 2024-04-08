@@ -573,6 +573,52 @@ public class MoveValidator {
             return false;
           }
         }
+      }   else if (piece.getName().equals("King")) {
+        
+        if (checkkingValidator(pieceCol,pieceRow, pieceCol + 1, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow + 1, board, whiteMove)) {
+          System.out.println("King");
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol - 1, pieceRow -1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow - 1, board, whiteMove)) {
+          System.out.println("King");
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol + 1, pieceRow, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow, board, whiteMove)) { 
+          System.out.println("King");
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol - 1, pieceRow, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow, board, whiteMove)) {
+          System.out.println("King");
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol, pieceRow - 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow - 1, board, whiteMove)) {
+          System.out.println("King");
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow + 1, board, whiteMove)) {
+          System.out.println("King");
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol + 1, pieceRow - 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow - 1, board, whiteMove)) {
+          System.out.println("King");
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol - 1, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow + 1, board, whiteMove)) {
+          System.out.println("King");
+          return false;
+          
+        }
+        
+        
+        
       }
       
       
