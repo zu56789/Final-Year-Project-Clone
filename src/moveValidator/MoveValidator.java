@@ -519,9 +519,31 @@ public class MoveValidator {
           }
           
         }
+      } else if (piece.getName().equals("Bishop") || piece.getName().equals("Queen")) {
         
-        
-        
+        for (int i = 1; i < 8; i++) {
+          if (bishopValidator(pieceCol, pieceRow, pieceCol - (i * 1), pieceRow - (i * 1), board, whiteMove) &&
+              !isKingChecked(pieceCol, pieceRow, pieceCol - (i * 1), pieceRow - (i * 1), board, whiteMove)) {
+            System.out.println("Bishop");
+            return false;
+            
+          }   else if (bishopValidator(pieceCol, pieceRow, pieceCol - (i * 1), pieceRow - (i * -1), board, whiteMove) &&
+              !isKingChecked(pieceCol, pieceRow, pieceCol - (i * 1), pieceRow - (i * -1), board, whiteMove)) {
+            System.out.println("Bishop");
+            return false;
+            
+          }   else if (bishopValidator(pieceCol, pieceRow, pieceCol - (i * -1), pieceRow - (i * 1), board, whiteMove) &&
+              !isKingChecked(pieceCol, pieceRow, pieceCol - (i * -1), pieceRow - (i * 1), board, whiteMove)) {
+            System.out.println("Bishop");
+            return false;
+            
+          }   else if (bishopValidator(pieceCol, pieceRow, pieceCol - (i * -1), pieceRow - (i * -1), board, whiteMove) && 
+              !isKingChecked(pieceCol, pieceRow, pieceCol - (i * -1), pieceRow - (i * -1), board, whiteMove)) {
+            System.out.println("Bishop");
+            return false;
+          }
+        }
+
       }
       
     }
