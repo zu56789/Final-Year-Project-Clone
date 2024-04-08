@@ -497,7 +497,28 @@ public class MoveValidator {
           return false;
           
         }
+      }   else if (piece.getName().equals("Rook") || piece.getName().equals("Queen")) {
         
+        
+        for (int i = 1; i < 8; i++) {
+          if (rookValidator(pieceCol, pieceRow, pieceCol + (i * 0), pieceRow + (i * 1), board, whiteMove) &&
+              !isKingChecked(pieceCol, pieceRow, pieceCol + (i * 0), pieceRow + (i * 1), board, whiteMove)) {
+            return false;
+            
+          }   else if (rookValidator(pieceCol, pieceRow, pieceCol + (i * 0), pieceRow + (i * -1), board, whiteMove) &&
+              !isKingChecked(pieceCol, pieceRow, pieceCol + (i * 0), pieceRow + (i * -1), board, whiteMove)) {
+            return false;
+            
+          }   else if (rookValidator(pieceCol, pieceRow, pieceCol + (i * 1), pieceRow + (i * 0), board, whiteMove) &&
+              !isKingChecked(pieceCol, pieceRow, pieceCol + (i * 1), pieceRow + (i * 0), board, whiteMove)) {
+            return false;
+            
+          }   else if (rookValidator(pieceCol, pieceRow, pieceCol + (i * -1), pieceRow + (i * 0), board, whiteMove) &&
+              !isKingChecked(pieceCol, pieceRow, pieceCol + (i * -1), pieceRow + (i * 0), board, whiteMove)) {
+            return false;
+          }
+          
+        }
         
         
         
