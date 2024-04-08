@@ -133,6 +133,10 @@ public class MoveValidator {
    */
   public boolean knightValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
+    if ((x1 > 7  || x1 < 0) || (x2 > 7 || x2 < 0) || (y1 > 7 || y2 < 0) || (y2 > 7 || y2 < 0)) {
+      return false; // x and y values should be from 0 to 7
+    } 
+    
     if (sameTeam(x1, y1, x2, y2, board)) {
       return false;
     }   else {
@@ -161,6 +165,10 @@ public class MoveValidator {
    * @return returns a boolean value determining if the pawn moved in a legal way.
    */
   public boolean pawnValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
+    
+    if ((x1 > 7  || x1 < 0) || (x2 > 7 || x2 < 0) || (y1 > 7 || y2 < 0) || (y2 > 7 || y2 < 0)) {
+      return false; // x and y values should be from 0 to 7
+    } 
     
     
     if (sameTeam(x1, y1, x2, y2, board) || collision(x1, y1, x2, y2, board)) {
@@ -211,6 +219,10 @@ public class MoveValidator {
    */
   public boolean rookValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
+    if ((x1 > 7  || x1 < 0) || (x2 > 7 || x2 < 0) || (y1 > 7 || y2 < 0) || (y2 > 7 || y2 < 0)) {
+      return false; // x and y values should be from 0 to 7
+    } 
+    
     if (sameTeam(x1, y1, x2, y2, board) || collision(x1, y1, x2, y2, board)) {
       return false;
     }   else if (x1 == x2 && y1 == y2) {
@@ -243,6 +255,10 @@ public class MoveValidator {
    * @return returns boolean value determining if the bishop moves in a legal way.
    */
   public boolean bishopValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
+    
+    if ((x1 > 7  || x1 < 0) || (x2 > 7 || x2 < 0) || (y1 > 7 || y2 < 0) || (y2 > 7 || y2 < 0)) {
+      return false; // x and y values should be from 0 to 7
+    } 
     
     if (sameTeam(x1, y1, x2, y2, board) || collision(x1, y1, x2, y2, board)) {
       return false;
@@ -462,6 +478,49 @@ public class MoveValidator {
         }
         
         
+      }     else if (piece.getName().equals("Knight")) {
+        
+        if (knightValidator(pieceCol, pieceRow, pieceCol - 1, pieceRow - 2, board, whiteMove) && 
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow - 2, board, whiteMove)) {
+          System.out.println("Knight");
+          return false;
+
+        }   else if (knightValidator(pieceCol, pieceRow, pieceCol - 2, pieceRow - 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 2, pieceRow - 1, board, whiteMove)) {
+          System.out.println("Knight");
+          return false;
+          
+        }   else if (knightValidator(pieceCol, pieceRow, pieceCol + 2, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 2, pieceRow + 1, board, whiteMove)) {
+          System.out.println("Knight");
+          return false; 
+          
+        }   else if (knightValidator(pieceCol, pieceRow, pieceCol + 1, pieceRow + 2, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow + 2, board, whiteMove)) {
+          System.out.println("Knight");
+          return false;
+          
+        }   else if (knightValidator(pieceCol, pieceRow, pieceCol - 1, pieceRow + 2, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow + 2, board, whiteMove)) {
+          System.out.println("Knight");
+          return false;
+          
+        }   else if (knightValidator(pieceCol, pieceRow, pieceCol + 1, pieceRow - 2, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow - 2, board, whiteMove)) {
+          System.out.println("Knight");
+          return false;
+          
+        }   else if (knightValidator(pieceCol, pieceRow, pieceCol + 2, pieceRow - 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 2, pieceRow - 1, board, whiteMove)) {
+          System.out.println("Knight");
+          return false;
+          
+        }    else if (knightValidator(pieceCol, pieceRow, pieceCol - 2, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 2, pieceRow + 1, board, whiteMove)) {
+          System.out.println("Knight");
+          return false;
+          
+        }
       }
       
       
