@@ -52,13 +52,13 @@ public class GameThread implements Runnable {
 
    * @param player2 the player with the black pieces.
    */
-  public GameThread(Player player1, Player player2) {
+  public GameThread(Player player1, Player player2, MoveValidator moveValidator) {
     this.player1 = player1;
     this.player2 = player2;
     this.board = new Board();
     this.player1turn = true;
     this.gameOver = false;
-    moveValidator = MoveValidator.getInstance();
+    this.moveValidator = moveValidator;
     // singleton instance of move validator
   }
   

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import game.GameThread;
+import movevalidator.MoveValidator;
 import pieces.Piece;
 import player.*;
 
@@ -15,11 +16,11 @@ public class TestGameThread {
   @Before
   public void setup() {
     
-    game = new GameThread(new WhitePlayer("white"), new BlackPlayer("black"));
+    game = new GameThread(new WhitePlayer("white"), new BlackPlayer("black"), MoveValidator.getInstance());
     Thread gameThread = new Thread(game);
     gameThread.start();
     
-    game2 = new GameThread(new WhitePlayer("a"), new BlackPlayer("b"));
+    game2 = new GameThread(new WhitePlayer("a"), new BlackPlayer("b"),MoveValidator.getInstance());
     Thread gameThread2 = new Thread(game2);
     gameThread2.start();
     
