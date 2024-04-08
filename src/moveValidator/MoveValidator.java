@@ -605,8 +605,6 @@ public class MoveValidator {
 
   }
   
-  
-  
   public boolean isKingChecked(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
     Piece king = whiteMove ? board.getWhiteKing() : board.getBlackKing();
@@ -639,7 +637,6 @@ public class MoveValidator {
            
   }
   
-  
   public boolean hitByRook(int x1, int y1, int col, int row, Piece king, int kingCol, int kingRow,
       int colVal, int rowVal, Board board) {
     
@@ -656,12 +653,10 @@ public class MoveValidator {
         break;
       }
       
-      
     }
     
     return false;
   }
-  
   
   public boolean hitByBishop(int x1, int y1, int col, int row, Piece king, int kingCol, int kingRow,
       int colVal, int rowVal, Board board) {
@@ -678,8 +673,6 @@ public class MoveValidator {
         }
         break;
       }
-      
-      
     }
     
     return false;

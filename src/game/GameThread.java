@@ -131,13 +131,6 @@ public class GameThread implements Runnable {
     frame.add(movesPanel, BorderLayout.CENTER);
     
     
-    
-    
-    
-    
-    
-    
-    
     frame.setVisible(true);
     
     this.board.drawPieces(this.getPlayer1Pieces(), this.getPlayer2Pieces());
@@ -153,6 +146,16 @@ public class GameThread implements Runnable {
         turnLabel.setForeground(Color.BLACK);
         this.simulateTurn(player1turn);
       }
+    }
+    
+    if (this.player1turn) {
+      turnLabel.setText(this.player2.getName().toUpperCase() + " WINS");
+      turnLabel.setForeground(Color.BLACK);
+      frame.setTitle(this.player2.getName().toUpperCase() + " WINS");
+    }   else {
+      turnLabel.setText(this.player1.getName().toUpperCase() + " WINS");
+      turnLabel.setForeground(Color.WHITE);
+      frame.setTitle(this.player1.getName().toUpperCase() + " WINS");
     }
     
   }
@@ -218,12 +221,21 @@ public class GameThread implements Runnable {
         }   else {
           
           if (moveValidator.isKingCheckmated(x1, y1, x2, y2, board, whiteturn)) {
-            System.out.println("checkmate");
+            JOptionPane.showMessageDialog(frame,"Checkmate" + "", " ",JOptionPane.ERROR_MESSAGE);
+            
+            if (whiteturn) {
+              JOptionPane.showMessageDialog(frame, this.player2.getName() + " won" + "", " ",JOptionPane.ERROR_MESSAGE);
+            }   else {
+              JOptionPane.showMessageDialog(frame, this.player1.getName() + " won" + "", " ",JOptionPane.ERROR_MESSAGE);
+            }
+            
+            this.gameOver = true;
+            
+          }   else {
+            JOptionPane.showMessageDialog(frame,"Invalid Move" + "", " ",JOptionPane.ERROR_MESSAGE);
+            simulateTurn(whiteturn);
+            
           }
-          
-          JOptionPane.showMessageDialog(frame,"Invalid Move" + "", " ",JOptionPane.ERROR_MESSAGE);
-          simulateTurn(whiteturn);
-          
           
         }
       }
