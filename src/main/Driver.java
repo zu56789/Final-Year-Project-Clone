@@ -1,6 +1,7 @@
 package main;
 
 import game.GameThread;
+import movevalidator.MoveValidator;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
@@ -16,6 +17,7 @@ public class Driver {
 
   public static void main(String[] args) {
     
+    MoveValidator moveValidator = MoveValidator.getInstance();
     
     String input = JOptionPane.showInputDialog("How many games do you want to play (up to 4)?");
     int numberOfGames;
@@ -60,7 +62,7 @@ public class Driver {
       
       Player player1 = new WhitePlayer(whitePlayerName);
       Player player2 = new BlackPlayer(blackPlayerName);
-      GameThread game = new GameThread(player1, player2);
+      GameThread game = new GameThread(player1, player2, moveValidator); // each thread shares the same move validator
       Thread gameThread = new Thread(game);
       gameThread.start();
       panel.add(game.getBoard());

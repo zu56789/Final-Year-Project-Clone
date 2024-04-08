@@ -10,3 +10,4 @@
 19/03/24: Added Check and checkmate logic. Struggling to find a way to allow gameThread to recognise a checkmate.
 04/04/24: Added new GUI to each game for showing game status. Also implemented pawn promotion properly.
 08/04/24: Finally completed adding checkmate logic. It was very difficult to implement at first because every method i tried did not work but I found a way to do it.
+08/04/24: Added stalemate logic and now the code is fully functional. The game can end in either a win or a draw.

@@ -43,6 +43,7 @@ public class GameThread implements Runnable {
   private JLabel blackPieceCountLabel;
   private JTextArea whiteMovesArea;
   private JTextArea blackMovesArea;
+  private boolean stalemate;
   // add checking for gameOver
   
   /**
@@ -52,13 +53,13 @@ public class GameThread implements Runnable {
 
    * @param player2 the player with the black pieces.
    */
-  public GameThread(Player player1, Player player2) {
+  public GameThread(Player player1, Player player2, MoveValidator moveValidator) {
     this.player1 = player1;
     this.player2 = player2;
     this.board = new Board();
     this.player1turn = true;
     this.gameOver = false;
-    moveValidator = MoveValidator.getInstance();
+    this.moveValidator = moveValidator;
     // singleton instance of move validator
   }
   
@@ -148,16 +149,26 @@ public class GameThread implements Runnable {
       }
     }
     
-    if (this.player1turn) {
-      turnLabel.setText(this.player2.getName().toUpperCase() + " WINS");
-      turnLabel.setForeground(Color.BLACK);
-      frame.setTitle(this.player2.getName().toUpperCase() + " WINS");
+    if (this.stalemate) {
+      
+      turnLabel.setText("STALEMATE");
+      turnLabel.setForeground(Color.RED);
+      frame.setTitle("STALEMATE");
+      
     }   else {
-      turnLabel.setText(this.player1.getName().toUpperCase() + " WINS");
-      turnLabel.setForeground(Color.WHITE);
-      frame.setTitle(this.player1.getName().toUpperCase() + " WINS");
+      
+      if (this.player1turn) {
+        turnLabel.setText(this.player2.getName().toUpperCase() + " WINS");
+        turnLabel.setForeground(Color.BLACK);
+        frame.setTitle(this.player2.getName().toUpperCase() + " WINS");
+      }   else {
+        turnLabel.setText(this.player1.getName().toUpperCase() + " WINS");
+        turnLabel.setForeground(Color.WHITE);
+        frame.setTitle(this.player1.getName().toUpperCase() + " WINS");
+      }
+
     }
-    
+ 
   }
   
   
@@ -232,8 +243,24 @@ public class GameThread implements Runnable {
             this.gameOver = true;
             
           }   else {
-            JOptionPane.showMessageDialog(frame,"Invalid Move" + "", " ",JOptionPane.ERROR_MESSAGE);
-            simulateTurn(whiteturn);
+            
+            if (moveValidator.stalemate(x1, y1, x2, y2, board, whiteturn)) {
+              JOptionPane.showMessageDialog(frame,"STALEMATE" + "", " ",JOptionPane.ERROR_MESSAGE);
+              
+              this.stalemate = true;
+              
+              this.gameOver = true;
+            }   else {
+              
+              JOptionPane.showMessageDialog(frame,"Invalid Move" + "", " ",JOptionPane.ERROR_MESSAGE);
+              simulateTurn(whiteturn);
+              
+            }
+            
+            
+            
+            
+            
             
           }
           

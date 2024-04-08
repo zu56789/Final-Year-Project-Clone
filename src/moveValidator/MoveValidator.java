@@ -133,6 +133,7 @@ public class MoveValidator {
    */
   public boolean knightValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
+    
     if (sameTeam(x1, y1, x2, y2, board)) {
       return false;
     }   else {
@@ -161,6 +162,10 @@ public class MoveValidator {
    * @return returns a boolean value determining if the pawn moved in a legal way.
    */
   public boolean pawnValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
+    
+    if ((x1 > 7  || x1 < 0) || (x2 > 7 || x2 < 0) || (y1 > 7 || y2 < 0) || (y2 > 7 || y2 < 0)) {
+      return false; // x and y values should be from 0 to 7
+    } 
     
     
     if (sameTeam(x1, y1, x2, y2, board) || collision(x1, y1, x2, y2, board)) {
@@ -211,6 +216,10 @@ public class MoveValidator {
    */
   public boolean rookValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
+    if ((x1 > 7  || x1 < 0) || (x2 > 7 || x2 < 0) || (y1 > 7 || y2 < 0) || (y2 > 7 || y2 < 0)) {
+      return false; // x and y values should be from 0 to 7
+    } 
+    
     if (sameTeam(x1, y1, x2, y2, board) || collision(x1, y1, x2, y2, board)) {
       return false;
     }   else if (x1 == x2 && y1 == y2) {
@@ -243,6 +252,10 @@ public class MoveValidator {
    * @return returns boolean value determining if the bishop moves in a legal way.
    */
   public boolean bishopValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
+    
+    if ((x1 > 7  || x1 < 0) || (x2 > 7 || x2 < 0) || (y1 > 7 || y2 < 0) || (y2 > 7 || y2 < 0)) {
+      return false; // x and y values should be from 0 to 7
+    } 
     
     if (sameTeam(x1, y1, x2, y2, board) || collision(x1, y1, x2, y2, board)) {
       return false;
@@ -435,6 +448,195 @@ public class MoveValidator {
   }
   
   
+  public boolean checkknightValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
+    
+    if ((x1 > 7  || x1 < 0) || (x2 > 7 || x2 < 0) || (y1 > 7 || y2 < 0) || (y2 > 7 || y2 < 0)) {
+      return false; // x and y values should be from 0 to 7
+    } 
+    
+    if (sameTeam(x1, y1, x2, y2, board)) {
+      return false;
+    }   else {
+      
+      return Math.abs(x2 - x1)  * Math.abs(y2 - y1) == 2;
+    }
+    
+    // add checking for captures
+  }
+  
+  
+  
+  public boolean stalemate(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
+    
+    if (this.isKingChecked(x1, y1, x2, y2, board, whiteMove)) {
+      return false;
+    }
+    
+    ArrayList<Piece> pieces = whiteMove ? board.getWhitePieces() : board.getBlackPieces();
+    
+    for (Piece piece : pieces) {
+      
+      int pieceCol = piece.getColumn();
+      int pieceRow = piece.getRow();
+      
+      if (piece.getName().equals("Pawn")) {
+        
+        int val = piece.isBlack() ? 1 : -1;
+        
+        int val2 = piece.isBlack() ? 1 : -1;
+        
+        if (piece.isBlack() && piece.getRow() == 1) {
+          val2 = 2;
+        }   else if (!piece.isBlack() && piece.getRow() == 6) {
+          val2 = -2;
+        }
+        
+        if (pawnValidator(pieceCol, pieceRow, pieceCol + 1, pieceRow + val, board, whiteMove)
+            && !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow + val, board, whiteMove)) {
+          return false;
+          
+        }   else if (pawnValidator(pieceCol, pieceRow, pieceCol - 1, pieceRow + val, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow + val, board, whiteMove)) {
+          return false;
+          
+        }   else if (pawnValidator(pieceCol, pieceRow, pieceCol, pieceRow + val, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow + val, board, whiteMove)) {
+          return false;
+          
+        }   else if (pawnValidator(pieceCol, pieceRow, pieceCol, pieceRow + val2, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow + val2, board, whiteMove)) {
+          return false;
+          
+        }
+        
+        
+      }   else if (piece.getName().equals("Knight")) {
+        
+        if (checkknightValidator(pieceCol, pieceRow, pieceCol - 1, pieceRow - 2, board, whiteMove) && 
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow - 2, board, whiteMove)) {
+          return false;
+
+        }   else if (checkknightValidator(pieceCol, pieceRow, pieceCol - 2, pieceRow - 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 2, pieceRow - 1, board, whiteMove)) {
+          return false;
+          
+        }   else if (checkknightValidator(pieceCol, pieceRow, pieceCol + 2, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 2, pieceRow + 1, board, whiteMove)) {
+          return false; 
+          
+        }   else if (checkknightValidator(pieceCol, pieceRow, pieceCol + 1, pieceRow + 2, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow + 2, board, whiteMove)) {
+          return false;
+          
+        }   else if (checkknightValidator(pieceCol, pieceRow, pieceCol - 1, pieceRow + 2, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow + 2, board, whiteMove)) {
+          return false;
+          
+        }   else if (checkknightValidator(pieceCol, pieceRow, pieceCol + 1, pieceRow - 2, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow - 2, board, whiteMove)) {
+          return false;
+          
+        }   else if (checkknightValidator(pieceCol, pieceRow, pieceCol + 2, pieceRow - 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 2, pieceRow - 1, board, whiteMove)) {
+          return false;
+          
+        }    else if (checkknightValidator(pieceCol, pieceRow, pieceCol - 2, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 2, pieceRow + 1, board, whiteMove)) {
+          return false;
+          
+        }
+      }   else if (piece.getName().equals("Rook") || piece.getName().equals("Queen")) {
+        
+        
+        for (int i = 1; i < 8; i++) {
+          if (rookValidator(pieceCol, pieceRow, pieceCol + (i * 0), pieceRow + (i * 1), board, whiteMove) &&
+              !isKingChecked(pieceCol, pieceRow, pieceCol + (i * 0), pieceRow + (i * 1), board, whiteMove)) {
+            return false;
+            
+          }   else if (rookValidator(pieceCol, pieceRow, pieceCol + (i * 0), pieceRow + (i * -1), board, whiteMove) &&
+              !isKingChecked(pieceCol, pieceRow, pieceCol + (i * 0), pieceRow + (i * -1), board, whiteMove)) {
+            return false;
+            
+          }   else if (rookValidator(pieceCol, pieceRow, pieceCol + (i * 1), pieceRow + (i * 0), board, whiteMove) &&
+              !isKingChecked(pieceCol, pieceRow, pieceCol + (i * 1), pieceRow + (i * 0), board, whiteMove)) {
+            return false;
+            
+          }   else if (rookValidator(pieceCol, pieceRow, pieceCol + (i * -1), pieceRow + (i * 0), board, whiteMove) &&
+              !isKingChecked(pieceCol, pieceRow, pieceCol + (i * -1), pieceRow + (i * 0), board, whiteMove)) {
+            return false;
+          }
+          
+        }
+      } else if (piece.getName().equals("Bishop") || piece.getName().equals("Queen")) {
+        
+        for (int i = 1; i < 8; i++) {
+          if (bishopValidator(pieceCol, pieceRow, pieceCol - (i * 1), pieceRow - (i * 1), board, whiteMove) &&
+              !isKingChecked(pieceCol, pieceRow, pieceCol - (i * 1), pieceRow - (i * 1), board, whiteMove)) {
+            return false;
+            
+          }   else if (bishopValidator(pieceCol, pieceRow, pieceCol - (i * 1), pieceRow - (i * -1), board, whiteMove) &&
+              !isKingChecked(pieceCol, pieceRow, pieceCol - (i * 1), pieceRow - (i * -1), board, whiteMove)) {
+            return false;
+            
+          }   else if (bishopValidator(pieceCol, pieceRow, pieceCol - (i * -1), pieceRow - (i * 1), board, whiteMove) &&
+              !isKingChecked(pieceCol, pieceRow, pieceCol - (i * -1), pieceRow - (i * 1), board, whiteMove)) {
+            return false;
+            
+          }   else if (bishopValidator(pieceCol, pieceRow, pieceCol - (i * -1), pieceRow - (i * -1), board, whiteMove) && 
+              !isKingChecked(pieceCol, pieceRow, pieceCol - (i * -1), pieceRow - (i * -1), board, whiteMove)) {
+            return false;
+          }
+        }
+
+      }   else if (piece.getName().equals("King")) {
+        
+        
+        if (checkkingValidator(pieceCol,pieceRow, pieceCol + 1, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow + 1, board, whiteMove)) {
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol - 1, pieceRow -1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow - 1, board, whiteMove)) {
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol + 1, pieceRow, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow, board, whiteMove)) { 
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol - 1, pieceRow, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow, board, whiteMove)) {
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol, pieceRow - 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow - 1, board, whiteMove)) {
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow + 1, board, whiteMove)) {
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol + 1, pieceRow - 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow - 1, board, whiteMove)) {
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol - 1, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow + 1, board, whiteMove)) {
+          return false;
+          
+        }
+        
+      }
+      
+    }
+    
+    return true;
+    
+  }
+  
+  
+  
+  
+  
   public boolean isKingCheckmated(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
     if (!this.isKingChecked(x1, y1, x2, y2, board, whiteMove)) {
@@ -452,6 +654,14 @@ public class MoveValidator {
         
         int val = piece.isBlack() ? 1 : -1;
         
+        int val2 = piece.isBlack() ? 1 : -1;
+        
+        if (piece.isBlack() && piece.getRow() == 1) {
+          val2 = 2;
+        }   else if (!piece.isBlack() && piece.getRow() == 6) {
+          val2 = -2;
+        }
+        
         if (pawnValidator(pieceCol, pieceRow, pieceCol + 1, pieceRow + val, board, whiteMove)
             && !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow + val, board, whiteMove)) {
           return false;
@@ -459,6 +669,15 @@ public class MoveValidator {
         }   else if (pawnValidator(pieceCol, pieceRow, pieceCol - 1, pieceRow + val, board, whiteMove) &&
             !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow + val, board, whiteMove)) {
           return false;
+          
+        }   else if (pawnValidator(pieceCol, pieceRow, pieceCol, pieceRow + val, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow + val, board, whiteMove)) {
+          return false;
+          
+        }   else if (pawnValidator(pieceCol, pieceRow, pieceCol, pieceRow + val2, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow + val2, board, whiteMove)) {
+          return false;
+          
         }
         
         
