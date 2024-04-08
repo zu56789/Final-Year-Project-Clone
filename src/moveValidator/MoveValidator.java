@@ -462,6 +462,45 @@ public class MoveValidator {
         }
         
         
+      }   else if (piece.getName().equals("Knight")) {
+        
+        if (knightValidator(pieceCol, pieceRow, pieceCol - 1, pieceRow - 2, board, whiteMove) && 
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow - 2, board, whiteMove)) {
+          return false;
+
+        }   else if (knightValidator(pieceCol, pieceRow, pieceCol - 2, pieceRow - 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 2, pieceRow - 1, board, whiteMove)) {
+          return false;
+          
+        }   else if (knightValidator(pieceCol, pieceRow, pieceCol + 2, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 2, pieceRow + 1, board, whiteMove)) {
+          return false; 
+          
+        }   else if (knightValidator(pieceCol, pieceRow, pieceCol + 1, pieceRow + 2, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow + 2, board, whiteMove)) {
+          return false;
+          
+        }   else if (knightValidator(pieceCol, pieceRow, pieceCol - 1, pieceRow + 2, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow + 2, board, whiteMove)) {
+          return false;
+          
+        }   else if (knightValidator(pieceCol, pieceRow, pieceCol + 1, pieceRow - 2, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow - 2, board, whiteMove)) {
+          return false;
+          
+        }   else if (knightValidator(pieceCol, pieceRow, pieceCol + 2, pieceRow - 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 2, pieceRow - 1, board, whiteMove)) {
+          return false;
+          
+        }    else if (knightValidator(pieceCol, pieceRow, pieceCol - 2, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 2, pieceRow + 1, board, whiteMove)) {
+          return false;
+          
+        }
+        
+        
+        
+        
       }
       
     }
