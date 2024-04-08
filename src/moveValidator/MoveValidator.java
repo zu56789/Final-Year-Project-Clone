@@ -483,6 +483,14 @@ public class MoveValidator {
         
         int val = piece.isBlack() ? 1 : -1;
         
+        int val2 = piece.isBlack() ? 1 : -1;
+        
+        if (piece.isBlack() && piece.getRow() == 1) {
+          val2 = 2;
+        }   else if (!piece.isBlack() && piece.getRow() == 6) {
+          val2 = -2;
+        }
+        
         if (pawnValidator(pieceCol, pieceRow, pieceCol + 1, pieceRow + val, board, whiteMove)
             && !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow + val, board, whiteMove)) {
           return false;
@@ -490,6 +498,15 @@ public class MoveValidator {
         }   else if (pawnValidator(pieceCol, pieceRow, pieceCol - 1, pieceRow + val, board, whiteMove) &&
             !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow + val, board, whiteMove)) {
           return false;
+          
+        }   else if (pawnValidator(pieceCol, pieceRow, pieceCol, pieceRow + val, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow + val, board, whiteMove)) {
+          return false;
+          
+        }   else if (pawnValidator(pieceCol, pieceRow, pieceCol, pieceRow + val2, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow + val2, board, whiteMove)) {
+          return false;
+          
         }
         
         
@@ -637,6 +654,14 @@ public class MoveValidator {
         
         int val = piece.isBlack() ? 1 : -1;
         
+        int val2 = piece.isBlack() ? 1 : -1;
+        
+        if (piece.isBlack() && piece.getRow() == 1) {
+          val2 = 2;
+        }   else if (!piece.isBlack() && piece.getRow() == 6) {
+          val2 = -2;
+        }
+        
         if (pawnValidator(pieceCol, pieceRow, pieceCol + 1, pieceRow + val, board, whiteMove)
             && !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow + val, board, whiteMove)) {
           return false;
@@ -644,6 +669,15 @@ public class MoveValidator {
         }   else if (pawnValidator(pieceCol, pieceRow, pieceCol - 1, pieceRow + val, board, whiteMove) &&
             !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow + val, board, whiteMove)) {
           return false;
+          
+        }   else if (pawnValidator(pieceCol, pieceRow, pieceCol, pieceRow + val, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow + val, board, whiteMove)) {
+          return false;
+          
+        }   else if (pawnValidator(pieceCol, pieceRow, pieceCol, pieceRow + val2, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow + val2, board, whiteMove)) {
+          return false;
+          
         }
         
         
