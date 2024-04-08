@@ -1,2 +1,3 @@
 release 1.0 17/10/23 GUI representation of chess board with pieces.
 release 2.0 08/04/24 GUI representing concurrently working chess games.
+release 3.0 08/04/24 Fully functioning chess game environment which supports concurrent game playing.
