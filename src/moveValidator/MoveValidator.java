@@ -434,6 +434,18 @@ public class MoveValidator {
   }
   
   
+  public boolean isKingCheckmated(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
+    
+    if (!this.isKingChecked(x1, y1, x2, y2, board, whiteMove)) {
+      return false;
+    }   else {
+      return true;
+    }
+    
+  }
+  
+  
+  
   public boolean isKingChecked(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
     Piece king = whiteMove ? board.getWhiteKing() : board.getBlackKing();
