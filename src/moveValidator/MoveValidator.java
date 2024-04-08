@@ -440,6 +440,33 @@ public class MoveValidator {
       return false;
     }
     
+    ArrayList<Piece> pieces = whiteMove ? board.getWhitePieces() : board.getBlackPieces();
+    
+    for (Piece piece : pieces) {
+      
+      int pieceCol = piece.getColumn();
+      int pieceRow = piece.getRow();
+      
+      
+      if (piece.getName().equals("Pawn")) {
+        
+        int val = piece.isBlack() ? 1 : -1;
+        
+        if (pawnValidator(pieceCol, pieceRow, pieceCol + 1, pieceRow + val, board, whiteMove)
+            && !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow + val, board, whiteMove)) {
+          return false;
+          
+        }   else if (pawnValidator(pieceCol, pieceRow, pieceCol - 1, pieceRow + val, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow + val, board, whiteMove)) {
+          return false;
+        }
+        
+        
+      }
+      
+      
+    }
+    
     return true;
   }
   
