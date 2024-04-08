@@ -544,12 +544,81 @@ public class MoveValidator {
           }
         }
 
+      }   else if (piece.getName().equals("King")) {
+        
+        
+        if (checkkingValidator(pieceCol,pieceRow, pieceCol + 1, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow + 1, board, whiteMove)) {
+          System.out.println("King 1");
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol - 1, pieceRow -1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow - 1, board, whiteMove)) {
+          System.out.println("King 2"); 
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol + 1, pieceRow, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow, board, whiteMove)) {
+          System.out.println("King 3");    
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol - 1, pieceRow, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow, board, whiteMove)) {
+          System.out.println("King 4");    
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol, pieceRow - 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow - 1, board, whiteMove)) {
+          System.out.println("King 5");
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol, pieceRow + 1, board, whiteMove)) {
+          System.out.println("King 6");
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol + 1, pieceRow - 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol + 1, pieceRow - 1, board, whiteMove)) {
+          System.out.println("King 7");
+          return false;
+          
+        }   else if (checkkingValidator(pieceCol,pieceRow, pieceCol - 1, pieceRow + 1, board, whiteMove) &&
+            !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow + 1, board, whiteMove)) {
+          System.out.println("King 8");
+          return false;
+          
+        }
+        
+        
+        
+        
+        
       }
       
     }
     
     return true;
     
+  }
+  
+  public boolean checkkingValidator(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
+    
+    if ((x1 > 7  || x1 < 0) || (x2 > 7 || x2 < 0) || (y1 > 7 || y2 < 0) || (y2 > 7 || y2 < 0)) {
+      return false;
+    }
+
+    if (sameTeam(x1, y1, x2, y2, board) || collision(x1, y1, x2, y2, board)) {
+      return false;
+      
+    }   else if (x1 == x2 && y1 == y2) {
+      return false;
+      
+    }   else {
+      
+      return Math.abs((x2 - x1) * (y2 - y1)) == 1 || Math.abs(x2 - x1) + Math.abs(y2 - y1) == 1;
+ 
+    }
+
   }
   
   
