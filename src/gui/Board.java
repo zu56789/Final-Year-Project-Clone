@@ -76,6 +76,11 @@ public class Board extends JPanel {
   }
   
   
+  /**
+   * this method returns the black king on the board.
+
+   * @return piece object containing the black king.
+   */
   public Piece getBlackKing() {
     
     for (Piece piece : pieceList) {
@@ -89,17 +94,22 @@ public class Board extends JPanel {
   }
   
   
+  /**
+   * this method returns the white king on the board.
+
+   * @return piece object containing the white king
+   */
   public Piece getWhiteKing() {
       
-      for (Piece piece : pieceList) {
-        if (piece.getName() == "King" && !piece.isBlack()) {
-          return piece;
-        }
+    for (Piece piece : pieceList) {
+      if (piece.getName() == "King" && !piece.isBlack()) {
+        return piece;
       }
-      
-      return null;
-      
     }
+      
+    return null;
+      
+  }
   
   /**
    * this method returns a list of all black pieces on the board.

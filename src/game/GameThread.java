@@ -67,9 +67,10 @@ public class GameThread implements Runnable {
   public void run() {
     
     
-    frame = new JFrame();
+    frame = new JFrame(); // JFrame for game status
     
-    frame.setTitle(this.player1.getName().toUpperCase() + " vs " + this.player2.getName().toUpperCase() + " Game Status");
+    frame.setTitle(this.player1.getName().toUpperCase() + " vs " 
+        + this.player2.getName().toUpperCase() + " Game Status");
     frame.setLayout(new GridBagLayout());
     frame.setSize(new Dimension(600, 400));
     frame.setLayout(new BorderLayout());
@@ -78,7 +79,8 @@ public class GameThread implements Runnable {
     frame.getContentPane().setBackground(new Color(160, 178, 250));
     
     
-    JLabel turnLabel = new JLabel (this.player1.getName().toUpperCase() + " turn", SwingConstants.CENTER);
+    JLabel turnLabel = new JLabel(this.player1.getName().toUpperCase()
+        + " turn", SwingConstants.CENTER);
     turnLabel.setForeground(Color.WHITE);
     
     frame.add(turnLabel, BorderLayout.NORTH);
@@ -87,17 +89,21 @@ public class GameThread implements Runnable {
     JPanel countsPanel = new JPanel(new GridLayout(1, 2));
     countsPanel.setOpaque(false);
     
-    whitePieceCountLabel = new JLabel(this.player1.getName().toUpperCase() + " Pieces: 16", SwingConstants.CENTER);
+    whitePieceCountLabel = new JLabel(this.player1.getName().toUpperCase()
+        + " Pieces: 16", SwingConstants.CENTER);
     whitePieceCountLabel.setForeground(Color.WHITE);
     
-    TitledBorder whitePiecesBorder = BorderFactory.createTitledBorder(this.player1.getName().toUpperCase() + " Count");
+    TitledBorder whitePiecesBorder = BorderFactory.createTitledBorder(
+        this.player1.getName().toUpperCase() + " Count");
     whitePiecesBorder.setTitleColor(Color.WHITE);
     whitePieceCountLabel.setBorder(whitePiecesBorder);
     
     countsPanel.add(whitePieceCountLabel);
 
-    blackPieceCountLabel = new JLabel(this.player2.getName().toUpperCase() + " Pieces: 16", SwingConstants.CENTER);
-    blackPieceCountLabel.setBorder(BorderFactory.createTitledBorder(this.player2.getName().toUpperCase() + " Count"));
+    blackPieceCountLabel = new JLabel(this.player2.getName().toUpperCase()
+        + " Pieces: 16", SwingConstants.CENTER);
+    blackPieceCountLabel.setBorder(BorderFactory.createTitledBorder(
+        this.player2.getName().toUpperCase() + " Count"));
     blackPieceCountLabel.setForeground(Color.BLACK);
     
     countsPanel.add(blackPieceCountLabel);
@@ -113,9 +119,10 @@ public class GameThread implements Runnable {
     JScrollPane whiteScroll = new JScrollPane(whiteMovesArea);
     whiteScroll.setOpaque(false);
     
-    TitledBorder whiteBorder = BorderFactory.createTitledBorder(this.player1.getName().toUpperCase() + " Moves");
+    TitledBorder whiteBorder = BorderFactory.createTitledBorder(
+        this.player1.getName().toUpperCase() + " Moves");
     
-    whiteBorder.setTitleColor(new Color(255,255,255));
+    whiteBorder.setTitleColor(new Color(255, 255, 255));
     
     whiteScroll.setBorder(whiteBorder);
     movesPanel.add(whiteScroll);
@@ -125,7 +132,8 @@ public class GameThread implements Runnable {
     
     JScrollPane blackScroll = new JScrollPane(blackMovesArea);
     blackScroll.setOpaque(false);
-    blackScroll.setBorder(BorderFactory.createTitledBorder(this.player2.getName().toUpperCase() + " Moves"));
+    blackScroll.setBorder(BorderFactory.createTitledBorder(
+        this.player2.getName().toUpperCase() + " Moves"));
     
     movesPanel.add(blackScroll);
 
@@ -206,11 +214,13 @@ public class GameThread implements Runnable {
           
           
           if (whiteturn) {
-            whiteMovesArea.append(piece1.getName() + " from (" + piece1.getColumn() + "," + piece1.getRow() +
-            ") to (" + x2 + "," + y2 + ")\n");
+            whiteMovesArea.append(piece1.getName() + " from (" + piece1.getColumn() + ","
+                + piece1.getRow() 
+                + ") to (" + x2 + "," + y2 + ")\n");
           } else {
-            blackMovesArea.append(piece1.getName() + " from (" + piece1.getColumn() + "," + piece1.getRow() +
-                ") to (" + x2 + "," + y2 + ")\n");
+            blackMovesArea.append(piece1.getName() + " from (" + piece1.getColumn() + ","
+                + piece1.getRow() 
+                + ") to (" + x2 + "," + y2 + ")\n");
           }
           
           if (moveValidator.otherTeam(x1, y1, x2, y2, this.getBoard())) {
@@ -232,12 +242,14 @@ public class GameThread implements Runnable {
         }   else {
           
           if (moveValidator.isKingCheckmated(x1, y1, x2, y2, board, whiteturn)) {
-            JOptionPane.showMessageDialog(frame,"Checkmate" + "", " ",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "Checkmate" + "", " ", JOptionPane.ERROR_MESSAGE);
             
             if (whiteturn) {
-              JOptionPane.showMessageDialog(frame, this.player2.getName() + " won" + "", " ",JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(frame, this.player2.getName() 
+                  + " won" + "", " ", JOptionPane.ERROR_MESSAGE);
             }   else {
-              JOptionPane.showMessageDialog(frame, this.player1.getName() + " won" + "", " ",JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(frame, this.player1.getName()
+                  + " won" + "", " ", JOptionPane.ERROR_MESSAGE);
             }
             
             this.gameOver = true;
@@ -245,23 +257,19 @@ public class GameThread implements Runnable {
           }   else {
             
             if (moveValidator.stalemate(x1, y1, x2, y2, board, whiteturn)) {
-              JOptionPane.showMessageDialog(frame,"STALEMATE" + "", " ",JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(frame, "STALEMATE"
+                  + "", " ", JOptionPane.ERROR_MESSAGE);
               
               this.stalemate = true;
               
               this.gameOver = true;
             }   else {
               
-              JOptionPane.showMessageDialog(frame,"Invalid Move" + "", " ",JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(frame, "Invalid Move"
+                  + "", " ", JOptionPane.ERROR_MESSAGE);
               simulateTurn(whiteturn);
               
             }
-            
-            
-            
-            
-            
-            
           }
           
         }
@@ -299,7 +307,7 @@ public class GameThread implements Runnable {
       
       if (piece1.getName() == "Pawn" && y2 == 0) {
 
-        pawnPromotion(piece1,whiteturn);
+        pawnPromotion(piece1, whiteturn);
         
       }
          
@@ -317,7 +325,7 @@ public class GameThread implements Runnable {
       
       if (piece1.getName() == "Pawn" && y2 == 7) {
         
-        pawnPromotion(piece1,whiteturn);
+        pawnPromotion(piece1, whiteturn);
         
       }
 
@@ -326,6 +334,13 @@ public class GameThread implements Runnable {
   }
   
   
+  /**
+ * this method creates an option panel for pawn promotion.
+
+ * @param piece1 pawn that is getting promoted
+
+ * @param whiteturn boolean value used to determine who is currently moving.
+ */
   public void pawnPromotion(Piece piece1, boolean whiteturn) {
     
     Piece newPiece;
@@ -343,21 +358,21 @@ public class GameThread implements Runnable {
           options,
           options[0]);
       
-      switch(choice) {
+      switch (choice) {
         case 0:
-          newPiece = new Queen(piece1.getColumn(),piece1.getRow(), false);
+          newPiece = new Queen(piece1.getColumn(), piece1.getRow(), false);
           break;
         case 1:
-          newPiece = new Rook(piece1.getColumn(),piece1.getRow(), false);
+          newPiece = new Rook(piece1.getColumn(), piece1.getRow(), false);
           break;
         case 2:
-          newPiece = new Bishop(piece1.getColumn(),piece1.getRow(), false);
+          newPiece = new Bishop(piece1.getColumn(), piece1.getRow(), false);
           break;
         case 3:
-          newPiece = new Knight(piece1.getColumn(),piece1.getRow(), false);
+          newPiece = new Knight(piece1.getColumn(), piece1.getRow(), false);
           break;
         default:
-          newPiece = new Queen(piece1.getColumn(),piece1.getRow(), false);
+          newPiece = new Queen(piece1.getColumn(), piece1.getRow(), false);
           break;
       }
       
@@ -370,9 +385,7 @@ public class GameThread implements Runnable {
       list.add(newPiece);
       this.player1.setPieces(list);
       
-    }
-    
-    else {
+    }   else {
       
       int choice = JOptionPane.showOptionDialog(null, 
           "Choose an option:", 
@@ -383,21 +396,21 @@ public class GameThread implements Runnable {
           options, 
           options[0]);
       
-      switch(choice) {
+      switch (choice) {
         case 0:
-          newPiece = new Queen(piece1.getColumn(),piece1.getRow(), true);
+          newPiece = new Queen(piece1.getColumn(), piece1.getRow(), true);
           break;
         case 1:
-          newPiece = new Rook(piece1.getColumn(),piece1.getRow(), true);
+          newPiece = new Rook(piece1.getColumn(), piece1.getRow(), true);
           break;
         case 2:
-          newPiece = new Bishop(piece1.getColumn(),piece1.getRow(), true);
+          newPiece = new Bishop(piece1.getColumn(), piece1.getRow(), true);
           break;
         case 3:
-          newPiece = new Knight(piece1.getColumn(),piece1.getRow(), true);
+          newPiece = new Knight(piece1.getColumn(), piece1.getRow(), true);
           break;
         default:
-          newPiece = new Queen(piece1.getColumn(),piece1.getRow(), true);
+          newPiece = new Queen(piece1.getColumn(), piece1.getRow(), true);
           break;
       }
       
@@ -459,8 +472,10 @@ public class GameThread implements Runnable {
       
     }
     
-    whitePieceCountLabel.setText(this.player1.getName().toUpperCase() + " Pieces: " + this.player1.getNumPieces());
-    blackPieceCountLabel.setText(this.player2.getName().toUpperCase() + " Pieces: " + this.player2.getNumPieces());
+    whitePieceCountLabel.setText(this.player1.getName().toUpperCase()
+        + " Pieces: " + this.player1.getNumPieces());
+    blackPieceCountLabel.setText(this.player2.getName().toUpperCase()
+        + " Pieces: " + this.player2.getNumPieces());
        
   }
   
