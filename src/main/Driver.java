@@ -23,7 +23,7 @@ public class Driver {
 
   public static void main(String[] args) {
     
-    MoveValidator moveValidator = MoveValidator.getInstance();
+    MoveValidator moveValidator = MoveValidator.getInstance(); // singleton instance 
     
     String input = JOptionPane.showInputDialog("How many games do you want to play (up to 4)?");
     int numberOfGames;
@@ -84,7 +84,7 @@ public class Driver {
     
     if (frame.getWidth() > Toolkit.getDefaultToolkit().getScreenSize().width
         || numberOfGames == 1) {
-      frame.setSize(new Dimension(534, 577));
+      frame.setSize(new Dimension(534, 577)); // 3 or 4 games will contain a scrollbar
     }
     
     

@@ -502,7 +502,7 @@ public class MoveValidator {
   public boolean stalemate(int x1, int y1, int x2, int y2, Board board, boolean whiteMove) {
     
     if (this.isKingChecked(x1, y1, x2, y2, board, whiteMove)) {
-      return false;
+      return false; // cant already be in check for stalemate to occur 
     }
     
     ArrayList<Piece> pieces = whiteMove ? board.getWhitePieces() : board.getBlackPieces();
@@ -513,6 +513,8 @@ public class MoveValidator {
       int pieceRow = piece.getRow();
       
       if (piece.getName().equals("Pawn")) {
+        
+        // checking if pawns have any valid moves
         
         int val = piece.isBlack() ? 1 : -1;
         
@@ -547,6 +549,8 @@ public class MoveValidator {
         
         
       }   else if (piece.getName().equals("Knight")) {
+        
+        // checking if Knights have any valid moves
         
         if (checkknightValidator(pieceCol, pieceRow, pieceCol - 1, pieceRow - 2, board,
             whiteMove)  
@@ -591,6 +595,8 @@ public class MoveValidator {
         }
       }   else if (piece.getName().equals("Rook") || piece.getName().equals("Queen")) {
         
+        // checking if rooks(or queen) have any valid moves
+        
         
         for (int i = 1; i < 8; i++) {
           if (rookValidator(pieceCol, pieceRow, pieceCol + (i * 0), pieceRow + (i * 1),
@@ -621,6 +627,8 @@ public class MoveValidator {
         }
       } else if (piece.getName().equals("Bishop") || piece.getName().equals("Queen")) {
         
+        // checking if bishops(or queen) have any valid moves
+        
         for (int i = 1; i < 8; i++) {
           if (bishopValidator(pieceCol, pieceRow, pieceCol - (i * 1), pieceRow - (i * 1),
               board, whiteMove) 
@@ -649,6 +657,8 @@ public class MoveValidator {
         }
 
       }   else if (piece.getName().equals("King")) {
+        
+        // checking if king has any valid moves
         
         
         if (checkkingValidator(pieceCol, pieceRow, pieceCol + 1, pieceRow + 1, board, whiteMove) 
@@ -700,10 +710,6 @@ public class MoveValidator {
     
   }
   
-  
-  
-  
-  
   /**
    * this method determines if a king is in checkmate or not.
 
@@ -725,7 +731,7 @@ public class MoveValidator {
     
     if (!this.isKingChecked(x1, y1, x2, y2, board, whiteMove)) {
       return false;
-    }
+    }   // cant be in checkmate if king isnt currently in check
     
     ArrayList<Piece> pieces = whiteMove ? board.getWhitePieces() : board.getBlackPieces();
     
@@ -735,6 +741,8 @@ public class MoveValidator {
       int pieceRow = piece.getRow();
       
       if (piece.getName().equals("Pawn")) {
+        
+        // checking if pawns have any valid moves
         
         int val = piece.isBlack() ? 1 : -1;
         
@@ -769,6 +777,8 @@ public class MoveValidator {
         
         
       }   else if (piece.getName().equals("Knight")) {
+        
+        // checking if knights have any valid moves
         
         if (knightValidator(pieceCol, pieceRow, pieceCol - 1, pieceRow - 2, board, whiteMove)  
             && !isKingChecked(pieceCol, pieceRow, pieceCol - 1, pieceRow - 2, board, whiteMove)) {
@@ -812,6 +822,8 @@ public class MoveValidator {
         }
       }   else if (piece.getName().equals("Rook") || piece.getName().equals("Queen")) {
         
+        // checking if rooks(or queen) have any valid moves
+        
         
         for (int i = 1; i < 8; i++) {
           if (rookValidator(pieceCol, pieceRow, pieceCol + (i * 0), pieceRow + (i * 1),
@@ -842,6 +854,8 @@ public class MoveValidator {
         }
       } else if (piece.getName().equals("Bishop") || piece.getName().equals("Queen")) {
         
+        // checking if bishops(or queen) have any valid moves
+        
         for (int i = 1; i < 8; i++) {
           if (bishopValidator(pieceCol, pieceRow, pieceCol - (i * 1), pieceRow - (i * 1),
               board, whiteMove) 
@@ -870,6 +884,8 @@ public class MoveValidator {
         }
 
       }   else if (piece.getName().equals("King")) {
+        
+        // checking if king has any valid moves
         
         
         if (checkkingValidator(pieceCol, pieceRow, pieceCol + 1, pieceRow + 1, board, whiteMove) 
@@ -986,7 +1002,7 @@ public class MoveValidator {
     
     if (board.getPiece(x1, y1) != null && board.getPiece(x1, y1).getName().equals("King")) {
       kingCol = x2;
-      kingRow = y2;
+      kingRow = y2; // if king is moving, set col and row to destination
     }
     
     
@@ -1038,7 +1054,7 @@ public class MoveValidator {
     
     for (int i = 1; i < 8; i++) {
       if (kingCol + (i * colVal) == col && kingRow + (i * rowVal) == row) {
-        break;
+        break; // found a piece in same col/row as king
       }
       
       Piece piece = board.getPiece(kingCol + (i * colVal), kingRow + (i * rowVal));
@@ -1047,7 +1063,7 @@ public class MoveValidator {
             || piece.getName().equals("Queen"))) {
           return true;
         }
-        break;
+        break; // break loop to decrease workload of cpu
       }
       
     }
@@ -1085,7 +1101,7 @@ public class MoveValidator {
     
     for (int i = 1; i < 8; i++) {
       if (kingCol - (i * colVal) == col && kingRow - (i * rowVal) == row) {
-        break;
+        break; // found a piece diagonal to the king
       }
       
       Piece piece = board.getPiece(kingCol - (i * colVal), kingRow - (i * rowVal));
@@ -1128,6 +1144,7 @@ public class MoveValidator {
            || checkKnight(board.getPiece(kingCol + 1, kingRow - 2), king, col, row) 
            || checkKnight(board.getPiece(kingCol + 2, kingRow - 1), king, col, row) 
            || checkKnight(board.getPiece(kingCol - 2, kingRow + 1), king, col, row); 
+    
   }
   
   /**
@@ -1207,7 +1224,7 @@ public class MoveValidator {
    */
   public boolean hitByPawn(int col, int row, Piece king, int kingCol, int kingRow, Board board) {
     
-    int val = king.isBlack() ? 1 : -1;
+    int val = king.isBlack() ? 1 : -1; // direction of pawn movement based on colour
     
     return checkPawn(board.getPiece(kingCol + 1, kingRow + val), king, col, row)
            || checkPawn(board.getPiece(kingCol - 1, kingRow + val), king, col, row);
