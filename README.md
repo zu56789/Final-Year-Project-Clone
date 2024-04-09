@@ -7,4 +7,4 @@ This project is a concurrency based game environment which currently allows a si
 When you run the program, you are presented with a GUI of a chess board. The board contains both black and white pieces and the game is able to commence straight away. The first turn goes to the white player and they can drag their pieces with the mouse in order to execute a move. When a successful move is executed, the other player can now move one of their pieces. 
 
 ## Video link for program walkthrough
-https://youtu.be/jChrzAsKg88
+https://youtu.be/0bJwtWIem2w?si=5GlDLk63MUb15ZIB
